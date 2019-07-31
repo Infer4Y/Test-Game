@@ -22,7 +22,6 @@ public class BlockRender implements Entity, Drawable {
     public BlockRender(Block block, int x, int y){
         try {
             this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
-            System.out.println(block.getName());
         } catch (IOException | NullPointerException e) {
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);

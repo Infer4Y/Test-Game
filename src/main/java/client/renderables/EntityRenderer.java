@@ -47,7 +47,6 @@ public class EntityRenderer implements Entity, Drawable {
             if (entity.getFacing() == Direction.LEFT) {
                 try {
                     this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png").getFile())), 4.0);
-                    System.out.println(entity.getName());
                 } catch (IOException | NullPointerException e) {
                     try {
                         this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
@@ -60,7 +59,6 @@ public class EntityRenderer implements Entity, Drawable {
             } else {
                 try {
                     this.texture = FileUtils.horizontalFlip(FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png").getFile())), 4.0));
-                    System.out.println(entity.getName());
                 } catch (IOException | NullPointerException e) {
                     try {
                         this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
