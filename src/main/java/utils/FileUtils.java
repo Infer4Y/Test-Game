@@ -51,7 +51,7 @@ public class FileUtils {
         int width = src.getWidth();
         int height = src.getHeight();
 
-        BufferedImage dest = new BufferedImage(height, width, src.getType());
+        BufferedImage dest = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D graphics2D = dest.createGraphics();
         graphics2D.translate((height - width) / 2, (height - width) / 2);
@@ -64,7 +64,7 @@ public class FileUtils {
     public static BufferedImage verticalFlip(BufferedImage img) {
         int w = img.getWidth();
         int h = img.getHeight();
-        BufferedImage flippedImage = new BufferedImage(w, h, img.getColorModel().getTransparency());
+        BufferedImage flippedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = flippedImage.createGraphics();
         g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
         g.dispose();
@@ -74,7 +74,7 @@ public class FileUtils {
     public static BufferedImage horizontalFlip(BufferedImage img) {
         int w = img.getWidth();
         int h = img.getHeight();
-        BufferedImage flippedImage = new BufferedImage(w, h, img.getType());
+        BufferedImage flippedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = flippedImage.createGraphics();
         g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
         g.dispose();

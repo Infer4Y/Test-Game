@@ -121,7 +121,7 @@ public class Game extends Canvas implements Runnable {
         BufferStrategy bufferstrategy = getBufferStrategy ();
 
         if (bufferstrategy == null) {
-            createBufferStrategy(3);
+            createBufferStrategy(2);
             return;
         }
 

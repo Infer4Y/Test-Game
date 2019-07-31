@@ -13,7 +13,6 @@ public class BlockHandler {
     }
 
     public static BlockRender handleBlockRenderer(Block block, int x, int y) {
-        System.out.println(block.getName());
         return new BlockRender(block, x, y);
     }
 
