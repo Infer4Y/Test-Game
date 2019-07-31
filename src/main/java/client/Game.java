@@ -1,10 +1,7 @@
 package client;
 
 import client.handlers.BlockHandler;
-import client.renderables.BlockRender;
-import client.renderables.Drawable;
-import client.renderables.Entity;
-import client.renderables.EntityRenderer;
+import client.renderables.*;
 import common.block.Block;
 import common.registries.Blocks;
 import common.world.World;
@@ -42,10 +39,11 @@ public class Game extends Canvas implements Runnable {
     private final List<Drawable> drawables = new ArrayList<>();
 
     public static final int WIDTH      = 1280;
-    protected static final int HEIGHT     = 640;
+    public static final int HEIGHT     = 640;
 
 
     private World world = new World("test", WIDTH/64,HEIGHT/64);
+    private Background background = new Background();
 
 
     private static final String TITLE   = "Game";
@@ -60,6 +58,11 @@ public class Game extends Canvas implements Runnable {
 
     public Game () {
         Blocks.init();
+
+
+        entities.add(background);
+        drawables.add(background);
+
         for (int i = 0; i < world.getWidth(); i++) {
             for (int j = 0; j < world.getHeight(); j++) {
                 entities.add(world.getMapR()[j][i]);
@@ -127,7 +130,7 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bufferstrategy.getDrawGraphics();
 
-        g.setColor (Color.white);
+        g.setColor (Color.BLACK);
         g.fillRect (0, 0, getWidth(), getHeight());
 
         for (Drawable d : drawables) {
