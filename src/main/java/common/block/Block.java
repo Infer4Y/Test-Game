@@ -35,4 +35,8 @@ public class Block {
     public boolean isSolid(){
         return true;
     }
+
+    public boolean isAir() {
+        return  false;
+    }
 }

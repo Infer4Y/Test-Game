@@ -2,19 +2,12 @@ package client;
 
 import client.handlers.BlockHandler;
 import client.renderables.*;
-import common.block.Block;
 import common.registries.Blocks;
 import common.world.World;
-import utils.FileUtils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,15 +30,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private BlockHandler blocktest;
 
-    private final List<Entity> entities = new ArrayList<>();
-    private final List<Drawable> drawables = new ArrayList<>();
+    public static final List<Entity> entities = new ArrayList<>();
+    public static final List<Drawable> drawables = new ArrayList<>();
 
     public static final int WIDTH      = 1280;
     public static final int HEIGHT     = 640;
 
 
     private World world = new World("test", WIDTH/64,HEIGHT/64);
-    private Background background = new Background();
+    private Background background = new Background(world);
 
 
     private static final String TITLE   = "Game";
@@ -70,6 +63,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
             for (int j = 0; j < world.getHeight(); j++) {
                 entities.add(world.getMapR()[j][i]);
                 drawables.add(world.getMapR()[j][i]);
+                this.addMouseListener(world.getMapR()[j][i]);
             }
         }
 

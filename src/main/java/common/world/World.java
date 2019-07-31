@@ -19,6 +19,7 @@ public class World {
     private BlockRender[][] mapR = null;
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
+    private int time;
 
     public World (String name, int x, int y){
         this.x = x;
@@ -55,6 +56,7 @@ public class World {
         }
         Player player = new Player("player", 10,10);
         entities.put(player, new EntityRenderer(player, (x/2)*32, (y-5)*64));
+        time = 0;
     }
 
     public String getName() {
@@ -100,8 +102,18 @@ public class World {
     }
 
     public void updatePerSecond () {
+        if (time == 2400){
+            time = 0;
+        } else {
+            time++;
+        }
         for (client.renderables.Entity e : entities.values()) {
             e.second ();
         }
+
+    }
+
+    public int getTime() {
+        return time/100;
     }
 }

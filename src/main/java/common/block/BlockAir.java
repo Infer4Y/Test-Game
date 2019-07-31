@@ -9,4 +9,9 @@ public class BlockAir extends Block {
     public boolean isSolid() {
         return false;
     }
+
+    @Override
+    public boolean isAir() {
+        return true;
+    }
 }

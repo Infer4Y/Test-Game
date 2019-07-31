@@ -1,4 +1,4 @@
-package client;
+package client.renderables;
 
 import client.renderables.Drawable;
 import client.renderables.Entity;
