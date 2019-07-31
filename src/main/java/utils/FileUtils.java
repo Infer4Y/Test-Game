@@ -1,5 +1,6 @@
 package utils;
 
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -44,5 +45,39 @@ public class FileUtils {
 
         scaleOp.filter(before, after);
         return after;
+    }
+
+    public static BufferedImage rotateClockwise90(BufferedImage src) {
+        int width = src.getWidth();
+        int height = src.getHeight();
+
+        BufferedImage dest = new BufferedImage(height, width, src.getType());
+
+        Graphics2D graphics2D = dest.createGraphics();
+        graphics2D.translate((height - width) / 2, (height - width) / 2);
+        graphics2D.rotate(Math.PI / 2, height / 2, width / 2);
+        graphics2D.drawRenderedImage(src, null);
+
+        return dest;
+    }
+
+    public static BufferedImage verticalFlip(BufferedImage img) {
+        int w = img.getWidth();
+        int h = img.getHeight();
+        BufferedImage flippedImage = new BufferedImage(w, h, img.getColorModel().getTransparency());
+        Graphics2D g = flippedImage.createGraphics();
+        g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
+        g.dispose();
+        return flippedImage;
+    }
+
+    public static BufferedImage horizontalFlip(BufferedImage img) {
+        int w = img.getWidth();
+        int h = img.getHeight();
+        BufferedImage flippedImage = new BufferedImage(w, h, img.getType());
+        Graphics2D g = flippedImage.createGraphics();
+        g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
+        g.dispose();
+        return flippedImage;
     }
 }
