@@ -9,6 +9,8 @@ import utils.FileUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.List;
 
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable, KeyListener {
 
     private boolean isRunning = true;
     private Thread thread;
@@ -49,6 +51,7 @@ public class Game extends Canvas implements Runnable {
     private static final String TITLE   = "Game";
 
     private final FPSViewer fpsViewer = new FPSViewer();
+    public static boolean up, down, left, right;
 
     public static void main(String[] args) {
         new Game();
@@ -139,5 +142,50 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose ();
         bufferstrategy.show();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                up = true;
+                break;
+            case KeyEvent.VK_A:
+                left = true;
+                break;
+            case KeyEvent.VK_S:
+                down=true;
+                break;
+            case KeyEvent.VK_D:
+                right=true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                up = false;
+                break;
+            case KeyEvent.VK_A:
+                left = false;
+                break;
+            case KeyEvent.VK_S:
+                down=false;
+                break;
+            case KeyEvent.VK_D:
+                right=false;
+                break;
+            default:
+                break;
+        }
     }
 }

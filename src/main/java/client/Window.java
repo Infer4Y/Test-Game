@@ -13,6 +13,7 @@ public class Window
 
         JFrame frame = new JFrame (title);
         frame.add (game);
+        frame.addKeyListener(game);
         frame.pack ();
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         frame.setResizable (false);

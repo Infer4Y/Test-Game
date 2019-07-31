@@ -1,5 +1,6 @@
 package client.renderables;
 
+import client.Game;
 import common.block.Block;
 import utils.FileUtils;
 
@@ -34,8 +35,8 @@ public class BlockRender implements Entity, Drawable {
         this.block = block;
         this.x = x;
         this.y = y;
-        this.x1 = 0;
-        this.y1 = 0;
+        this.x1 = x;
+        this.y1 = y;
     }
 
     @Override
@@ -50,35 +51,42 @@ public class BlockRender implements Entity, Drawable {
     @Override
     public void second() {
         Random r = new Random();
-        /*switch (r.nextInt(3)){
-            case 0:
-                if (!( x > 800-64)) {
-                    x += 64;
-                } else {
-                    x = 0;
-                }
-            case 1:
-                if (!( x < 0)) {
-                    x -= 64;
-                } else {
-                    x = 800-64;
-                }
-            case 2:
-                if (!( y > 600-64)) {
-                    y += 64;
-                } else {
-                    y = 0;
-                }
-            case 3:
-                if (!( y < 0)) {
-                    y -= 64;
-                } else {
-                    y = 600-64;
-                }
-            default:
-                break;
-        }*/
-        if (block.getName().equals("air") && r.nextInt(3) == 1)
+        if (block.getName().equals("air")) {
             texture = FileUtils.rotateClockwise90(texture);
+            switch (r.nextInt(3)) {
+                case 0:
+                    if (!(x > Game.WIDTH - 64)) {
+                        x += 64;
+                    } else {
+                        x = 0;
+                    }
+                    break;
+                case 1:
+                    if (!(x < 0)) {
+                        x -= 64;
+                    } else {
+                        x = Game.WIDTH - 64;
+                    }
+                    break;
+                case 2:
+                    if (!(y > Game.HEIGHT/2 - 64)) {
+                        y += 64;
+                    } else {
+                        y = 0;
+                    }
+                    break;
+                case 3:
+                    if (!(y < 0)) {
+                        y -= 64;
+                    } else {
+                        y = Game.HEIGHT/2 - 64;
+                    }
+                    break;
+                default:
+                    x = x1;
+                    y = y1;
+                    break;
+            }
+        }
     }
 }

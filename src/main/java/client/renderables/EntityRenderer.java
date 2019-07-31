@@ -1,6 +1,7 @@
 package client.renderables;
 
 import client.Game;
+import common.entities.Player;
 import common.world.Direction;
 import utils.FileUtils;
 
@@ -71,17 +72,34 @@ public class EntityRenderer implements Entity, Drawable {
             }
         }
         prevDirection = entity.getFacing();
-        if (entity.getFacing() == Direction.RIGHT) {
-            x++;
-            if (x == Game.WIDTH) {
-                entity.setFacing(Direction.LEFT);
+        if (entity instanceof Player){
+            if (Game.up){
+                if (y>=0) {
+                    y--;
+                }
+            } else if (Game.down){
+                if (y<=Game.HEIGHT/2) {
+                    y++;
+                }
             }
-        } else {
-            x--;
-            if (x == 0) {
-                entity.setFacing(Direction.RIGHT);
+            if (Game.right) {
+
+                if (x <= Game.WIDTH-63) {
+                    entity.setFacing(Direction.RIGHT);
+                    x++;
+                } else {
+                    x=0;
+                }
+            } else if (Game.left) {
+                if (x >= 0) {
+                    entity.setFacing(Direction.LEFT);
+                    x--;
+                } else {
+                    x = Game.WIDTH-64;
+                }
             }
         }
+        //if (!(entity.isJumping()) && !(entity.onGround())){}
     }
 
     @Override
