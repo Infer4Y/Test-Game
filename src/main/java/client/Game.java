@@ -55,6 +55,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public Game () {
         Blocks.init();
 
+        addKeyListener(this);
+
 
         entities.add(background);
         drawables.add(background);
