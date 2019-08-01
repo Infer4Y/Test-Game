@@ -75,7 +75,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
                 e1.printStackTrace();
             }
         } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && x1>= e.getX()) && (y <= e.getY() && y1>= e.getY())){
-            block = Blocks.stone;
+            block = Game.currentlySelected.selected;
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
             } catch (IOException | NullPointerException e1) {

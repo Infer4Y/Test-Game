@@ -30,6 +30,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private BlockHandler blocktest;
 
+    public static CurrentlySelected currentlySelected = new CurrentlySelected();
+
     public static final List<Entity> entities = new ArrayList<>();
     public static final List<Drawable> drawables = new ArrayList<>();
 
@@ -74,10 +76,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
             drawables.add(e);
         }
 
+        entities.add(currentlySelected);
+        drawables.add(currentlySelected);
+        addKeyListener(currentlySelected);
+
         entities.add(fpsViewer);
         drawables.add(fpsViewer);
-
-
 
         Window window = new Window (WIDTH, HEIGHT, TITLE, this);
 
