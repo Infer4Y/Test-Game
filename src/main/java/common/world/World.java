@@ -114,6 +114,6 @@ public class World {
     }
 
     public int getTime() {
-        return time/100;
+        return time;
     }
 }

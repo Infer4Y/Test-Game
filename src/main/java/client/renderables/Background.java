@@ -13,8 +13,6 @@ import java.io.IOException;
 public class Background implements Entity, Drawable {
     private BufferedImage texture;
     private Color c = Color.BLACK;
-    private boolean f = true;
-    private int count;
     private World world;
 
     public Background(World world) {
@@ -38,15 +36,9 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void second() {
-        if (world.getTime() >= 12) {
-            if (c.equals(Color.white)) {
-                f = false;
-            }
+        if (world.getTime() >= 120) {
             c = c.brighter();
-        } else if ( world.getTime() <= 13){
-            if (c.equals(Color.BLACK)) {
-                f = true;
-            }
+        } else if ( world.getTime() <= 130){
             c = c.darker();
         }
     }

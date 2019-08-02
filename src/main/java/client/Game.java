@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static final int HEIGHT     = 640;
 
 
-    private World world = new World("test", WIDTH/64,HEIGHT/64);
+    public static World world = new World("test", WIDTH/64,HEIGHT/64);
     private Background background = new Background(world);
 
 

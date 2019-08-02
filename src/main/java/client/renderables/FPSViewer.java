@@ -1,5 +1,6 @@
 package client.renderables;
 
+import client.Game;
 import client.renderables.Drawable;
 import client.renderables.Entity;
 
@@ -16,7 +17,7 @@ public class FPSViewer implements Drawable, Entity {
         frames++;
         g.setColor(Color.GREEN);
         g.setFont(new Font(null, 0, 24));
-        g.drawString("FPS: " + averageFrames + " Ticks: " + averageTicks, 600, 24);
+        g.drawString("FPS: " + averageFrames + " Ticks: " + averageTicks + " Time : " + Game.world.getTime(), 600, 24);
     }
 
     public void tick () {
