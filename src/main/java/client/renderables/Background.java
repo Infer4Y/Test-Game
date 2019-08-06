@@ -9,24 +9,27 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Background implements Entity, Drawable {
     private BufferedImage texture;
     private Color c = Color.BLACK;
     private World world;
-    private Random r = new Random();
-    private ArrayList<Point> points = new ArrayList<>();
-
+    private Star[] stars;
+    private Random random=new Random();
 
     public Background(World world) {
         this.world = world;
+        int allowedStars = (int) (random.nextInt(10)+20);
+        this.stars = new Star[allowedStars];
+        for (int i = 0; i < allowedStars; i++) {
+            stars[i] = new Star(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
+        }
         try {
             this.texture = ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/background.png").getFile()));
         } catch (IOException | NullPointerException e) {
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder/.png").getFile())), 4.0);
+                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
             } catch (IOException ex) {
                 this.texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                 ex.printStackTrace();
@@ -37,21 +40,24 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void tick() {
+        for (Star s: stars) {
+            s.tick();
+        }
     }
 
     @Override
     public void second() {
-        points.clear();
-        if (world.getTime() >= 1200) {
+        if (world.getTime() >= 400 && world.getTime() <= 1200) {
             c = c.brighter();
-        } else if ( world.getTime() <= 1201){
+        } else if (world.getTime() == 1200){
+            c = Color.white;
+        }else if (world.getTime() <= 1201 && world.getTime() <= 1799){
             c = c.darker();
+        } else if ( world.getTime() <= 1800){
+            c = Color.BLACK;
         }
-        for (int i = 0; i < 20; i++) {
-            int x = r.nextInt(Game.WIDTH-1);
-            int y = r.nextInt(Game.HEIGHT/2-1);
-            Point p = new Point(x,y);
-            points.add(p);
+        for (Star s : stars) {
+            s.second();
         }
     }
 
@@ -61,8 +67,15 @@ public class Background implements Entity, Drawable {
         g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
         g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, null);
         g.setColor(Color.WHITE);
-        for (Point p : points) {
-            g.drawRect(((int) p.getX()), (int) p.getY(), 1, 1);
+        if (world.getTime() >= 1800 && world.getTime() <= 2400) {
+            for (Star s: stars) {
+                s.draw(g);
+            }
+        }
+        if (world.getTime() >= 0 && world.getTime() <= 500) {
+            for (Star s: stars) {
+                s.draw(g);
+            }
         }
     }
 }
