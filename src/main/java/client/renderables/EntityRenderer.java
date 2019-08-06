@@ -3,6 +3,7 @@ package client.renderables;
 import client.Game;
 import common.entities.Player;
 import common.world.Direction;
+import common.world.World;
 import utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -14,10 +15,11 @@ import java.io.IOException;
 public class EntityRenderer implements Entity, Drawable {
     private BufferedImage texture;
     private common.entities.Entity entity;
-    private int x, x1, y, y1;
+    private int x, width, y, height;
     private Direction prevDirection = Direction.LEFT;
+    private World world;
 
-    public EntityRenderer(common.entities.Entity entity, int x, int y) {
+    public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
             this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/entities/"+entity.getName()+".png").getFile())), 4.0);
             System.out.println(entity.getName());
@@ -34,6 +36,9 @@ public class EntityRenderer implements Entity, Drawable {
         entity.setFacing(Direction.RIGHT);
         this.x = x;
         this.y = y;
+        this.width = 64;
+        this.height = 128;
+        this.world = world;
     }
 
     @Override
@@ -72,18 +77,9 @@ public class EntityRenderer implements Entity, Drawable {
             }
         }
         prevDirection = entity.getFacing();
+        BlockRender nearestBlock = world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor(x/64)];
         if (entity instanceof Player){
-            if (Game.up){
-                if (y>=0) {
-                    y--;
-                }
-            } else if (Game.down){
-                if (y<=Game.HEIGHT/2) {
-                    y++;
-                }
-            }
             if (Game.right) {
-
                 if (x <= Game.WIDTH-63) {
                     entity.setFacing(Direction.RIGHT);
                     x++;
@@ -99,12 +95,26 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        //if (!(entity.isJumping()) && !(entity.onGround())){}
+        if ((this.onGround(nearestBlock))){
+            y++;
+        }
+    }
+
+    private boolean onGround(BlockRender blockRender){
+        blockRender.getBounds().setLocation(getBounds().x,getBounds().y-1);
+        if (this.getBounds().intersects(blockRender.getBounds()) && (blockRender.getBlock().isSolid())){
+            blockRender.getBounds().setLocation(getBounds().x,getBounds().y+1);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkColision(BlockRender blockRender){
+        return false;
     }
 
     @Override
     public void second() {
-
     }
 
     public common.entities.Entity getEntity() {
@@ -115,19 +125,7 @@ public class EntityRenderer implements Entity, Drawable {
         this.entity = entity;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 }

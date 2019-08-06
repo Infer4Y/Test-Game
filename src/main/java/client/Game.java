@@ -83,6 +83,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
         entities.add(fpsViewer);
         drawables.add(fpsViewer);
 
+        this.requestFocus();
+
         Window window = new Window (WIDTH, HEIGHT, TITLE, this);
 
         thread = new Thread(this);

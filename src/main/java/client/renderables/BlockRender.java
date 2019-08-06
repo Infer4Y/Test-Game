@@ -22,7 +22,7 @@ import java.util.Random;
 public class BlockRender implements Entity, Drawable, MouseListener {
     private BufferedImage texture;
     private Block block;
-    private int x, x1, y, y1;
+    private int x, width, y, height;
 
     public BlockRender(Block block, int x, int y){
         try {
@@ -39,8 +39,8 @@ public class BlockRender implements Entity, Drawable, MouseListener {
         this.block = block;
         this.x = x;
         this.y = y;
-        this.x1 = x + 64;
-        this.y1 = y + 64;
+        this.height = 64;
+        this.width = 64;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX() && x1>= e.getX()) && (y <= e.getY() && y1>= e.getY())){
+        if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
             block = Blocks.air;
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
@@ -74,7 +74,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
                 }
                 e1.printStackTrace();
             }
-        } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && x1>= e.getX()) && (y <= e.getY() && y1>= e.getY())){
+        } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && width>= e.getX()) && (y <= e.getY() && height>= e.getY())){
             block = Game.currentlySelected.selected;
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
@@ -103,5 +103,13 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+
+    public Block getBlock() {
+        return block;
     }
 }

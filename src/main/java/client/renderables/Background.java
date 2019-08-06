@@ -47,7 +47,7 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void second() {
-        if (world.getTime() >= 400 && world.getTime() <= 1200) {
+        if (world.getTime() >= 600 && world.getTime() <= 1200) {
             c = c.brighter();
         } else if (world.getTime() == 1200){
             c = Color.white;
@@ -72,7 +72,7 @@ public class Background implements Entity, Drawable {
                 s.draw(g);
             }
         }
-        if (world.getTime() >= 0 && world.getTime() <= 500) {
+        if (world.getTime() >= 0 && world.getTime() <= 700) {
             for (Star s: stars) {
                 s.draw(g);
             }
