@@ -26,10 +26,10 @@ public class Background implements Entity, Drawable {
             stars[i] = new Star(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
         }
         try {
-            this.texture = ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/background.png").getFile()));
+            this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));
         } catch (IOException | NullPointerException e) {
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
             } catch (IOException ex) {
                 this.texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                 ex.printStackTrace();

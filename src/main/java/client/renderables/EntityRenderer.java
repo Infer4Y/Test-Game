@@ -21,11 +21,11 @@ public class EntityRenderer implements Entity, Drawable {
 
     public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
-            this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/entities/"+entity.getName()+".png").getFile())), 4.0);
+            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/"+entity.getName()+".png")), 4.0);
             System.out.println(entity.getName());
         } catch (IOException | NullPointerException e) {
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
             } catch (IOException ex) {
                 texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                 ex.printStackTrace();
@@ -43,7 +43,7 @@ public class EntityRenderer implements Entity, Drawable {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(texture, x, y-64, null);
+        g.drawImage(texture, x, y-64,64,128, null);
 
     }
 
@@ -52,10 +52,10 @@ public class EntityRenderer implements Entity, Drawable {
         if (!(prevDirection == entity.getFacing())) {
             if (entity.getFacing() == Direction.LEFT) {
                 try {
-                    this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png").getFile())), 4.0);
+                    this.texture = FileUtils.scale1(ImageIO.read((this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png"))), 4.0);
                 } catch (IOException | NullPointerException e) {
                     try {
-                        this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                        this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
                     } catch (IOException ex) {
                         texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
                         ex.printStackTrace();
@@ -64,10 +64,10 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             } else {
                 try {
-                    this.texture = FileUtils.horizontalFlip(FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png").getFile())), 4.0));
+                    this.texture = FileUtils.horizontalFlip(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png")), 4.0));
                 } catch (IOException | NullPointerException e) {
                     try {
-                        this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                        this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
                     } catch (IOException ex) {
                         texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
                         ex.printStackTrace();
@@ -95,7 +95,7 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        if ((this.onGround(nearestBlock))){ y++; }
+        //if ((this.onGround(nearestBlock))){ y++; }
     }
 
     private boolean onGround(BlockRender blockRender){

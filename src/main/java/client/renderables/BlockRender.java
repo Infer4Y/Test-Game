@@ -26,10 +26,10 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     public BlockRender(Block block, int x, int y){
         try {
-            this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
+            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
         } catch (IOException | NullPointerException e) {
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
             } catch (IOException ex) {
                 texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                 ex.printStackTrace();
@@ -64,10 +64,10 @@ public class BlockRender implements Entity, Drawable, MouseListener {
         if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
             block = Blocks.air;
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
+                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
             } catch (IOException | NullPointerException e1) {
                 try {
-                    this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                    this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
                 } catch (IOException ex) {
                     texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                     ex.printStackTrace();
@@ -77,10 +77,10 @@ public class BlockRender implements Entity, Drawable, MouseListener {
         } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && width>= e.getX()) && (y <= e.getY() && height>= e.getY())){
             block = Game.currentlySelected.selected;
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png").getFile())), 4.0);
+                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
             } catch (IOException | NullPointerException e1) {
                 try {
-                    this.texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 4.0);
+                    this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
                 } catch (IOException ex) {
                     texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                     ex.printStackTrace();
