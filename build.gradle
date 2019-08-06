@@ -7,6 +7,18 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+jar {
+    manifest {
+        manifest {
+            attributes["Manifest-Version"] = version
+            attributes["Main-Class"] = "client.Game"
+        }
+    }
+    into 'resources', {
+        from 'resources'
+    }
+}
+
 repositories {
     mavenCentral()
 }

@@ -95,16 +95,16 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        if ((this.onGround(nearestBlock))){
-            y++;
-        }
+        if ((this.onGround(nearestBlock))){ y++; }
     }
 
     private boolean onGround(BlockRender blockRender){
         blockRender.getBounds().setLocation(getBounds().x,getBounds().y-1);
         if (this.getBounds().intersects(blockRender.getBounds()) && (blockRender.getBlock().isSolid())){
-            blockRender.getBounds().setLocation(getBounds().x,getBounds().y+1);
-            return true;
+            if (blockRender.getBounds().intersects(this.getBounds())) {
+                blockRender.getBounds().setLocation(getBounds().x, getBounds().y + 1);
+                return true;
+            }
         }
         return false;
     }
