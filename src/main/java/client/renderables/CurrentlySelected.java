@@ -22,10 +22,10 @@ public class CurrentlySelected implements Drawable, Entity, MouseWheelListener, 
     public void draw(Graphics g) {
         BufferedImage texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
         try {
-            texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/blocks/"+selected.getName()+".png").getFile())), 2.0);
+            texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+selected.getName()+".png")), 2.0);
         } catch (IOException | NullPointerException e1) {
             try {
-                texture = FileUtils.scale1(ImageIO.read(new File(this.getClass().getClassLoader().getResource("tex/placeholder.png").getFile())), 2.0);
+                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
             } catch (IOException ex) {
                 texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
                 ex.printStackTrace();
