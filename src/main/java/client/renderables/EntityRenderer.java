@@ -77,7 +77,7 @@ public class EntityRenderer implements Entity, Drawable {
             }
         }
         prevDirection = entity.getFacing();
-        BlockRender nearestBlock = world.getMapR()[(int) Math.floor(y/64)+1][(int) Math.floor(x/64)+1];
+        BlockRender nearestBlock = world.getMapR()[(int) Math.floor(y/64)+1][(int) Math.floor(x/64)];
         if (entity instanceof Player){
             if (Game.right) {
                 if (x <= Game.WIDTH-63) {
@@ -95,14 +95,12 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        //if ((this.onGround(nearestBlock))){ y++; }
+        if (!(this.onGround(nearestBlock))){ y++; }
     }
 
     private boolean onGround(BlockRender blockRender){
-        if (this.getBounds().intersects(blockRender.getBounds()) && (blockRender.getBlock().isSolid())){
-            if (blockRender.getBounds().intersects(this.getBounds())) {
+        if ((blockRender.getBlock().isSolid())){
                 return true;
-            }
         }
         return false;
     }

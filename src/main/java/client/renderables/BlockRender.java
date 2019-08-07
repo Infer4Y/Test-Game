@@ -22,7 +22,7 @@ import java.util.Random;
 public class BlockRender implements Entity, Drawable, MouseListener {
     private BufferedImage texture;
     private Block block;
-    private int x, width, y, height;
+    private int x, width = 64, y, height = 64;
 
     public BlockRender(Block block, int x, int y){
         try {
@@ -106,7 +106,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(x, y, width+2, height+2);
     }
 
     public Block getBlock() {
