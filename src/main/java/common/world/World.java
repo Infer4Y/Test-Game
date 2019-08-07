@@ -55,7 +55,7 @@ public class World {
             }
         }
         Player player = new Player("player", 10,10);
-        entities.put(player, new EntityRenderer(player, (x/2)*32, (y-6)*64, this));
+        entities.put(player, new EntityRenderer(player, (x/2)*32, (y-5)*64, this));
         time = 0;
     }
 

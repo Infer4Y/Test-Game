@@ -20,7 +20,7 @@ public class CurrentlySelected implements Drawable, Entity, MouseWheelListener, 
 
     @Override
     public void draw(Graphics g) {
-        BufferedImage texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
+        BufferedImage texture;
         try {
             texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+selected.getName()+".png")), 2.0);
         } catch (IOException | NullPointerException e1) {

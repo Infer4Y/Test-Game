@@ -95,7 +95,7 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        if ((this.onGround(nearestBlock))){ y++; }
+        //if ((this.onGround(nearestBlock))){ y++; }
     }
 
     private boolean onGround(BlockRender blockRender){
