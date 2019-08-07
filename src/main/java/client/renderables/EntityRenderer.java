@@ -18,6 +18,7 @@ public class EntityRenderer implements Entity, Drawable {
     private int x, width, y, height;
     private Direction prevDirection = Direction.LEFT;
     private World world;
+    private float jumpVel = 0.0f;
 
     public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
@@ -77,8 +78,15 @@ public class EntityRenderer implements Entity, Drawable {
             }
         }
         prevDirection = entity.getFacing();
-        BlockRender nearestBlock = world.getMapR()[(int) Math.floor(y/64)+1][(int) Math.floor(x/64)];
+        BlockRender nearestBlock = null;
+        try {
+            nearestBlock = world.getMapR()[(int) Math.floor(y/64)+1][(int) Math.floor(x/64)];
+        } catch (ArrayIndexOutOfBoundsException e){
+        }
         if (entity instanceof Player){
+            if (this.onGround(nearestBlock) && Game.up){
+                setJumping();
+            }
             if (Game.right) {
                 if (x <= Game.WIDTH-63) {
                     entity.setFacing(Direction.RIGHT);
@@ -95,12 +103,30 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        if (!(this.onGround(nearestBlock))){ y++; }
+        if (!(this.onGround(nearestBlock)) && !(this.isJumping())){ y++; } else if (jumpVel != 0) {
+            if (this.y > 0) {
+                y--;
+            }
+            jumpVel--;
+        }
     }
 
     private boolean onGround(BlockRender blockRender){
-        if ((blockRender.getBlock().isSolid())){
+        if (blockRender != null) {
+            if ((blockRender.getBlock().isSolid())) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public void setJumping(){
+        jumpVel = 64;
+    }
+
+    public boolean isJumping(){
+        if (jumpVel != 0.0f){
+            return true;
         }
         return false;
     }
