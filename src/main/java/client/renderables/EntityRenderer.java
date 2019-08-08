@@ -83,31 +83,57 @@ public class EntityRenderer implements Entity, Drawable {
             nearestBlock = world.getMapR()[(int) Math.floor(y/64)+1][(int) Math.floor(x/64)];
         } catch (ArrayIndexOutOfBoundsException e){
         }
-        BlockRender blockLeft;
-        BlockRender blockRight;
-        if (x  >= 0 && x <= 63){
-            blockLeft = world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor(world.getWidth()-1)];
-            blockRight =  world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor(x/64)+1];
-        }else if (x <63 && x < Game.WIDTH-65){
-            blockLeft = world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor((Game.WIDTH-65)/65)];
-            blockRight =  world.getMapR()[(int) Math.floor(y/64)][0];
+        BlockRender blockLeft=null;
+        BlockRender blockRight=null;
+        if (x  == 0 || x == 1){
+            try {
+                blockLeft = world.getMapR()[(int) Math.floor(y / 64)][world.getWidth() - 1];
+            } catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+            try {
+                blockRight = world.getMapR()[(int) Math.floor(y / 64)][(int) Math.floor(x / 64) + 1];
+            } catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+        }else if ( x == Game.WIDTH-2 || x == Game.WIDTH-1){
+            try {
+                blockLeft = world.getMapR()[(int) Math.floor(y / 64)][(int) Math.floor((Game.WIDTH - 65) / 65)];
+            } catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+            try {
+                blockRight = world.getMapR()[(int) Math.floor(y / 64)][0];
+            } catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
         } else {
-            blockLeft =  world.getMapR()[(int) Math.floor(y/64)][(((int) Math.floor(x/64)-1))];
-            blockRight =  world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor(x/64)];
+
+            try {
+                blockLeft = world.getMapR()[(int) Math.floor(y / 64)][(((int) Math.floor(x / 64)))];
+            } catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
+            try {
+                blockRight = world.getMapR()[(int) Math.floor(y / 64)][(int) Math.floor(x / 64) + 1];
+            } catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
+            }
         }
         if (entity instanceof Player){
 
             if (this.onGround(nearestBlock) && Game.up){
                 setJumping();
             }
-            if (Game.right && !(blockRight.getBlock().isSolid())) {
+
+            if (Game.right && (blockRight == null || !(blockRight.getBlock().isSolid()))) {
                 if (x <= Game.WIDTH-63) {
                     entity.setFacing(Direction.RIGHT);
                     x++;
                 } else {
                     x=0;
                 }
-            } else if (Game.left && !(blockLeft.getBlock().isSolid())) {
+            } else if (Game.left && (blockLeft == null || !(blockLeft.getBlock().isSolid()))) {
                 if (x >= 0) {
                     entity.setFacing(Direction.LEFT);
                     x--;
@@ -116,13 +142,13 @@ public class EntityRenderer implements Entity, Drawable {
                 }
             }
         }
-        if (checkColision(nearestBlock) && nearestBlock != null){
+        if (checkColision(nearestBlock)){
             nearestBlock.getBlock().onBlockCollision(world, this);
         }
-        if (checkColision(blockLeft) && blockLeft != null){
+        if (checkColision(blockLeft)){
             blockLeft.getBlock().onBlockCollision(world, this);
         }
-        if (checkColision(blockRight) && blockRight != null){
+        if (checkColision(blockRight)){
             blockRight.getBlock().onBlockCollision(world, this);
         }
         if (!(this.onGround(nearestBlock)) && !(this.isJumping())){ y++; } else if (jumpVel != 0) {
