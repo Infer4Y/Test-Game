@@ -14,8 +14,6 @@ import java.util.List;
 
 public class World {
     private String name;
-
-    private Block[][] map = null;
     private BlockRender[][] mapR = null;
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
@@ -24,32 +22,30 @@ public class World {
     public World (String name, int x, int y){
         this.x = x;
         this.y = y;
-        map = new Block[y][x];
         mapR = new BlockRender[y][x];
         for (int i = 0; i < y; i++) {
-            if (i == y-4) {
+            if (i == y-5) {
                 for (int j = 0; j < x; j++) {
-                    map[i][j] = Blocks.grass;
                     mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.grass, j * 64, i *64);
+                }
+            } else if (i == y-4){
+                for (int j = 0; j < x; j++) {
+                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.dirt, j * 64, i *64);
                 }
             } else if (i == y-3){
                 for (int j = 0; j < x; j++) {
-                    map[i][j] = Blocks.dirt;
-                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.dirt, j * 64, i *64);
+                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.stone, j * 64, i *64);
                 }
             } else if (i == y-2){
                 for (int j = 0; j < x; j++) {
-                    map[i][j] = Blocks.stone;
                     mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.stone, j * 64, i *64);
                 }
-            } else if (i == y-1){
+            }else if (i == y-1){
                 for (int j = 0; j < x; j++) {
-                    map[i][j] = Blocks.stone;
-                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.stone, j * 64, i *64);
+                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.launcher, j * 64, i *64);
                 }
             } else {
                 for (int j = 0; j < x; j++) {
-                    map[i][j] = Blocks.air;
                     mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.air, j * 64, i *64);
                 }
             }
@@ -65,14 +61,6 @@ public class World {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Block[][] getMap() {
-        return map;
-    }
-
-    public void setMap(Block[][] map) {
-        this.map = map;
     }
 
     public BlockRender[][] getMapR() {

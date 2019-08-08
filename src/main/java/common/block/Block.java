@@ -1,11 +1,17 @@
 package common.block;
 
+import client.renderables.EntityRenderer;
+import common.world.World;
+
 public class Block {
     private String name = "";
     private float hardness, blastResistance = 1.0f;
 
     public Block(String name){
         this.name = name;
+    }
+
+    public void onBlockCollision(World world, EntityRenderer entity){
     }
 
     public String getName() {

@@ -65,7 +65,7 @@ public class Background implements Entity, Drawable {
     public void draw(Graphics g) {
         g.setColor(c);
         g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
-        g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, null);
+        g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
         g.setColor(Color.WHITE);
         if (world.getTime() >= 1800 && world.getTime() <= 2400) {
             for (Star s: stars) {

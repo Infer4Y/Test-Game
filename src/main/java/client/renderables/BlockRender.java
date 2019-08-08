@@ -45,7 +45,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(texture, x, y, null);
+        g.drawImage(texture, x, y, Game.instance);
     }
 
     @Override

@@ -2,6 +2,7 @@ package common.registries;
 
 import common.block.Block;
 import common.block.BlockAir;
+import common.block.BlockLanchPad;
 
 import java.util.HashMap;
 
@@ -11,9 +12,10 @@ public class Blocks {
     public static Block dirt = new Block("dirt");
     public static Block stone = new Block("stone");
     public static BlockAir air = new BlockAir("air");
+    public static BlockLanchPad launcher = new BlockLanchPad("launcher");
 
     public static void init(){
-        register(grass, dirt, stone, air);
+        register(grass, dirt, stone, air, launcher);
     }
 
     private static void register(Block block){

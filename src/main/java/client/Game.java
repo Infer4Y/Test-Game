@@ -30,6 +30,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private BlockHandler blocktest;
 
+    public static Game instance;
+
     public static CurrentlySelected currentlySelected = new CurrentlySelected();
 
     public static final List<Entity> entities = new ArrayList<>();
@@ -39,7 +41,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static final int HEIGHT     = 640;
 
 
-    public static World world = new World("test", WIDTH/64,HEIGHT/64);
+    public static World world = new World("test", WIDTH/64,(HEIGHT/64)+1);
     private Background background = new Background(world);
 
 
@@ -49,7 +51,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static boolean up, down, left, right;
 
     public static void main(String[] args) {
-        new Game();
+        instance = new Game();
     }
 
 

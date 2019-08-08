@@ -1,5 +1,6 @@
 package client.renderables;
 
+import client.Game;
 import common.block.Block;
 import common.registries.Blocks;
 import org.w3c.dom.events.MouseEvent;
@@ -32,7 +33,7 @@ public class CurrentlySelected implements Drawable, Entity, MouseWheelListener, 
             }
             e1.printStackTrace();
         }
-        g.drawImage(texture, 16,16 , null);
+        g.drawImage(texture, 16,16 , Game.instance);
     }
 
     @Override
@@ -61,6 +62,9 @@ public class CurrentlySelected implements Drawable, Entity, MouseWheelListener, 
                 break;
             case KeyEvent.VK_3:
                 selected = Blocks.stone;
+                break;
+            case KeyEvent.VK_4:
+                selected = Blocks.launcher;
                 break;
             default:
                  break;
