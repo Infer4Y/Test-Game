@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     private Thread thread;
 
     private static final long NANOSECOND        = 1000000000;
-    private static final double OPTIMAL_TICKS   = 50.0;
+    private static final double OPTIMAL_TICKS   = 75.0;
     private static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
 
     private long lastLoopTime = System.nanoTime();
@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public static Game instance;
 
-    public static CurrentlySelected currentlySelected = new CurrentlySelected();
+    public static HeadsUpDisplay headsUpDisplay;
 
     public static final List<Entity> entities = new ArrayList<>();
     public static final List<Drawable> drawables = new ArrayList<>();
@@ -58,6 +58,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public Game () {
         Blocks.init();
+        headsUpDisplay = new HeadsUpDisplay();
 
         addKeyListener(this);
 
@@ -78,9 +79,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
             drawables.add(e);
         }
 
-        entities.add(currentlySelected);
-        drawables.add(currentlySelected);
-        addKeyListener(currentlySelected);
+        entities.add(headsUpDisplay);
+        drawables.add(headsUpDisplay);
+        addKeyListener(headsUpDisplay);
 
         entities.add(fpsViewer);
         drawables.add(fpsViewer);

@@ -3,6 +3,7 @@ package client.renderables;
 import client.Game;
 import common.block.Block;
 import common.block.BlockAir;
+import common.item.ItemBlock;
 import common.registries.Blocks;
 import utils.FileUtils;
 
@@ -45,7 +46,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(texture, x, y, Game.instance);
+        g.drawImage(texture, x, y, null);
     }
 
     @Override
@@ -75,7 +76,9 @@ public class BlockRender implements Entity, Drawable, MouseListener {
                 e1.printStackTrace();
             }
         } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
-            block = Game.currentlySelected.selected;
+            if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
+                block = ((ItemBlock)Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
+            }
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
             } catch (IOException | NullPointerException e1) {

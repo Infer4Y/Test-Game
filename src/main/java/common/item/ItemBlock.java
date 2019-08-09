@@ -15,4 +15,7 @@ public class ItemBlock extends Item{
         //TODO: On item use add block to world and decress item stack.
     }
 
+    public Block getBlock() {
+        return block;
+    }
 }
