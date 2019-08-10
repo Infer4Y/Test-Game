@@ -24,7 +24,9 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
         slots[1].setItemStack(new ItemStack(new ItemBlock(Blocks.dirt),1));
         slots[2].setItemStack(new ItemStack(new ItemBlock(Blocks.stone), 1));
         slots[3].setItemStack(new ItemStack(new ItemBlock(Blocks.launcher), 1));
-        slots[4].setItemStack(new ItemStack(new Item("pickaxe"), 1));
+        slots[4].setItemStack(new ItemStack(new ItemBlock(Blocks.log), 1));
+        slots[5].setItemStack(new ItemStack(new ItemBlock(Blocks.leaf), 1));
+        slots[6].setItemStack(new ItemStack(new ItemBlock(Blocks.planks), 1));
     }
 
     @Override

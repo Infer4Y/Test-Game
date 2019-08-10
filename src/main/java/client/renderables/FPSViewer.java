@@ -15,9 +15,11 @@ public class FPSViewer implements Drawable, Entity {
 
     public void draw (Graphics g) {
         frames++;
-        g.setColor(Color.GREEN);
-        g.setFont(new Font(null, 0, 24));
-        g.drawString("FPS: " + averageFrames + " Ticks: " + averageTicks + " Time : " + Game.world.getTime(), 600, 24);
+        if (Game.f3) {
+            g.setColor(Color.GREEN);
+            g.setFont(new Font(null, 0, 24));
+            g.drawString("FPS: " + averageFrames + " Ticks: " + averageTicks, 1280 - (14 * (5 + 2 + 6 + 2)), 24);
+        }
     }
 
     public void tick () {

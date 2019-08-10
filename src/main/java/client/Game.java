@@ -5,10 +5,18 @@ import client.renderables.*;
 import common.registries.Blocks;
 import common.world.World;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,6 +24,8 @@ import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 
+    public static boolean f3;
+    public static boolean f2;
     private boolean isRunning = true;
     private Thread thread;
 
@@ -148,6 +158,42 @@ public class Game extends Canvas implements Runnable, KeyListener {
         bufferstrategy.show();
     }
 
+    public void saveCanvas() {
+        try {
+            BufferedImage image=new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
+            Graphics g = image.createGraphics();
+            g.setColor (Color.BLACK);
+            g.fillRect (0, 0, getWidth(), getHeight());
+            for (Drawable d : drawables) {
+                d.draw(g);
+            }
+            g.dispose();
+
+            File screenshotFolder = new File(".", "screenshots");
+
+            if (screenshotFolder.exists()) {
+                File out = new File(screenshotFolder,"Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
+                if (!out.exists()) {
+                    out.createNewFile();
+                    ImageIO.write(image, "png", out);
+                } else {
+                    ImageIO.write(image, "png", out);
+                }
+            } else {
+                screenshotFolder.mkdir();
+                File out = new File(screenshotFolder,  "Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
+                if (!out.exists()) {
+                    out.createNewFile();
+                    ImageIO.write(image, "png", out);
+                } else {
+                    ImageIO.write(image, "png", out);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -167,6 +213,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 break;
             case KeyEvent.VK_D:
                 right=true;
+                break;
+            case KeyEvent.VK_F3:
+                f3 = !f3;
+                break;
+            case KeyEvent.VK_F2:
+                saveCanvas();
                 break;
             default:
                 break;

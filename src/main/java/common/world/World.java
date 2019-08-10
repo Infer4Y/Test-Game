@@ -58,6 +58,24 @@ public class World {
                 mapR[i+1][j] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j) * 64, (i+1) * 64);
             }
         }
+        treeStruct = tree.getStruct();
+        for (int i = 0; i < treeStruct.length; i++) {
+            for (int j = 0; j < treeStruct[i].length; j++){
+                mapR[i+1][j+5] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+5) * 64, (i+1) * 64);
+            }
+        }
+        treeStruct = tree.getStruct();
+        for (int i = 0; i < treeStruct.length; i++) {
+            for (int j = 0; j < treeStruct[i].length; j++){
+                mapR[i+1][j+10] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+10) * 64, (i+1) * 64);
+            }
+        }
+        treeStruct = tree.getStruct();
+        for (int i = 0; i < treeStruct.length; i++) {
+            for (int j = 0; j < treeStruct[i].length; j++){
+                mapR[i+1][j+15] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+15) * 64, (i+1) * 64);
+            }
+        }
         Player player = new Player("player", 10,10);
         entities.put(player, new EntityRenderer(player, (x/2)*32, (y-6)*64, this));
         time = 0;
@@ -111,5 +129,9 @@ public class World {
 
     public int getTime() {
         return time;
+    }
+
+    public void transition(){
+
     }
 }
