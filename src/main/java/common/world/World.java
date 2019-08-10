@@ -7,6 +7,7 @@ import common.block.Block;
 import common.entities.Entity;
 import common.entities.Player;
 import common.registries.Blocks;
+import common.world.gen.Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.List;
 public class World {
     private String name;
     private BlockRender[][] mapR = null;
+    private Tree tree = new Tree();
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
     private int time;
@@ -50,8 +52,14 @@ public class World {
                 }
             }
         }
+        Block[][] treeStruct = tree.getStruct();
+        for (int i = 0; i < treeStruct.length; i++) {
+            for (int j = 0; j < treeStruct[i].length; j++){
+                mapR[i+1][j] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j) * 64, (i+1) * 64);
+            }
+        }
         Player player = new Player("player", 10,10);
-        entities.put(player, new EntityRenderer(player, (x/2)*32, (y-5)*64, this));
+        entities.put(player, new EntityRenderer(player, (x/2)*32, (y-6)*64, this));
         time = 0;
     }
 
