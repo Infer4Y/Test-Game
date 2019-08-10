@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class EntityRenderer implements Entity, Drawable {
+    private Hand hand = new Hand();
     private BufferedImage texture;
     private common.entities.Entity entity;
     private int x, width, y, height;
@@ -45,7 +46,7 @@ public class EntityRenderer implements Entity, Drawable {
     @Override
     public void draw(Graphics g) {
         g.drawImage(texture, x, y-64,64,128, null);
-
+        hand.draw(g,x,y,Game.headsUpDisplay.getSelected().getItemStack(),entity.getFacing());
     }
 
     @Override

@@ -12,12 +12,13 @@ public class Window
         game.setMinimumSize(new Dimension (width, height));
 
         JFrame frame = new JFrame (title);
-        frame.add (game);
         frame.addKeyListener(game);
-        frame.pack ();
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         frame.setResizable (false);
-        frame.setLocationRelativeTo (null);
         frame.setVisible (true);
+        frame.requestFocus();
+        frame.add (game);
+        frame.pack ();
+        frame.setLocationRelativeTo (null);
     }
 }

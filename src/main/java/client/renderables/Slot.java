@@ -40,8 +40,18 @@ public class Slot implements ISlot {
             }
             e1.printStackTrace();
         }
-        g.fillRect(x,y, 34,34);
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(x-1, y-1, 36, 36);
+        try {
+            g.drawImage(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/air.png")), 2.0), x+1,y+1 , Game.instance);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         g.drawImage(texture, x+1,y+1 , Game.instance);
+        if (selected) {
+            g.setColor(new Color(80, 159, 119,127));
+            g.fillRect(x-1, y-1, 36, 36);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package client.renderables;
 
 import common.block.Block;
+import common.item.Item;
 import common.item.ItemBlock;
 import common.item.ItemStack;
 import common.registries.Blocks;
@@ -13,26 +14,25 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
 
     private int selected = 0;
     private Slot[] slots;
-    {
+
+    public HeadsUpDisplay() {
         slots = new Slot[8];
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
         }
         slots[0].setItemStack(new ItemStack(new ItemBlock(Blocks.grass),1));
         slots[1].setItemStack(new ItemStack(new ItemBlock(Blocks.dirt),1));
         slots[2].setItemStack(new ItemStack(new ItemBlock(Blocks.stone), 1));
         slots[3].setItemStack(new ItemStack(new ItemBlock(Blocks.launcher), 1));
-    }
-
-    public HeadsUpDisplay() {
+        slots[4].setItemStack(new ItemStack(new Item("pickaxe"), 1));
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(16, 16, 32*8 + 20, 32 + 4);
         for (int i =0; i < slots.length; i++) {
-            slots[i].draw(g, 32*i + 17, 17, i == selected);
+            try {
+                slots[i].draw(g, 36 * i + 16, 16, i == selected);
+            }catch (NullPointerException e){}
         }
     }
 
@@ -66,6 +66,18 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
             case KeyEvent.VK_4:
                 selected = 3;
                 break;
+            case KeyEvent.VK_5:
+                selected = 4;
+                break;
+            case KeyEvent.VK_6:
+                selected = 5;
+                break;
+            case KeyEvent.VK_7:
+                selected = 6;
+                break;
+            case KeyEvent.VK_8:
+                selected = 7;
+                break;
             default:
                 break;
         }
@@ -77,6 +89,6 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
     }
 
     public Slot getSelected() {
-        return slots[0];
+        return slots[selected];
     }
 }

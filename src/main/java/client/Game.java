@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     private Thread thread;
 
     private static final long NANOSECOND        = 1000000000;
-    private static final double OPTIMAL_TICKS   = 75.0;
+    private static final double OPTIMAL_TICKS   = 50.0;
     private static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
 
     private long lastLoopTime = System.nanoTime();
@@ -89,7 +89,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
         this.requestFocus();
 
         Window window = new Window (WIDTH, HEIGHT, TITLE, this);
-
         thread = new Thread(this);
         thread.start();
     }
@@ -132,7 +131,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         BufferStrategy bufferstrategy = getBufferStrategy ();
 
         if (bufferstrategy == null) {
-            createBufferStrategy(2);
+            createBufferStrategy(4);
             return;
         }
 

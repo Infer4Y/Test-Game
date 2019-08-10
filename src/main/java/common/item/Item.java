@@ -6,6 +6,10 @@ public class Item implements IItem{
     public Item() {
     }
 
+    public Item(String name) {
+        this.name = name;
+    }
+
     public void onItemUse(){
         // Of the event if user right click while holding the item in active slot.
     }
