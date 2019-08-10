@@ -115,4 +115,17 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     public Block getBlock() {
         return block;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setCoords(int i, int i1) {
+        this.x = i;
+        this.y = i1;
+    }
 }

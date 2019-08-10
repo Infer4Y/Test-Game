@@ -141,7 +141,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         BufferStrategy bufferstrategy = getBufferStrategy ();
 
         if (bufferstrategy == null) {
-            createBufferStrategy(4);
+            createBufferStrategy(2);
             return;
         }
 

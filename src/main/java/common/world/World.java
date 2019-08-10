@@ -131,7 +131,11 @@ public class World {
         return time;
     }
 
-    public void transition(){
-
+    public void transition(int x, int y){
+        for (int i = 0; i < this.y; i++) {
+            for (int j = 0; j < this.x; j++) {
+                mapR[i][j].setCoords(mapR[i][j].getX()+ x, mapR[i][j].getY() + y);
+            }
+        }
     }
 }

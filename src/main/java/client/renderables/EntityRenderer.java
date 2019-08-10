@@ -118,7 +118,7 @@ public class EntityRenderer implements Entity, Drawable {
             try {
                 blockRight = world.getMapR()[(int) Math.floor(y / 64)][(int) Math.floor(x / 64) + 1];
             } catch (ArrayIndexOutOfBoundsException e){
-                e.printStackTrace();
+                blockRight = null;
             }
         }
         if (entity instanceof Player){
