@@ -22,23 +22,26 @@ import java.io.IOException;
 
 public class Slot implements ISlot {
     private ItemStack stack = new ItemStack(new ItemBlock(Blocks.air),0);
+    private ItemStack lastStack = stack;
+    BufferedImage texture;
 
     public void draw(Graphics g, int x, int y, boolean selected) {
-        BufferedImage texture;
-        try {
-            if (stack.getItem() instanceof ItemBlock) {
-                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/" + stack.getItem().getName() + ".png")), 2.0);
-            } else {
-                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + stack.getItem().getName() + ".png")), 2.0);
-            }
-        } catch (IOException | NullPointerException e1) {
+        if (!lastStack.equals(stack)){
             try {
-                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
-            } catch (IOException ex) {
-                texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
-                ex.printStackTrace();
+                if (stack.getItem() instanceof ItemBlock) {
+                    texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/" + stack.getItem().getName() + ".png")), 2.0);
+                } else {
+                    texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + stack.getItem().getName() + ".png")), 2.0);
+                }
+            } catch (IOException | NullPointerException e1) {
+                try {
+                    texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
+                } catch (IOException ex) {
+                    texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+                    ex.printStackTrace();
+                }
+                e1.printStackTrace();
             }
-            e1.printStackTrace();
         }
         g.setColor(Color.DARK_GRAY);
         g.fillRect(x-1, y-1, 36, 36);
@@ -56,6 +59,7 @@ public class Slot implements ISlot {
 
     @Override
     public void setItemStack(ItemStack stack) {
+        this.lastStack = this.stack;
         this.stack = stack;
     }
 

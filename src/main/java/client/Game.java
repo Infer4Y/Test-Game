@@ -25,8 +25,8 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable, KeyListener {
 
     public static boolean f3;
-    public static boolean f2;
-    private boolean isRunning = true;
+    public static boolean f11;
+    private static boolean isRunning = true;
     private Thread thread;
 
     private static final long NANOSECOND        = 1000000000;
@@ -42,12 +42,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public static Game instance;
 
+    private static Renderer rendererThread;
+
     public static HeadsUpDisplay headsUpDisplay;
 
     public static final List<Entity> entities = new ArrayList<>();
     public static final List<Drawable> drawables = new ArrayList<>();
 
-    public static final int WIDTH      = 1280;
+    public static final int WIDTH      = 640*2;
     public static final int HEIGHT     = 640;
 
 
@@ -97,10 +99,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
         drawables.add(fpsViewer);
 
         this.requestFocus();
-
+        System.setProperty("sun.java2d.translaccel","True");
+        //System.setProperty("sun.java2d.d3d","True");
         Window window = new Window (WIDTH, HEIGHT, TITLE, this);
         thread = new Thread(this);
+        rendererThread = new Renderer("client");
         thread.start();
+        rendererThread.start();
+
     }
 
     public void run() {
@@ -114,7 +120,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 deltaTime--;
             }
 
-            render ();
+            render();
 
             if (System.currentTimeMillis () - secondTimer > 1000) {
                 updatePerSecond();
@@ -141,11 +147,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
         BufferStrategy bufferstrategy = getBufferStrategy ();
 
         if (bufferstrategy == null) {
-            createBufferStrategy(2);
+            createBufferStrategy(4);
             return;
         }
 
-        Graphics g = bufferstrategy.getDrawGraphics();
+        Graphics2D g = (Graphics2D) bufferstrategy.getDrawGraphics();
 
         g.setColor (Color.BLACK);
         g.fillRect (0, 0, getWidth(), getHeight());
@@ -196,7 +202,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -242,6 +247,30 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 break;
             default:
                 break;
+        }
+    }
+
+    private class Renderer extends Thread{
+
+        public Renderer(String name) {
+            super(name);
+        }
+
+        @Override
+        public synchronized void start() {
+            super.start();
+        }
+
+        @Override
+        public void run() {
+            while (Game.isRunning) {
+                //Game.instance.render();
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

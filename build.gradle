@@ -26,6 +26,10 @@ def getDate() {
     return new Date().format('MMddyyyy')
 }
 
+compileJava {
+    options.forkOptions.javaHome = file(System.properties['java.home'])
+}
+
 repositories {
     mavenCentral()
 }
