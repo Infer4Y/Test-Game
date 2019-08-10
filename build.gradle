@@ -1,11 +1,14 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'java'
 }
 
-group 'xavier'
-version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.8
+
+group 'xavier'
+version getDate() + '-SNAPSHOT'
 
 jar {
     manifest {
@@ -17,6 +20,10 @@ jar {
     into 'resources', {
         from 'resources'
     }
+}
+
+def getDate() {
+    return new Date().format('MMddyyyy')
 }
 
 repositories {
