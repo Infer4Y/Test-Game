@@ -7,7 +7,6 @@ import utils.FileUtils;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -36,7 +35,8 @@ public class Background implements Entity, Drawable {
         }
         try {
             this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));
-            this.texture1 = FileUtils.verticalFlip(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/sunmoon.png")),1.5));
+            this.texture1 = ImageIO.read(this.getClass().getClassLoader().getResource("tex/sunmoon.png"));
+
         } catch (IOException | NullPointerException e) {
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
@@ -61,8 +61,11 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void second() {
-        if (count == 10) {
+        if (count == 7) {
             texture1 = FileUtils.rotateClockwise(texture1);
+            count=0;
+        } else {
+            count++;
         }
         if (world.getTime() >= 600 && world.getTime() <= 1200) {
             c = c.brighter();
@@ -83,11 +86,10 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void draw(Graphics g) {
-        texture1 = FileUtils.rotateClockwise(texture1);
         g.setColor(c);
         g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
         g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
-        g.drawImage(texture1, 0-texture1.getWidth()/4,0-texture1.getWidth()/4, c, Game.instance);
+        g.drawImage(texture1, 0-texture1.getWidth()/10,0-texture1.getWidth()/4, c, Game.instance);
         g.setColor(Color.WHITE);
         if ((world.getTime() >= 1800 && world.getTime() <= 2400) || (world.getTime() >= 0 && world.getTime() <= 700)) {
             for (Star s: stars) {
