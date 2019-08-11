@@ -4,6 +4,7 @@ import client.Game;
 import client.Textures;
 import common.block.Block;
 import common.block.BlockAir;
+import common.block.BlockLeaf;
 import common.item.ItemBlock;
 import common.registries.Blocks;
 import utils.FileUtils;
@@ -25,6 +26,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     private BufferedImage texture;
     private Block block;
     private int x, width = 64, y, height = 64;
+    private Random r = new Random();
 
     public BlockRender(Block block, int x, int y){
         this.texture = Game.textures.getTexture4(block.getName());
@@ -37,6 +39,8 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void draw(Graphics g) {
+        //texture = FileUtils.rotateClockwise90(texture);
+
         g.drawImage(texture, x, y, null);
     }
 
@@ -55,31 +59,11 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
             block = Blocks.air;
-            try {
-                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
-            } catch (IOException | NullPointerException e1) {
-                try {
-                    this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
-                } catch (IOException ex) {
-                    texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
-                    ex.printStackTrace();
-                }
-                e1.printStackTrace();
-            }
+            texture = Game.textures.getTexture4(block.getName());
         } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
             if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
                 block = ((ItemBlock)Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
-            }
-            try {
-                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
-            } catch (IOException | NullPointerException e1) {
-                try {
-                    this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
-                } catch (IOException ex) {
-                    texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
-                    ex.printStackTrace();
-                }
-                e1.printStackTrace();
+                texture = Game.textures.getTexture4(block.getName());
             }
         }
     }

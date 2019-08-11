@@ -18,6 +18,7 @@ public class Background implements Entity, Drawable {
     private World world;
     private Star[] stars;
     private Random random=new Random();
+    private Rain[] rain;
 
     public Background(World world) {
         this.world = world;
@@ -25,6 +26,11 @@ public class Background implements Entity, Drawable {
         this.stars = new Star[allowedStars];
         for (int i = 0; i < allowedStars; i++) {
             stars[i] = new Star(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
+        }
+        int allowedRainDrops = (int) (random.nextInt(10)+20);
+        this.rain = new Rain[allowedRainDrops];
+        for (int i = 0; i < allowedRainDrops; i++) {
+            rain[i] = new Rain(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
         }
         try {
             this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));
@@ -44,6 +50,10 @@ public class Background implements Entity, Drawable {
         for (Star s: stars) {
             s.tick();
         }
+
+        for (Rain raindrops: rain) {
+            raindrops.tick();
+        }
     }
 
     @Override
@@ -60,6 +70,9 @@ public class Background implements Entity, Drawable {
         for (Star s : stars) {
             s.second();
         }
+        for (Rain raindrops: rain) {
+            raindrops.second();
+        }
     }
 
     @Override
@@ -68,14 +81,13 @@ public class Background implements Entity, Drawable {
         g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
         g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
         g.setColor(Color.WHITE);
-        if (world.getTime() >= 1800 && world.getTime() <= 2400) {
+        if ((world.getTime() >= 1800 && world.getTime() <= 2400) || (world.getTime() >= 0 && world.getTime() <= 700)) {
             for (Star s: stars) {
                 s.draw(g);
             }
-        }
-        if (world.getTime() >= 0 && world.getTime() <= 700) {
-            for (Star s: stars) {
-                s.draw(g);
+        } else {
+            for (Rain raindrops: rain) {
+                raindrops.draw(g);
             }
         }
     }

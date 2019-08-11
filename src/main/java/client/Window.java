@@ -4,21 +4,19 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class Window {
-    private JFrame frame;
+public class Window extends JFrame{
     public Window (int width, int height, String title, Game game) {
+        super(title);
         game.setPreferredSize(new Dimension (width, height));
         game.setMaximumSize(new Dimension (width, height));
         game.setMinimumSize(new Dimension (width, height));
-
-        frame = new JFrame (title);
-        frame.addKeyListener(game);
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.setResizable (false);
-        frame.setVisible (true);
-        frame.requestFocus();
-        frame.add (game);
-        frame.pack ();
-        frame.setLocationRelativeTo (null);
+        addKeyListener(game);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setVisible(true);
+        requestFocus();
+        add(game);
+        pack();
+        setLocationRelativeTo(null);
     }
 }
