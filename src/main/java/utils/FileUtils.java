@@ -67,7 +67,7 @@ public class FileUtils {
 
         Graphics2D graphics2D = dest.createGraphics();
         graphics2D.translate((height - width) / 2, (height - width) / 2);
-        graphics2D.rotate(Math.PI / 12, height / 2, width / 2);
+        graphics2D.rotate(Math.PI/240, height / 2, width / 2);
         graphics2D.drawRenderedImage(src, null);
 
         return dest;

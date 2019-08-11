@@ -61,6 +61,9 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void second() {
+        if (count == 10) {
+            texture1 = FileUtils.rotateClockwise(texture1);
+        }
         if (world.getTime() >= 600 && world.getTime() <= 1200) {
             c = c.brighter();
         } else if (world.getTime() == 1200){
@@ -76,21 +79,15 @@ public class Background implements Entity, Drawable {
         for (Rain raindrops: rain) {
             raindrops.second();
         }
-        if (count == 200){
-            texture1 = FileUtils.rotateClockwise(texture1);
-
-            count=0;
-        } else {
-            count++;
-        }
     }
 
     @Override
     public void draw(Graphics g) {
+        texture1 = FileUtils.rotateClockwise(texture1);
         g.setColor(c);
         g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
         g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
-        g.drawImage(texture1, 0-texture1.getWidth()/6,0-texture1.getHeight()/8, c, Game.instance);
+        g.drawImage(texture1, 0-texture1.getWidth()/4,0-texture1.getWidth()/4, c, Game.instance);
         g.setColor(Color.WHITE);
         if ((world.getTime() >= 1800 && world.getTime() <= 2400) || (world.getTime() >= 0 && world.getTime() <= 700)) {
             for (Star s: stars) {

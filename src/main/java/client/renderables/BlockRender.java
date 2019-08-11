@@ -39,7 +39,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void draw(Graphics g) {
-        //texture = FileUtils.rotateClockwise90(texture);
+        //texture = FileUtils.rotateClockwise(texture);
 
         g.drawImage(texture, x, y, null);
     }
