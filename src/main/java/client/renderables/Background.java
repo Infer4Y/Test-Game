@@ -27,10 +27,10 @@ public class Background implements Entity, Drawable {
         for (int i = 0; i < allowedStars; i++) {
             stars[i] = new Star(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
         }
-        int allowedRainDrops = (int) (random.nextInt(10)+20);
+        int allowedRainDrops = (int) (random.nextInt(10)+40);
         this.rain = new Rain[allowedRainDrops];
         for (int i = 0; i < allowedRainDrops; i++) {
-            rain[i] = new Rain(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
+            rain[i] = new Rain(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1);
         }
         try {
             this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));

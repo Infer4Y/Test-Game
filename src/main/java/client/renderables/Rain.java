@@ -7,17 +7,11 @@ import java.awt.*;
 public class Rain implements Drawable, Entity {
     private int x, y, size, speed, count;
 
-    public Rain(int x, int y, int size, int speed) {
+    public Rain(int x, int y, int size) {
         this.x = x;
         this.y = y;
         this.size = size;
-        if (speed > 10) {
-            this.speed = 10;
-        } else if (speed >=0){
-            this.speed = speed;
-        }else {
-            this.speed = 0;
-        }
+        speed = 10;
     }
 
     @Override
@@ -30,7 +24,7 @@ public class Rain implements Drawable, Entity {
     public void tick() {
         if (count == (10 - speed)){
             count = 0;
-            if (Game.world.getMapR()[(int) Math.floor(y/64)+1][(int) Math.floor(x/64)].getBlock().isSolid()){
+            if (Game.world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor(x/64)].getBlock().isSolid()){
                 y = 0;
             } else {
                 y++;
