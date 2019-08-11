@@ -42,6 +42,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     private BlockHandler blocktest;
 
     public static Game instance;
+    public static Textures textures = new Textures();
 
     private static Renderer rendererThread;
 
@@ -54,8 +55,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static final int HEIGHT     = 640;
 
 
-    public static World world = new World("test", WIDTH/64,(HEIGHT/64)+1);
-    private Background background = new Background(world);
+    public static World world;
+    private Background background;
 
 
     private static final String TITLE   = "Game";
@@ -71,10 +72,13 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public Game () {
         Blocks.init();
-        Textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
+        Items.init();
+        textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
         headsUpDisplay = new HeadsUpDisplay();
 
         addKeyListener(this);
+        world = new World("test", WIDTH/64,(HEIGHT/64)+1);
+        background = new Background(world);
 
 
         entities.add(background);

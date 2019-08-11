@@ -27,7 +27,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     private int x, width = 64, y, height = 64;
 
     public BlockRender(Block block, int x, int y){
-        this.texture = Textures.getTexture4(block.getName());
+        this.texture = Game.textures.getTexture4(block.getName());
         this.block = block;
         this.x = x;
         this.y = y;

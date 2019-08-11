@@ -10,32 +10,40 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Textures {
-    private static final HashMap<String, BufferedImage> textures4 = new HashMap<>();
-    private static final HashMap<String, BufferedImage> textures3 = new HashMap<>();
-    private static final HashMap<String, BufferedImage> textures2 = new HashMap<>();
-    private static final HashMap<String, BufferedImage> textures1 = new HashMap<>();
+    private final HashMap<String, BufferedImage> textures4 = new HashMap<>();
+    private final HashMap<String, BufferedImage> textures3 = new HashMap<>();
+    private final HashMap<String, BufferedImage> textures2 = new HashMap<>();
+    private final HashMap<String, BufferedImage> textures1 = new HashMap<>();
 
-    private static BufferedImage placeholder4;
-    private static BufferedImage placeholder3;
-    private static BufferedImage placeholder2;
-    private static BufferedImage placeholder1;
+    private BufferedImage placeholder4;
+    private BufferedImage placeholder3;
+    private BufferedImage placeholder2;
+    private BufferedImage placeholder1;
 
-    static {
+
+
+    public void init(HashMap<String, Item> items, HashMap<String, Block> blocks){
         try {
-            placeholder4 = FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
-            placeholder3 = FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/placeholder.png")), 3.0);
-            placeholder2 = FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
-            placeholder1 = FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/placeholder.png")), 1.0);
-        } catch (IOException e) {
+            placeholder4 = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
+        } catch (NullPointerException|IOException e) {
+            e.printStackTrace();
+        } try {
+            placeholder3 = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 3.0);
+        } catch (NullPointerException|IOException e) {
+            e.printStackTrace();
+        } try {
+            placeholder2 = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
+        } catch (NullPointerException|IOException e) {
+            e.printStackTrace();
+        } try {
+            placeholder1 = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 1.0);
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
-    }
-
-
-    public static void init(HashMap<String, IItem> items, HashMap<String, Block> blocks){
-        for (IItem i: items.values()) {
+        for (Item i: items.values()) {
             register1(i);
             register2(i);
             register3(i);
@@ -49,165 +57,207 @@ public class Textures {
         }
     }
 
-    public static BufferedImage getTexture1(String name){
+    public BufferedImage getTexture1(String name){
         return textures1.getOrDefault(name, placeholder1);
     }
-    public static BufferedImage getTexture2(String name){
+    public BufferedImage getTexture2(String name){
         return textures2.getOrDefault(name, placeholder2);
     }
-    public static BufferedImage getTexture3(String name){
+    public BufferedImage getTexture3(String name){
         return textures3.getOrDefault(name, placeholder3);
     }
-    public static BufferedImage getTexture4(String name){
+    public BufferedImage getTexture4(String name){
         return textures4.getOrDefault(name, placeholder4);
     }
 
-
-
-
-    private static void register4(Block block){
+    private void register4(Block block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),4.0));
-        } catch (IOException e) {
+            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),4.0));
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register4(Block... block){
+    private void register4(Block... block){
         for (Block b : block) {
             try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 4.0));
-            } catch (IOException e) {
+                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 4.0));
+            } catch (NullPointerException|IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private static void register3(Block block){
+    private void register3(Block block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),3.0));
-        } catch (IOException e) {
+            textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),3.0));
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register3(Block... block){
+    private void register3(Block... block){
         for (Block b : block) {
             try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 3.0));
-            } catch (IOException e) {
+                textures3.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 3.0));
+            } catch (NullPointerException|IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private static void register2(Block block){
+    private void register2(Block block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),2.0));
-        } catch (IOException e) {
+            textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),2.0));
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register2(Block... block){
+    private void register2(Block... block){
         for (Block b : block) {
             try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 2.0));
-            } catch (IOException e) {
+                textures2.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 2.0));
+            } catch (NullPointerException|IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private static void register1(Block block){
+    private void register1(Block block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),1.0));
-        } catch (IOException e) {
+            textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")),1.0));
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register1(Block... block){
+    private void register1(Block... block){
         for (Block b : block) {
             try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 1.0));
-            } catch (IOException e) {
+                textures1.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 1.0));
+            } catch (NullPointerException|IOException e) {
                 e.printStackTrace();
             }
         }
     }
-    private static void register4(IItem block){
+
+    private void register4(Item block){
         try {
             if (block instanceof ItemBlock){
-
+                textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
             } else {
-                textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 4.0));
+                textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 4.0));
             }
-        } catch (IOException e) {
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register4(IItem... block){
-        for (IItem b : block) {
-            try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+b.getName()+".png")), 4.0));
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void register4(Item... blocks){
+        for (Item block : blocks) {
+            if (block instanceof ItemBlock){
+                try {
+                    textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 4.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private static void register3(IItem block){
+    private void register3(Item block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+block.getName()+".png")),3.0));
-        } catch (IOException e) {
+            if (block instanceof ItemBlock){
+                textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 3.0));
+            } else {
+                textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 3.0));
+            }
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register3(IItem... block){
-        for (IItem b : block) {
-            try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+b.getName()+".png")), 3.0));
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void register3(Item... blocks){
+        for (Item block : blocks) {
+            if (block instanceof ItemBlock){
+                try {
+                    textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 3.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 3.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private static void register2(IItem block){
+    private void register2(Item block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+block.getName()+".png")),2.0));
-        } catch (IOException e) {
+            if (block instanceof ItemBlock){
+                textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 2.0));
+            } else {
+                textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 2.0));
+            }
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register2(IItem... block){
-        for (IItem b : block) {
-            try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+b.getName()+".png")), 2.0));
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void register2(Item... blocks){
+        for (Item block : blocks) {
+            if (block instanceof ItemBlock){
+                try {
+                    textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 2.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 2.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private static void register1(IItem block){
+    private void register1(Item block){
         try {
-            textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+block.getName()+".png")),1.0));
-        } catch (IOException e) {
+            if (block instanceof ItemBlock){
+                textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 1.0));
+            } else {
+                textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 1.0));
+            }
+        } catch (NullPointerException|IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void register1(IItem... block){
-        for (IItem b : block) {
-            try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(Textures.class.getClass().getClassLoader().getResource("tex/items/"+b.getName()+".png")), 1.0));
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void register1(Item... blocks) {
+        for (Item block : blocks) {
+            if (block instanceof ItemBlock) {
+                try {
+                    textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 1.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 1.0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 package client.renderables;
 
+import client.Game;
+import client.Textures;
 import common.item.ItemBlock;
 import common.item.ItemStack;
 import common.world.Direction;
@@ -13,21 +15,7 @@ import java.io.IOException;
 public class Hand {
     public void draw(Graphics g, int x, int y, ItemStack stack, Direction facing) {
         BufferedImage texture;
-        try {
-            if (stack.getItem() instanceof ItemBlock) {
-                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/" + stack.getItem().getName() + ".png")), 3.0);
-            } else {
-                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + stack.getItem().getName() + ".png")), 3.0);
-            }
-        } catch (IOException | NullPointerException e1) {
-            try {
-                texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
-            } catch (IOException ex) {
-                texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
-                ex.printStackTrace();
-            }
-            e1.printStackTrace();
-        }
+        texture = Game.textures.getTexture3(stack.getItem().getName());
         if (!stack.getItem().getName().equals("air")) {
             if (facing == Direction.RIGHT) {
                 g.drawImage(texture, x+32, y-16, null);
