@@ -14,11 +14,13 @@ import java.util.Random;
 
 public class Background implements Entity, Drawable {
     private BufferedImage texture;
+    private BufferedImage texture1;
     private Color c = Color.BLACK;
     private World world;
     private Star[] stars;
     private Random random=new Random();
     private Rain[] rain;
+    private int count;
 
     public Background(World world) {
         this.world = world;
@@ -34,6 +36,7 @@ public class Background implements Entity, Drawable {
         }
         try {
             this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));
+            this.texture1 = FileUtils.verticalFlip(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/sunmoon.png")),1.5));
         } catch (IOException | NullPointerException e) {
             try {
                 this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
@@ -73,6 +76,13 @@ public class Background implements Entity, Drawable {
         for (Rain raindrops: rain) {
             raindrops.second();
         }
+        if (count == 200){
+            texture1 = FileUtils.rotateClockwise(texture1);
+
+            count=0;
+        } else {
+            count++;
+        }
     }
 
     @Override
@@ -80,6 +90,7 @@ public class Background implements Entity, Drawable {
         g.setColor(c);
         g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
         g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
+        g.drawImage(texture1, 0-texture1.getWidth()/6,0-texture1.getHeight()/8, c, Game.instance);
         g.setColor(Color.WHITE);
         if ((world.getTime() >= 1800 && world.getTime() <= 2400) || (world.getTime() >= 0 && world.getTime() <= 700)) {
             for (Star s: stars) {

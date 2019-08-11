@@ -60,6 +60,18 @@ public class FileUtils {
 
         return dest;
     }
+    public static BufferedImage rotateClockwise(BufferedImage src) {
+        int width = src.getWidth();
+        int height = src.getHeight();
+        BufferedImage dest = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D graphics2D = dest.createGraphics();
+        graphics2D.translate((height - width) / 2, (height - width) / 2);
+        graphics2D.rotate(Math.PI / 12, height / 2, width / 2);
+        graphics2D.drawRenderedImage(src, null);
+
+        return dest;
+    }
 
     public static BufferedImage verticalFlip(BufferedImage img) {
         int w = img.getWidth();
