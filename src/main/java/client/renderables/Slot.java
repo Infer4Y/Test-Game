@@ -1,6 +1,7 @@
 package client.renderables;
 
 import client.Game;
+import client.Textures;
 import common.block.Block;
 import common.containers.ISlot;
 import common.item.Item;
@@ -27,29 +28,11 @@ public class Slot implements ISlot {
 
     public void draw(Graphics g, int x, int y, boolean selected) {
         if (!lastStack.equals(stack)){
-            try {
-                if (stack.getItem() instanceof ItemBlock) {
-                    texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/" + stack.getItem().getName() + ".png")), 2.0);
-                } else {
-                    texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + stack.getItem().getName() + ".png")), 2.0);
-                }
-            } catch (IOException | NullPointerException e1) {
-                try {
-                    texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 2.0);
-                } catch (IOException ex) {
-                    texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
-                    ex.printStackTrace();
-                }
-                e1.printStackTrace();
-            }
+            texture = Textures.getTexture2(stack.getItem().getName());
         }
         g.setColor(Color.DARK_GRAY);
         g.fillRect(x-1, y-1, 36, 36);
-        try {
-            g.drawImage(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/air.png")), 2.0), x+1,y+1 , Game.instance);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        g.drawImage(Textures.getTexture2("air"), x+1,y+1 , Game.instance);
         g.drawImage(texture, x+1,y+1 , Game.instance);
         if (selected) {
             g.setColor(new Color(80, 159, 119,127));

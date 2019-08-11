@@ -3,6 +3,7 @@ package client;
 import client.handlers.BlockHandler;
 import client.renderables.*;
 import common.registries.Blocks;
+import common.registries.Items;
 import common.world.World;
 
 import javax.imageio.ImageIO;
@@ -70,6 +71,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public Game () {
         Blocks.init();
+        Textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
         headsUpDisplay = new HeadsUpDisplay();
 
         addKeyListener(this);

@@ -1,6 +1,7 @@
 package client.renderables;
 
 import client.Game;
+import client.Textures;
 import common.block.Block;
 import common.block.BlockAir;
 import common.item.ItemBlock;
@@ -26,17 +27,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     private int x, width = 64, y, height = 64;
 
     public BlockRender(Block block, int x, int y){
-        try {
-            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+block.getName()+".png")), 4.0);
-        } catch (IOException | NullPointerException e) {
-            try {
-                this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
-            } catch (IOException ex) {
-                texture=new BufferedImage(64,64,BufferedImage.TYPE_INT_ARGB);
-                ex.printStackTrace();
-            }
-            e.printStackTrace();
-        }
+        this.texture = Textures.getTexture4(block.getName());
         this.block = block;
         this.x = x;
         this.y = y;
