@@ -4,10 +4,13 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.net.URL;
+import java.util.Random;
 
 public class FileUtils {
+    static Random r = new Random();
     public static File getFileFromResources(String fileName) {
 
         ClassLoader classLoader = FileUtils.class.getClass().getClassLoader();
@@ -76,6 +79,44 @@ public class FileUtils {
         graphics2D.drawRenderedImage(src, null);
 
         return dest;
+    }
+
+    public static BufferedImage colorImage(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        WritableRaster raster = image.getRaster();
+
+        for (int xx = 0; xx < width; xx++) {
+            for (int yy = 0; yy < height; yy++) {
+                int[] pixels = raster.getPixel(xx, yy, (int[]) null);
+                if (!(pixels[0] <= 0)) {
+                    pixels[0]-= r.nextInt(5);
+                    if (pixels[0] <= 0) {
+                        pixels[0] = 255;
+                    }
+                } else {
+                    pixels[0] = 255;
+                }
+                if (!(pixels[1] <= 0)) {
+                    pixels[1]-= r.nextInt(5);
+                    if (pixels[1] <= 0) {
+                        pixels[1] = 255;
+                    }
+                } else {
+                    pixels[1] = 255;
+                }
+                if (!(pixels[2] <= 0)) {
+                    pixels[2]-= r.nextInt(5);
+                    if (pixels[2] <= 0) {
+                        pixels[2] = 255;
+                    }
+                } else {
+                    pixels[2] = 255;
+                }
+                raster.setPixel(xx, yy, pixels);
+            }
+        }
+        return image;
     }
 
     public static BufferedImage verticalFlip(BufferedImage img) {

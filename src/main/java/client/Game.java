@@ -63,6 +63,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     private final FPSViewer fpsViewer = new FPSViewer();
     public static boolean up, down, left, right;
+    private int count;
 
     public static void main(String[] args) {
         instance = new Game();
@@ -86,8 +87,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         for (int i = 0; i < world.getWidth(); i++) {
             for (int j = 0; j < world.getHeight(); j++) {
-                entities.add(world.getMapR()[j][i]);
-                drawables.add(world.getMapR()[j][i]);
                 this.addMouseListener(world.getMapR()[j][i]);
             }
         }
@@ -166,6 +165,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
             d.draw(g);
         }
 
+        world.draw(g);
+
+        count++;
+
         g.dispose ();
         bufferstrategy.show();
     }
@@ -173,13 +176,18 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public void saveCanvas() {
         try {
             BufferedImage image=new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
-            Graphics g = image.createGraphics();
+            Graphics2D g = image.createGraphics();
+
             g.setColor (Color.BLACK);
             g.fillRect (0, 0, getWidth(), getHeight());
+
             for (Drawable d : drawables) {
                 d.draw(g);
             }
-            g.dispose();
+
+            world.draw(g);
+
+            g.dispose ();
 
             File screenshotFolder = new File(".", "screenshots");
 

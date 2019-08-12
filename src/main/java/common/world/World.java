@@ -9,6 +9,7 @@ import common.entities.Player;
 import common.registries.Blocks;
 import common.world.gen.Tree;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ public class World {
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
     private int time;
+    private int offsetX, offsetY;;
 
     public World (String name, int x, int y){
         this.x = x;
@@ -81,6 +83,21 @@ public class World {
         time = 1199;
     }
 
+    public void draw(Graphics g){
+        g.translate(offsetX, offsetY);
+        for (BlockRender[] r: mapR) {
+            for (BlockRender r1: r) {
+                r1.draw(g);
+            }
+        }
+
+        g.translate(-offsetX, -offsetY);
+        for (EntityRenderer r : entities.values()){
+            r.draw(g);
+        }
+    }
+
+
     public String getName() {
         return name;
     }
@@ -132,10 +149,7 @@ public class World {
     }
 
     public void transition(int x, int y){
-        for (int i = 0; i < this.y; i++) {
-            for (int j = 0; j < this.x; j++) {
-                mapR[i][j].setCoords(mapR[i][j].getX()+ x, mapR[i][j].getY() + y);
-            }
-        }
+        this.offsetX = this.offsetX+x;
+        this.offsetY = this.offsetY+y;
     }
 }

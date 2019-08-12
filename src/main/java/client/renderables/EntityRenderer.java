@@ -20,6 +20,7 @@ public class EntityRenderer implements Entity, Drawable {
     private Direction prevDirection = Direction.LEFT;
     private World world;
     private float jumpVel = 0.0f;
+    private int count;
 
     public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
@@ -158,6 +159,7 @@ public class EntityRenderer implements Entity, Drawable {
             }
             jumpVel--;
         }
+        //world.transition(x - y,y - x);
     }
 
     private boolean onGround(BlockRender blockRender){
