@@ -13,13 +13,14 @@ import java.util.Random;
 
 public class Background implements Entity, Drawable {
     private BufferedImage texture;
-    private BufferedImage texture1;
     private Color c = Color.BLACK;
     private World world;
     private Star[] stars;
     private Random random=new Random();
     private Rain[] rain;
-    private int count;
+    private double count;
+    private boolean day;
+    private int count2;
 
     public Background(World world) {
         this.world = world;
@@ -35,7 +36,6 @@ public class Background implements Entity, Drawable {
         }
         try {
             this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));
-            this.texture1 = ImageIO.read(this.getClass().getClassLoader().getResource("tex/sunmoon.png"));
 
         } catch (IOException | NullPointerException e) {
             try {
@@ -46,6 +46,8 @@ public class Background implements Entity, Drawable {
             }
             e.printStackTrace();
         }
+        count=-90;
+        day = true;
     }
 
     @Override
@@ -61,11 +63,11 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void second() {
-        if (count == 7) {
-            texture1 = FileUtils.rotateClockwise(texture1);
-            count=0;
+        if (count >= 0.d) {
+            count = -180;
+            day = !day;
         } else {
-            count++;
+            count+=360.00000000d/2400.000000000d;
         }
         if (world.getTime() >= 600 && world.getTime() <= 1200) {
             c = c.brighter();
@@ -84,20 +86,37 @@ public class Background implements Entity, Drawable {
         }
     }
 
+    private  void drawCycle(Graphics g){
+        int size = 40;
+        if (day) {
+            g.setColor(Color.YELLOW);
+            size = 160;
+        } else {
+            g.setColor(Color.WHITE);
+            size = 80;
+        }
+        g.fillOval(600,40,size,size);
+    }
+
     @Override
     public void draw(Graphics g) {
-        g.setColor(c);
-        g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
-        g.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
-        g.drawImage(texture1, 0-texture1.getWidth()/10,0-texture1.getWidth()/4, c, Game.instance);
-        g.setColor(Color.WHITE);
+        Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setColor(c);
+        graphics2D.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
+        graphics2D.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
+        graphics2D.setColor(Color.WHITE);
+        graphics2D.translate(640,640);
+        graphics2D.rotate(Math.toRadians(count));
+        drawCycle(graphics2D);
+        graphics2D.rotate(-Math.toRadians(count));
+        graphics2D.translate(-640,-640);
         if ((world.getTime() >= 1800 && world.getTime() <= 2400) || (world.getTime() >= 0 && world.getTime() <= 700)) {
             for (Star s: stars) {
-                s.draw(g);
+                s.draw(graphics2D);
             }
         } else {
             for (Rain raindrops: rain) {
-                raindrops.draw(g);
+                raindrops.draw(graphics2D);
             }
         }
     }
