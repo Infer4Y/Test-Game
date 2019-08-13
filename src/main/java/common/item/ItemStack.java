@@ -1,5 +1,8 @@
 package common.item;
 
+import common.registries.Blocks;
+import common.registries.Items;
+
 public class ItemStack {
     private Item item;
     private int amount;
@@ -23,5 +26,9 @@ public class ItemStack {
 
     public void setAmount(int amount) {
         this.amount = amount;
+        if (this.amount==0){
+            setItem(Items.getItem("air"));
+            this.amount=-1;
+        }
     }
 }

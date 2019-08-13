@@ -1,6 +1,7 @@
 package client.renderables;
 
 import common.block.Block;
+import common.containers.ISlot;
 import common.item.Item;
 import common.item.ItemBlock;
 import common.item.ItemStack;
@@ -22,13 +23,6 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheel
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
         }
-        slots[0].setItemStack(new ItemStack(new ItemBlock(Blocks.grass),1));
-        slots[1].setItemStack(new ItemStack(new ItemBlock(Blocks.dirt),1));
-        slots[2].setItemStack(new ItemStack(new ItemBlock(Blocks.stone), 1));
-        slots[3].setItemStack(new ItemStack(new ItemBlock(Blocks.launcher), 1));
-        slots[4].setItemStack(new ItemStack(new ItemBlock(Blocks.log), 1));
-        slots[5].setItemStack(new ItemStack(new ItemBlock(Blocks.leaf), 1));
-        slots[6].setItemStack(new ItemStack(new ItemBlock(Blocks.planks), 1));
     }
 
     @Override
@@ -111,5 +105,9 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheel
                 selected++;
             }
         }
+    }
+
+    public ISlot[] getSlots() {
+        return slots;
     }
 }
