@@ -27,7 +27,7 @@ public class FPSViewer implements Drawable, Entity {
     }
 
     public void second () {
-        averageFrames = frames ;// 60;
+        averageFrames = frames;
         averageTicks = ticks;
         frames = 0;
         ticks = 0;

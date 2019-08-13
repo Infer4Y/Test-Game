@@ -1,15 +1,22 @@
 package common.block;
 
-import client.Game;
 import client.renderables.EntityRenderer;
+import common.item.Item;
+import common.registries.Items;
 import common.world.World;
 
 public class Block {
     private String name = "";
     private float hardness, blastResistance = 1.0f;
+    private boolean solid = true;
 
     public Block(String name){
         this.name = name;
+    }
+
+    public Block(String name, boolean b) {
+        this.name = name;
+        setSolid(b);
     }
 
     public void onBlockRightClick(World world, EntityRenderer entity){ }
@@ -42,12 +49,16 @@ public class Block {
         this.blastResistance = blastResistance;
     }
 
-    public Block getBlockDrop(){
-        return this;
+    public Item getBlockDrop(){
+        return Items.getItem(this.getName());
+    }
+
+    public void setSolid(boolean solid) {
+        this.solid = solid;
     }
 
     public boolean isSolid(){
-        return true;
+        return solid;
     }
 
     public boolean isAir() {

@@ -65,7 +65,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
                 Sounds.playSound("block_break");
                 for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
                     if (Game.headsUpDisplay.getSlots()[i].getItemStack().getItem() instanceof ItemBlock) {
-                        if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock() == block.getBlockDrop()) {
+                        if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()) == block.getBlockDrop()) {
                             Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(Game.headsUpDisplay.getSlots()[i].getItemStack().getAmount() + 1);
                             break;
                         } else if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock().isAir()){
@@ -82,8 +82,16 @@ public class BlockRender implements Entity, Drawable, MouseListener {
             if (block.isAir()) {
                 if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
                     block = ((ItemBlock) Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
+                    block.setSolid(true);
                     Game.headsUpDisplay.getSelected().getItemStack().setAmount(Game.headsUpDisplay.getSelected().getItemStack().getAmount() - 1);
                     texture = Game.textures.getTexture4(block.getName());
+                } else if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
+                    if (e.isShiftDown()){
+                        block = ((ItemBlock) Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
+                        block.setSolid(false);
+                        Game.headsUpDisplay.getSelected().getItemStack().setAmount(Game.headsUpDisplay.getSelected().getItemStack().getAmount() - 1);
+                        texture = Game.textures.getTexture4(block.getName());
+                    }
                 }
             } else {
                 block.onBlockRightClick(Game.world, null);

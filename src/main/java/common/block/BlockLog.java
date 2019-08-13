@@ -9,7 +9,7 @@ import common.world.World;
 
 public class BlockLog extends Block {
     public BlockLog(String name) {
-        super(name);
+        super(name, false);
     }
 
     @Override
@@ -31,10 +31,5 @@ public class BlockLog extends Block {
                 }
             }
         }
-    }
-
-    @Override
-    public boolean isSolid() {
-        return false;
     }
 }

@@ -100,8 +100,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
         this.requestFocus();
-        System.setProperty("sun.java2d.translaccel","True");
-        System.setProperty("sun.java2d.d3d","True");
         Window window = new Window (WIDTH, HEIGHT, TITLE, this);
         thread = new Thread(this);
         rendererThread = new Renderer("client");

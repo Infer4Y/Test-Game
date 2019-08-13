@@ -5,7 +5,7 @@ import common.world.World;
 
 public class BlockLanchPad extends Block{
     public BlockLanchPad(String name) {
-        super(name);
+        super(name, true);
     }
 
     @Override

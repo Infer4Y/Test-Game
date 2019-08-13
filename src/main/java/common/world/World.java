@@ -1,5 +1,6 @@
 package common.world;
 
+import client.Game;
 import client.handlers.BlockHandler;
 import client.renderables.BlockRender;
 import client.renderables.EntityRenderer;
@@ -89,6 +90,14 @@ public class World {
             for (BlockRender r1: r) {
                 r1.draw(g);
             }
+        }
+
+        if ((this.getTime() >= 1800 && this.getTime() <= 2400) || (this.getTime() >= 0 && this.getTime() <= 700)) {
+            g.setColor(new Color(0x3F3D3DE2, true));
+            //g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+        } else {
+            g.setColor(new Color(0x3FE2CF70, true));
+            //g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         }
 
         g.translate(-offsetX, -offsetY);

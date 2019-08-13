@@ -28,6 +28,35 @@ public class FileUtils {
 
     }
 
+    public static BufferedImage dye(BufferedImage image, Color color) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage dyed = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = dyed.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.setComposite(AlphaComposite.SrcAtop);
+        g.setColor(color);
+        g.fillRect(0, 0, w, h);
+        g.dispose();
+        return dyed;
+    }
+
+    public static BufferedImage joinBufferedImage(BufferedImage img1, BufferedImage img2) {
+        int width = img1.getWidth();
+        int height = img1.getHeight();
+        BufferedImage newImage = new BufferedImage(width, height,
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = newImage.createGraphics();
+        Color oldColor = g2.getColor();
+        g2.setPaint(Color.BLACK);
+        g2.fillRect(0, 0, width, height);
+        g2.setColor(oldColor);
+        g2.drawImage(img1, null, 0, 0);
+        g2.drawImage(img2, null, 0, 0);
+        g2.dispose();
+        return newImage;
+    }
+
     public static File[] getResourceFolderFiles (String folder) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         URL url = loader.getResource(folder);

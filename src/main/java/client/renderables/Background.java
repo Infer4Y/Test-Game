@@ -57,7 +57,7 @@ public class Background implements Entity, Drawable {
         }
 
         for (Rain raindrops: rain) {
-            raindrops.tick();
+            //raindrops.tick();
         }
     }
 
@@ -82,17 +82,17 @@ public class Background implements Entity, Drawable {
             s.second();
         }
         for (Rain raindrops: rain) {
-            raindrops.second();
+            //raindrops.second();
         }
     }
 
     private  void drawCycle(Graphics g){
         int size = 40;
         if (day) {
-            g.setColor(Color.YELLOW);
+            g.setColor(new Color(0xFFE261));
             size = 160;
         } else {
-            g.setColor(Color.WHITE);
+            g.setColor(new Color(0xA6E2DB));
             size = 80;
         }
         g.fillOval(600,40,size,size);
@@ -103,7 +103,9 @@ public class Background implements Entity, Drawable {
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setColor(c);
         graphics2D.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
-        graphics2D.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
+        graphics2D.setColor(new Color(0x7F3D3DE2, true));
+        graphics2D.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
+        //graphics2D.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
         graphics2D.setColor(Color.WHITE);
         graphics2D.translate(640,640);
         graphics2D.rotate(Math.toRadians(count));
@@ -116,7 +118,7 @@ public class Background implements Entity, Drawable {
             }
         } else {
             for (Rain raindrops: rain) {
-                raindrops.draw(graphics2D);
+                //raindrops.draw(graphics2D);
             }
         }
     }

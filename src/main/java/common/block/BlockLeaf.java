@@ -1,19 +1,16 @@
 package common.block;
 
+import common.item.Item;
 import common.registries.Blocks;
+import common.registries.Items;
 
 public class BlockLeaf extends Block {
     public BlockLeaf(String name) {
-        super(name);
+        super(name,false);
     }
 
     @Override
-    public boolean isSolid() {
-        return false;
-    }
-
-    @Override
-    public Block getBlockDrop() {
-        return Blocks.sapling;
+    public Item getBlockDrop() {
+        return Items.getItem(Blocks.sapling.getName());
     }
 }

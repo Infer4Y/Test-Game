@@ -9,7 +9,7 @@ import common.world.World;
 
 public class BlockWoodProducer extends Block {
     public BlockWoodProducer(String name) {
-        super(name);
+        super(name,false);
     }
 
     @Override
@@ -30,16 +30,26 @@ public class BlockWoodProducer extends Block {
                     }
                 }
             }
+        } else if (Blocks.log.getName().equals(Game.headsUpDisplay.getSelected().getItemStack().getItem().getName())&& Game.headsUpDisplay.getSelected().getItemStack().getAmount() >= 1){
+            for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
+                if (Game.headsUpDisplay.getSlots()[i].getItemStack().getItem() instanceof ItemBlock) {
+                    if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock() == Blocks.sapling) {
+                        Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(Game.headsUpDisplay.getSlots()[i].getItemStack().getAmount() + 4);
+                        Game.headsUpDisplay.getSelected().getItemStack().setAmount(Game.headsUpDisplay.getSelected().getItemStack().getAmount()-1);
+                        break;
+                    } else if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock().isAir()){
+                        Game.headsUpDisplay.getSlots()[i].getItemStack().setItem(Items.getItem(Blocks.sapling.getName()));
+                        Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(4);
+                        Game.headsUpDisplay.getSelected().getItemStack().setAmount(Game.headsUpDisplay.getSelected().getItemStack().getAmount()-1);
+                        break;
+                    }
+                }
+            }
         }
     }
 
     @Override
     public void onTick(World world, int x, int y) {
         super.onTick(world, x, y);
-    }
-
-    @Override
-    public boolean isSolid() {
-        return false;
     }
 }

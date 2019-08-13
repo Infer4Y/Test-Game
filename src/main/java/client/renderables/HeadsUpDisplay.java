@@ -1,11 +1,13 @@
 package client.renderables;
 
 import common.block.Block;
+import common.block.BlockOre;
 import common.containers.ISlot;
 import common.item.Item;
 import common.item.ItemBlock;
 import common.item.ItemStack;
 import common.registries.Blocks;
+import common.registries.Items;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,6 +17,17 @@ import java.awt.event.MouseWheelListener;
 
 public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheelListener {
 
+    private BlockOre[] ores = new BlockOre[]{
+            Blocks.ore_coal,
+            Blocks.ore_copper,
+            Blocks.ore_diamond,
+            Blocks.ore_iron,
+            Blocks.ore_gold,
+            Blocks.ore_tin,
+            Blocks.ore_silver,
+            Blocks.ore_ruby
+    };
+
     private int selected = 0;
     private Slot[] slots;
 
@@ -22,6 +35,7 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheel
         slots = new Slot[8];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
+            slots[i].setItemStack(new ItemStack(Items.getItem(ores[i].getName()), 999));
         }
     }
 
@@ -32,6 +46,9 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheel
                 slots[i].draw(g, 36 * i + 16, 16, i == selected);
             }catch (NullPointerException e){}
         }
+        g.setColor(new Color(0xFF00D5));
+        g.setFont(new Font(null, Font.BOLD, 24));
+        g.drawString(getSelected().getItemStack().getItem().getName(), 640,24);
     }
 
     @Override
