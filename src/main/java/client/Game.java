@@ -72,6 +72,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
     public Game () {
+        Sounds.init();
         Blocks.init();
         Items.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
@@ -96,12 +97,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
             drawables.add(e);
         }
 
-        entities.add(headsUpDisplay);
-        drawables.add(headsUpDisplay);
-        addKeyListener(headsUpDisplay);
 
-        entities.add(fpsViewer);
-        drawables.add(fpsViewer);
 
         this.requestFocus();
         System.setProperty("sun.java2d.translaccel","True");
@@ -111,6 +107,13 @@ public class Game extends Canvas implements Runnable, KeyListener {
         rendererThread = new Renderer("client");
         thread.start();
         rendererThread.start();
+        entities.add(headsUpDisplay);
+        drawables.add(headsUpDisplay);
+        addKeyListener(headsUpDisplay);
+        addMouseWheelListener(headsUpDisplay);
+
+        entities.add(fpsViewer);
+        drawables.add(fpsViewer);
 
     }
 
@@ -167,6 +170,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         world.draw(g);
 
+        fpsViewer.draw(g);
+        headsUpDisplay.draw(g);
+
         count++;
 
         g.dispose ();
@@ -186,6 +192,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
             }
 
             world.draw(g);
+
+            fpsViewer.draw(g);
+            headsUpDisplay.draw(g);
 
             g.dispose ();
 

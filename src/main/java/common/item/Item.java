@@ -10,6 +10,7 @@ public class Item implements IItem{
         this.name = name;
     }
 
+    @Override
     public void onItemUse(){
         // Of the event if user right click while holding the item in active slot.
     }

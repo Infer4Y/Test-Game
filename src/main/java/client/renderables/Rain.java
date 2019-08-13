@@ -1,6 +1,7 @@
 package client.renderables;
 
 import client.Game;
+import client.Sounds;
 
 import java.awt.*;
 
@@ -26,6 +27,7 @@ public class Rain implements Drawable, Entity {
             count = 0;
             if (Game.world.getMapR()[(int) Math.floor(y/64)][(int) Math.floor(x/64)].getBlock().isSolid()){
                 y = 0;
+                Sounds.playSound("raindrop");
             } else {
                 y++;
             }

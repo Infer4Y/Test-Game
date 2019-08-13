@@ -9,8 +9,10 @@ import common.registries.Blocks;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
+public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheelListener {
 
     private int selected = 0;
     private Slot[] slots;
@@ -92,5 +94,22 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
 
     public Slot getSelected() {
         return slots[selected];
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.getWheelRotation() < 0){
+            if (selected < 1){
+                selected = 7;
+            } else {
+                selected--;
+            }
+        } else {
+            if (selected == 7){
+                selected = 0;
+            } else {
+                selected++;
+            }
+        }
     }
 }

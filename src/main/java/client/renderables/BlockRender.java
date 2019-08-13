@@ -1,6 +1,7 @@
 package client.renderables;
 
 import client.Game;
+import client.Sounds;
 import client.Textures;
 import common.block.Block;
 import common.block.BlockAir;
@@ -60,6 +61,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
         if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
             block = Blocks.air;
             texture = Game.textures.getTexture4(block.getName());
+            Sounds.playSound("block_break");
         } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
             if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
                 block = ((ItemBlock)Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
