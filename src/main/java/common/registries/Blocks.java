@@ -14,9 +14,10 @@ public class Blocks {
     public static BlockLog log = new BlockLog("log");
     public static BlockLeaf leaf = new BlockLeaf("leaves");
     public static Block planks = new Block("planks");
+    public static Block sapling = new BlockSapling("sapling");
 
     public static void init(){
-        register(grass, dirt, stone, air, launcher, log, leaf, planks);
+        register(grass, dirt, stone, air, launcher, log, leaf, planks, sapling);
     }
 
     private static void register(Block block){

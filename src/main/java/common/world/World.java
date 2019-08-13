@@ -127,6 +127,11 @@ public class World {
     }
 
     public void update() {
+        for (BlockRender[] r: mapR) {
+            for (BlockRender r1: r) {
+                r1.tick();
+            }
+        }
         for (client.renderables.Entity e : entities.values()) {
             e.tick ();
         }
@@ -137,6 +142,11 @@ public class World {
             time = 0;
         } else {
             time++;
+        }
+        for (BlockRender[] r: mapR) {
+            for (BlockRender r1: r) {
+                r1.second();
+            }
         }
         for (client.renderables.Entity e : entities.values()) {
             e.second ();
@@ -151,5 +161,18 @@ public class World {
     public void transition(int x, int y){
         this.offsetX = this.offsetX+x;
         this.offsetY = this.offsetY+y;
+    }
+
+    public void genTree(int x, int y) {
+        Block[][] treeStruct = tree.getStruct();
+        for (int i = 0; i < treeStruct.length; i++) {
+            for (int j = 0; j < treeStruct[i].length; j++){
+                try {
+                    mapR[ y + i][x + j] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (x + j) * 64, (y + i) * 64);
+                } catch (ArrayIndexOutOfBoundsException e ){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -41,13 +41,13 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void draw(Graphics g) {
-        //texture = FileUtils.rotateClockwise(texture);
-
         g.drawImage(texture, x, y, null);
     }
 
     @Override
-    public void tick() {}
+    public void tick() {
+        block.onTick(Game.world, (int) Math.floor(y / 64),(int) Math.floor(x / 64));
+    }
 
     @Override
     public void second() {}
@@ -64,11 +64,11 @@ public class BlockRender implements Entity, Drawable, MouseListener {
                 Sounds.playSound("block_break");
                 for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
                     if (Game.headsUpDisplay.getSlots()[i].getItemStack().getItem() instanceof ItemBlock) {
-                        if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock() == block) {
+                        if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock() == block.getBlockDrop()) {
                             Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(Game.headsUpDisplay.getSlots()[i].getItemStack().getAmount() + 1);
                             break;
                         } else if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock().isAir()){
-                            Game.headsUpDisplay.getSlots()[i].getItemStack().setItem(Items.getItem(block.getName()));
+                            Game.headsUpDisplay.getSlots()[i].getItemStack().setItem(Items.getItem(block.getBlockDrop().getName()));
                             Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(1);
                             break;
                         }

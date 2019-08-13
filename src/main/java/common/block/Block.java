@@ -11,8 +11,9 @@ public class Block {
         this.name = name;
     }
 
-    public void onBlockCollision(World world, EntityRenderer entity){
-    }
+    public void onBlockCollision(World world, EntityRenderer entity){ }
+
+    public void onTick(World world, int x, int y){ }
 
     public String getName() {
         return name;
@@ -36,6 +37,10 @@ public class Block {
 
     public void setBlastResistance(float blastResistance) {
         this.blastResistance = blastResistance;
+    }
+
+    public Block getBlockDrop(){
+        return this;
     }
 
     public boolean isSolid(){

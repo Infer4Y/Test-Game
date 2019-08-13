@@ -1,5 +1,7 @@
 package common.block;
 
+import common.registries.Blocks;
+
 public class BlockLeaf extends Block {
     public BlockLeaf(String name) {
         super(name);
@@ -8,5 +10,10 @@ public class BlockLeaf extends Block {
     @Override
     public boolean isSolid() {
         return false;
+    }
+
+    @Override
+    public Block getBlockDrop() {
+        return Blocks.sapling;
     }
 }
