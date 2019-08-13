@@ -9,6 +9,7 @@ import common.block.BlockLeaf;
 import common.item.ItemBlock;
 import common.registries.Blocks;
 import common.registries.Items;
+import common.world.World;
 import utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -84,6 +85,8 @@ public class BlockRender implements Entity, Drawable, MouseListener {
                     Game.headsUpDisplay.getSelected().getItemStack().setAmount(Game.headsUpDisplay.getSelected().getItemStack().getAmount() - 1);
                     texture = Game.textures.getTexture4(block.getName());
                 }
+            } else {
+                block.onBlockRightClick(Game.world, null);
             }
         }
     }

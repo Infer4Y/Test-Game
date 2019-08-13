@@ -15,9 +15,11 @@ public class Blocks {
     public static BlockLeaf leaf = new BlockLeaf("leaves");
     public static Block planks = new Block("planks");
     public static Block sapling = new BlockSapling("sapling");
+    public static BlockWoodProducer wood_producer = new BlockWoodProducer("wood_producer");
+    public static BlockCrafter crafter = new BlockCrafter("crafter");
 
     public static void init(){
-        register(grass, dirt, stone, air, launcher, log, leaf, planks, sapling);
+        register(grass, dirt, stone, air, launcher, log, leaf, planks, sapling, wood_producer, crafter);
     }
 
     private static void register(Block block){

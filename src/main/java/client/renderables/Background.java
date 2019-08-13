@@ -63,8 +63,8 @@ public class Background implements Entity, Drawable {
 
     @Override
     public void second() {
-        if (count >= 0.d) {
-            count = -180;
+        if (count >= -10.d) {
+            count = -170;
             day = !day;
         } else {
             count+=360.00000000d/2400.000000000d;

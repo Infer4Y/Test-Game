@@ -1,5 +1,6 @@
 package common.block;
 
+import client.Game;
 import client.renderables.EntityRenderer;
 import common.world.World;
 
@@ -10,6 +11,8 @@ public class Block {
     public Block(String name){
         this.name = name;
     }
+
+    public void onBlockRightClick(World world, EntityRenderer entity){ }
 
     public void onBlockCollision(World world, EntityRenderer entity){ }
 
