@@ -35,7 +35,7 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheel
         slots = new Slot[8];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
-            slots[i].setItemStack(new ItemStack(Items.getItem(ores[i].getName()), 999));
+            //slots[i].setItemStack(new ItemStack(Items.getItem(ores[i].getName()), 999));
         }
     }
 

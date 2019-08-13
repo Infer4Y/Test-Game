@@ -159,7 +159,7 @@ public class EntityRenderer implements Entity, Drawable {
             }
             jumpVel--;
         }
-        //world.transition(x - y,y - x);
+        world.transition(x - y,y - x);
     }
 
     private boolean onGround(BlockRender blockRender){
@@ -183,6 +183,15 @@ public class EntityRenderer implements Entity, Drawable {
     }
 
     private boolean checkColision(BlockRender blockRender){
+        if (blockRender != null) {
+            if (this.getBounds().intersects(blockRender.getBounds())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkColision(EntityRenderer blockRender){
         if (blockRender != null) {
             if (this.getBounds().intersects(blockRender.getBounds())) {
                 return true;

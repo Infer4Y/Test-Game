@@ -41,6 +41,10 @@ public class Entity implements IEntity {
         this.maxHealth = maxHealth;
     }
 
+    @Override
+    public void onColision() {
+    }
+
     public Direction getFacing() {
         return facing;
     }
