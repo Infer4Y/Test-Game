@@ -1,6 +1,7 @@
 package common.block;
 
 import common.item.Item;
+import common.registries.Items;
 
 import java.awt.*;
 
@@ -21,17 +22,18 @@ public class BlockOre extends Block {
 
     public BlockOre(String name, int color) {
         super(name,true);
-        this.drop = super.getBlockDrop();
         this.color = color;
     }
 
     public BlockOre(String name) {
         super(name,true);
-        drop = super.getBlockDrop();
     }
 
     @Override
     public Item getBlockDrop() {
+        if (drop == null){
+            return this.drop =Items.getItem(this.getName());
+        }
         return drop;
     }
 

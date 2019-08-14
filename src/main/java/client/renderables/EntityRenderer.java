@@ -159,7 +159,7 @@ public class EntityRenderer implements Entity, Drawable {
             }
             jumpVel--;
         }
-        world.transition(x - y,y - x);
+        //world.transition(x,y);
     }
 
     private boolean onGround(BlockRender blockRender){

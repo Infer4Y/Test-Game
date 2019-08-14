@@ -5,6 +5,7 @@ import client.handlers.BlockHandler;
 import client.renderables.BlockRender;
 import client.renderables.EntityRenderer;
 import common.block.Block;
+import common.block.BlockOre;
 import common.entities.Entity;
 import common.entities.Player;
 import common.registries.Blocks;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class World {
     private String name;
@@ -22,7 +24,33 @@ public class World {
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
     private int time;
-    private int offsetX, offsetY;;
+    private int offsetX, offsetY;
+    private Random r = new Random();
+    private Block[][] ores = new Block[][]{
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.ore_ruby},
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.stone},
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.stone, Blocks.ore_tin, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.ore_tin, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.ore_coal, Blocks.stone, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.ore_coal, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone}
+    };
 
     public World (String name, int x, int y){
         this.x = x;
@@ -39,11 +67,15 @@ public class World {
                 }
             } else if (i == y-3){
                 for (int j = 0; j < x; j++) {
-                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.stone, j * 64, i *64);
+                    int l1 = r.nextInt(ores.length-1);
+                    int l2 = r.nextInt(ores[l1].length-1);
+                    mapR[i][j] = BlockHandler.handleBlockRenderer(ores[l1][l2], j * 64, i *64);
                 }
             } else if (i == y-2){
                 for (int j = 0; j < x; j++) {
-                    mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.stone, j * 64, i *64);
+                    int l1 = r.nextInt(ores.length-1);
+                    int l2 = r.nextInt(ores[l1].length-1);
+                    mapR[i][j] = BlockHandler.handleBlockRenderer(ores[l1][l2], j * 64, i *64);
                 }
             }else if (i == y-1){
                 for (int j = 0; j < x; j++) {
@@ -85,7 +117,7 @@ public class World {
     }
 
     public void draw(Graphics g){
-        g.translate(offsetX, offsetY);
+        //g.translate(offsetX, offsetY);
         for (BlockRender[] r: mapR) {
             for (BlockRender r1: r) {
                 r1.draw(g);
@@ -100,7 +132,7 @@ public class World {
             //g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         }
 
-        g.translate(-offsetX, -offsetY);
+        //g.translate(-offsetX, -offsetY);
         for (EntityRenderer r : entities.values()){
             r.draw(g);
         }
