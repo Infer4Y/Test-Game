@@ -79,7 +79,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         headsUpDisplay = new HeadsUpDisplay();
 
         addKeyListener(this);
-        world = new World("test", 30,(HEIGHT/64)+1);
+        world = new World("test", 400,40);
         background = new Background(world);
 
 

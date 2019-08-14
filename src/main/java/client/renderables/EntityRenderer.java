@@ -4,6 +4,7 @@ import client.Game;
 import common.entities.Player;
 import common.world.Direction;
 import common.world.World;
+import org.ietf.jgss.GSSManager;
 import utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -129,19 +130,15 @@ public class EntityRenderer implements Entity, Drawable {
             }
 
             if (Game.right && (blockRight == null || !(blockRight.getBlock().isSolid()))) {
-                if (x <= Game.WIDTH-63) {
-                    entity.setFacing(Direction.RIGHT);
+                entity.setFacing(Direction.RIGHT);
+                if(this.x < Game.world.getWidth()*64) {
                     x++;
-                } else {
-                    x=0;
                 }
             } else if (Game.left && (blockLeft == null || !(blockLeft.getBlock().isSolid()))) {
-                if (x >= 0) {
-                    entity.setFacing(Direction.LEFT);
+                entity.setFacing(Direction.LEFT);
+                if(this.x > 0) {
                     x--;
-                } else {
-                    x = Game.WIDTH-64;
-                }
+                }else {}
             }
         }
         if (checkColision(nearestBlock)){
@@ -218,5 +215,13 @@ public class EntityRenderer implements Entity, Drawable {
 
     public void setJumping(float i) {
         jumpVel = 68 * i;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
     }
 }

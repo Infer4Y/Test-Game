@@ -24,7 +24,7 @@ public class World {
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
     private int time;
-    private int offsetX, offsetY;
+    private Player player ;
     private Random r = new Random();
     private Block[][] ores = new Block[][]{
             {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.ore_ruby},
@@ -51,6 +51,8 @@ public class World {
             {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
             {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone}
     };
+    public int camX;
+    public int camY;
 
     public World (String name, int x, int y){
         this.x = x;
@@ -90,34 +92,50 @@ public class World {
         Block[][] treeStruct = tree.getStruct();
         for (int i = 0; i < treeStruct.length; i++) {
             for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[i+1][j] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j) * 64, (i+1) * 64);
+                mapR[(y-10)+i][j] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j) * 64, ((y-10+i)) * 64);
             }
         }
         treeStruct = tree.getStruct();
         for (int i = 0; i < treeStruct.length; i++) {
             for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[i+1][j+5] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+5) * 64, (i+1) * 64);
+                mapR[(y-10)+i][j+5] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+5) * 64, ((y-10+i)) * 64);
             }
         }
         treeStruct = tree.getStruct();
         for (int i = 0; i < treeStruct.length; i++) {
             for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[i+1][j+10] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+10) * 64, (i+1) * 64);
+                mapR[(y-10)+i][j+10] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+10) * 64, ((y-10+i) * 64));
             }
         }
         treeStruct = tree.getStruct();
         for (int i = 0; i < treeStruct.length; i++) {
             for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[i+1][j+15] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+15) * 64, (i+1) * 64);
+                mapR[(y-10)+i][j+15] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+15) * 64, ((y-10+i)) * 64);
             }
         }
-        Player player = new Player("player", 10,10);
-        entities.put(player, new EntityRenderer(player, (x/2)*32, (y-6)*64, this));
+        player = new Player("player", 10,10);
+        entities.put(player, new EntityRenderer(player, Game.WIDTH / 2, (y-10)*64, this));
         time = 1199;
     }
 
     public void draw(Graphics g){
-        //g.translate(offsetX, offsetY);
+        int offsetMaxX = this.getWidth()*64 - Game.WIDTH;
+        int offsetMaxY = this.getHeight()*64 - Game.HEIGHT;
+        int offsetMinX = 0;
+        int offsetMinY = 0;
+        camX = this.entities.get(player).getX() -  Game.WIDTH / 2;
+        camY = this.entities.get(player).getY() - Game.HEIGHT / 2;
+        if (camX > offsetMaxX) {
+            camX = offsetMaxX;
+        } else if (camX < offsetMinX) {
+            camX = offsetMinX;
+            if (camY > offsetMaxY) {
+                camY = offsetMaxY;
+            }
+        } else if (camY < offsetMinY) {
+            camY = offsetMinY;
+        }
+        g.translate(-camX, -camY);
         for (BlockRender[] r: mapR) {
             for (BlockRender r1: r) {
                 r1.draw(g);
@@ -132,10 +150,11 @@ public class World {
             //g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
         }
 
-        //g.translate(-offsetX, -offsetY);
+
         for (EntityRenderer r : entities.values()){
             r.draw(g);
         }
+        g.translate(camX, camY);
     }
 
 
@@ -197,11 +216,6 @@ public class World {
 
     public int getTime() {
         return time;
-    }
-
-    public void transition(int x, int y){
-        this.offsetX = this.offsetX+x;
-        this.offsetY = this.offsetY+y;
     }
 
     public void genTree(int x, int y) {

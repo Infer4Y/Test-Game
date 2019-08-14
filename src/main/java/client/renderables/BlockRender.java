@@ -60,7 +60,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())) {
+        if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)) {
             if (!block.isAir()){
                 Sounds.playSound("block_break");
                 for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
@@ -78,7 +78,7 @@ public class BlockRender implements Entity, Drawable, MouseListener {
             }
             block = Blocks.air;
             texture = Game.textures.getTexture4(block.getName());
-        } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX() && x+width>= e.getX()) && (y <= e.getY() && y+height>= e.getY())){
+        } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)){
             if (block.isAir()) {
                 if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
                     block = ((ItemBlock) Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
