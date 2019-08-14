@@ -59,27 +59,21 @@ public class World {
         this.y = y;
         mapR = new BlockRender[y][x];
         for (int i = 0; i < y; i++) {
-            if (i == y-5) {
+            if (i == y-40) {
                 for (int j = 0; j < x; j++) {
                     mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.grass, j * 64, i *64);
                 }
-            } else if (i == y-4){
+            } else if (i == y-39){
                 for (int j = 0; j < x; j++) {
                     mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.dirt, j * 64, i *64);
                 }
-            } else if (i == y-3){
+            } else if (i >= y-38  && i <= y-2){
                 for (int j = 0; j < x; j++) {
                     int l1 = r.nextInt(ores.length-1);
                     int l2 = r.nextInt(ores[l1].length-1);
                     mapR[i][j] = BlockHandler.handleBlockRenderer(ores[l1][l2], j * 64, i *64);
                 }
-            } else if (i == y-2){
-                for (int j = 0; j < x; j++) {
-                    int l1 = r.nextInt(ores.length-1);
-                    int l2 = r.nextInt(ores[l1].length-1);
-                    mapR[i][j] = BlockHandler.handleBlockRenderer(ores[l1][l2], j * 64, i *64);
-                }
-            }else if (i == y-1){
+            } else if (i == y-1){
                 for (int j = 0; j < x; j++) {
                     mapR[i][j] = BlockHandler.handleBlockRenderer(Blocks.launcher, j * 64, i *64);
                 }
@@ -89,32 +83,18 @@ public class World {
                 }
             }
         }
-        Block[][] treeStruct = tree.getStruct();
-        for (int i = 0; i < treeStruct.length; i++) {
-            for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[(y-10)+i][j] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j) * 64, ((y-10+i)) * 64);
+
+        for (int off = 0; off < this.getWidth()/5; off++) {
+            Block[][] treeStruct = tree.getStruct();
+            for (int i = 0; i < treeStruct.length; i++) {
+                for (int j = 0; j < treeStruct[i].length; j++){
+                    mapR[(y-45)+i][j+(off*5)] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+(off*5)) * 64, ((y-45+i)) * 64);
+                }
             }
         }
-        treeStruct = tree.getStruct();
-        for (int i = 0; i < treeStruct.length; i++) {
-            for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[(y-10)+i][j+5] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+5) * 64, ((y-10+i)) * 64);
-            }
-        }
-        treeStruct = tree.getStruct();
-        for (int i = 0; i < treeStruct.length; i++) {
-            for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[(y-10)+i][j+10] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+10) * 64, ((y-10+i) * 64));
-            }
-        }
-        treeStruct = tree.getStruct();
-        for (int i = 0; i < treeStruct.length; i++) {
-            for (int j = 0; j < treeStruct[i].length; j++){
-                mapR[(y-10)+i][j+15] = BlockHandler.handleBlockRenderer(treeStruct[i][j], (j+15) * 64, ((y-10+i)) * 64);
-            }
-        }
+
         player = new Player("player", 10,10);
-        entities.put(player, new EntityRenderer(player, Game.WIDTH / 2, (y-10)*64, this));
+        entities.put(player, new EntityRenderer(player, Game.WIDTH / 2, (y-50)*64, this));
         time = 1199;
     }
 
@@ -138,7 +118,9 @@ public class World {
         g.translate(-camX, -camY);
         for (BlockRender[] r: mapR) {
             for (BlockRender r1: r) {
-                r1.draw(g);
+                if ((r1.x+r1.width >= camX-64 && r1.x+r1.width<= camX+1280+64) && (r1.y+r1.width >= camY-64 && r1.y+r1.width<= camY+640+64)) {
+                    r1.draw(g);
+                }
             }
         }
 

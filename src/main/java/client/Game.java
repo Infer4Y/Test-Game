@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +25,7 @@ import java.util.List;
 
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable, KeyListener {
+public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 
     public static boolean f3;
     public static boolean f11;
@@ -79,18 +81,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
         headsUpDisplay = new HeadsUpDisplay();
 
         addKeyListener(this);
-        world = new World("test", 400,40);
+        world = new World("test", 256,256);
         background = new Background(world);
 
 
         entities.add(background);
         drawables.add(background);
 
-        for (int i = 0; i < world.getWidth(); i++) {
-            for (int j = 0; j < world.getHeight(); j++) {
-                this.addMouseListener(world.getMapR()[j][i]);
-            }
-        }
+        this.addMouseListener(this);
 
         for (EntityRenderer e: world.getEntities().values()) {
             entities.add(e);
@@ -269,6 +267,33 @@ public class Game extends Canvas implements Runnable, KeyListener {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x1 = (int)Math.floor(e.getX()/64)+(int)Math.floor(world.camX/64);
+        int y1 = (int)Math.floor(e.getY()/64)+(int)Math.floor(world.camY/64);
+        System.out.println("x "+x1+" y "+y1);
+        world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 
     private class Renderer extends Thread{

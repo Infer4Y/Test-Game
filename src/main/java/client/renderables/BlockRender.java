@@ -25,10 +25,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 
-public class BlockRender implements Entity, Drawable, MouseListener {
+public class BlockRender implements Entity, Drawable {
     private BufferedImage texture;
     private Block block;
-    private int x, width = 64, y, height = 64;
+    public int x;
+    public int width = 64;
+    public int y;
+    public int height = 64;
     private Random r = new Random();
 
     public BlockRender(Block block, int x, int y){
@@ -40,27 +43,10 @@ public class BlockRender implements Entity, Drawable, MouseListener {
         this.width = 64;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        g.drawImage(texture, x, y, null);
-    }
+    public void onClicked(MouseEvent e){
 
-    @Override
-    public void tick() {
-        block.onTick(Game.world, (int) Math.floor(y / 64),(int) Math.floor(x / 64));
-    }
-
-    @Override
-    public void second() {}
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1 && (x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)) {
+        if (e.getButton() == MouseEvent.BUTTON1
+        ) {
             if (!block.isAir()){
                 Sounds.playSound("block_break");
                 for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
@@ -78,7 +64,8 @@ public class BlockRender implements Entity, Drawable, MouseListener {
             }
             block = Blocks.air;
             texture = Game.textures.getTexture4(block.getName());
-        } else if (e.getButton() == MouseEvent.BUTTON3 && (x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)){
+        } else if (e.getButton() == MouseEvent.BUTTON3
+        ){
             if (block.isAir()) {
                 if (Game.headsUpDisplay.getSelected().getItemStack().getItem() instanceof ItemBlock) {
                     block = ((ItemBlock) Game.headsUpDisplay.getSelected().getItemStack().getItem()).getBlock();
@@ -100,19 +87,17 @@ public class BlockRender implements Entity, Drawable, MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
+    public void draw(Graphics g) {
+        g.drawImage(texture, x, y, null);
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
+    public void tick() {
+        block.onTick(Game.world, (int) Math.floor(y / 64),(int) Math.floor(x / 64));
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void second() {}
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, width+2, height+2);
