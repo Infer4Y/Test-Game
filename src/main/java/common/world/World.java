@@ -24,7 +24,7 @@ public class World {
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
     private int time;
-    private Player player ;
+    public Player player ;
     private Random r = new Random();
     private Block[][] ores = new Block[][]{
             {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.ore_ruby},

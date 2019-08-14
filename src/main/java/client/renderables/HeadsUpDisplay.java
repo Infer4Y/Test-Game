@@ -32,7 +32,7 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheel
     private Slot[] slots;
 
     public HeadsUpDisplay() {
-        slots = new Slot[8];
+        slots = new Slot[14];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
             //slots[i].setItemStack(new ItemStack(Items.getItem(ores[i].getName()), 999));

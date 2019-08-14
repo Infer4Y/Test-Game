@@ -275,8 +275,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x1 = (int)Math.floor(e.getX()/64)+(int)Math.floor(world.camX/64);
-        int y1 = (int)Math.floor(e.getY()/64)+(int)Math.floor(world.camY/64);
+        int offset = world.getEntities().get(world.player).offset;
+        int x1 = (int)(e.getX()/64)+ ((world.camX - offset)/64) ;
+        int y1 = (int)(e.getY()/64) + (world.camY/64);
         System.out.println("x "+x1+" y "+y1);
         world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
     }
