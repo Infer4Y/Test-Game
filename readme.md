@@ -14,5 +14,5 @@ Test-Game is a current project of mine. A 2D game with no current story/object o
 ## How to build / run it?
 Currently I do not recommend building/running it by yourself, but if you do I would recommend using Intellij Idea.
 ## Recent screenshots?
-![Screenshot-14-08-2019 02-41-18](https://github.com/inferno4you/Test-Game/tree/master/screenshots/Screenshot-14-08-2019 02-41-18.png)
-![Screenshot-13-08-2019 16-06-29](https://github.com/inferno4you/Test-Game/tree/master/screenshots/Screenshot-13-08-2019 16-06-29.png)
+![Screenshot-14-08-2019 02-41-18](https://github.com/inferno4you/Test-Game/tree/master/screenshots/Screenshot-14-08-2019_02-41-18.png)
+![Screenshot-13-08-2019 16-06-29](https://github.com/inferno4you/Test-Game/tree/master/screenshots/Screenshot-13-08-2019_16-06-29.png)

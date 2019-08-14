@@ -199,7 +199,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
             File screenshotFolder = new File(".", "screenshots");
 
             if (screenshotFolder.exists()) {
-                File out = new File(screenshotFolder,"Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
+                File out = new File(screenshotFolder,"Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".png");
                 if (!out.exists()) {
                     out.createNewFile();
                     ImageIO.write(image, "png", out);
@@ -208,7 +208,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 }
             } else {
                 screenshotFolder.mkdir();
-                File out = new File(screenshotFolder,  "Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
+                File out = new File(screenshotFolder,  "Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".png");
                 if (!out.exists()) {
                     out.createNewFile();
                     ImageIO.write(image, "png", out);
