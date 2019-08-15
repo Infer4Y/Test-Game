@@ -22,7 +22,6 @@ public class EntityRenderer implements Entity, Drawable {
     private World world;
     private float jumpVel = 0.0f;
     private int count;
-    public int offset;
 
     public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
@@ -44,7 +43,6 @@ public class EntityRenderer implements Entity, Drawable {
         this.width = 64;
         this.height = 128;
         this.world = world;
-        offset = 0;
     }
 
     @Override
@@ -134,22 +132,12 @@ public class EntityRenderer implements Entity, Drawable {
             if (Game.right && (blockRight == null || !(blockRight.getBlock().isSolid()))) {
                 entity.setFacing(Direction.RIGHT);
                 if(this.x < Game.world.getWidth()*64) {
-                    if (offset == 64){
-                        offset = 0;
-                    } else {
-                        offset++;
-                    }
                     x++;
                 }
             } else if (Game.left && (blockLeft == null || !(blockLeft.getBlock().isSolid()))) {
                 entity.setFacing(Direction.LEFT);
                 if(this.x > 0) {
                     x--;
-                    if (offset == -64){
-                        offset = 0;
-                    } else {
-                        offset--;
-                    }
                 }else {}
             }
         }

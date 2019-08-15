@@ -85,7 +85,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         addKeyListener(this);
         world = new World("test", 256,256);
         background = new Background(world);
-        long i = System.currentTimeMillis() + 3000;
+        long i = System.currentTimeMillis() + 2000;
 
         while (System.currentTimeMillis() < i) {
             splashScreen();
@@ -304,7 +304,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int offset = world.getEntities().get(world.player).offset;
         int x1 = (int)(e.getX()/64)+ ((world.camX)/64) ;
         int y1 = (int)(e.getY()/64) + (world.camY/64);
         System.out.println("x "+x1+" y "+y1);
