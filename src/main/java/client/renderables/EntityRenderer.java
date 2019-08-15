@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class EntityRenderer implements Entity, Drawable {
+    public int offX;
     private Hand hand = new Hand();
     private BufferedImage texture;
     private common.entities.Entity entity;
@@ -132,11 +133,21 @@ public class EntityRenderer implements Entity, Drawable {
             if (Game.right && (blockRight == null || !(blockRight.getBlock().isSolid()))) {
                 entity.setFacing(Direction.RIGHT);
                 if(this.x < Game.world.getWidth()*64) {
+                    if (offX == -64){
+                        offX=0;
+                    } else {
+                        offX--;
+                    }
                     x++;
                 }
             } else if (Game.left && (blockLeft == null || !(blockLeft.getBlock().isSolid()))) {
                 entity.setFacing(Direction.LEFT);
                 if(this.x > 0) {
+                    if (offX == 64){
+                        offX=0;
+                    } else {
+                        offX++;
+                    }
                     x--;
                 }else {}
             }
