@@ -1,32 +1,42 @@
 package client.renderables;
 
 import common.block.Block;
+import common.block.BlockOre;
+import common.containers.ISlot;
 import common.item.Item;
 import common.item.ItemBlock;
 import common.item.ItemStack;
 import common.registries.Blocks;
+import common.registries.Items;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
+public class HeadsUpDisplay implements Entity, Drawable, KeyListener, MouseWheelListener {
+
+    private BlockOre[] ores = new BlockOre[]{
+            Blocks.ore_coal,
+            Blocks.ore_copper,
+            Blocks.ore_diamond,
+            Blocks.ore_iron,
+            Blocks.ore_gold,
+            Blocks.ore_tin,
+            Blocks.ore_silver,
+            Blocks.ore_ruby
+    };
 
     private int selected = 0;
     private Slot[] slots;
 
     public HeadsUpDisplay() {
-        slots = new Slot[8];
+        slots = new Slot[15];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
+            //slots[i].setItemStack(new ItemStack(Items.getItem(ores[i].getName()), 999));
         }
-        slots[0].setItemStack(new ItemStack(new ItemBlock(Blocks.grass),1));
-        slots[1].setItemStack(new ItemStack(new ItemBlock(Blocks.dirt),1));
-        slots[2].setItemStack(new ItemStack(new ItemBlock(Blocks.stone), 1));
-        slots[3].setItemStack(new ItemStack(new ItemBlock(Blocks.launcher), 1));
-        slots[4].setItemStack(new ItemStack(new ItemBlock(Blocks.log), 1));
-        slots[5].setItemStack(new ItemStack(new ItemBlock(Blocks.leaf), 1));
-        slots[6].setItemStack(new ItemStack(new ItemBlock(Blocks.planks), 1));
     }
 
     @Override
@@ -36,6 +46,9 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
                 slots[i].draw(g, 36 * i + 16, 16, i == selected);
             }catch (NullPointerException e){}
         }
+        g.setColor(new Color(0xFF00D5));
+        g.setFont(new Font(null, Font.BOLD, 24));
+        g.drawString(getSelected().getItemStack().getItem().getName(), 640,24);
     }
 
     @Override
@@ -92,5 +105,26 @@ public class HeadsUpDisplay implements Entity, Drawable, KeyListener {
 
     public Slot getSelected() {
         return slots[selected];
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.getWheelRotation() < 0){
+            if (selected < 1){
+                selected = 7;
+            } else {
+                selected--;
+            }
+        } else {
+            if (selected == slots.length-1){
+                selected = 0;
+            } else {
+                selected++;
+            }
+        }
+    }
+
+    public ISlot[] getSlots() {
+        return slots;
     }
 }

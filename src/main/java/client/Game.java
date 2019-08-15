@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +25,7 @@ import java.util.List;
 
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable, KeyListener {
+public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 
     public static boolean f3;
     public static boolean f11;
@@ -72,49 +74,53 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
 
     public Game () {
+        this.requestFocus();
+        Window window = new Window (WIDTH, HEIGHT, TITLE, this);
+        Sounds.init();
         Blocks.init();
         Items.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
         headsUpDisplay = new HeadsUpDisplay();
 
         addKeyListener(this);
-        world = new World("test", WIDTH/64,(HEIGHT/64)+1);
+        world = new World("test", 256,256);
         background = new Background(world);
+        long i = System.currentTimeMillis() + 2000;
+
+        while (System.currentTimeMillis() < i) {
+            splashScreen();
+        }
 
 
         entities.add(background);
         drawables.add(background);
 
-        for (int i = 0; i < world.getWidth(); i++) {
-            for (int j = 0; j < world.getHeight(); j++) {
-                this.addMouseListener(world.getMapR()[j][i]);
-            }
-        }
+        this.addMouseListener(this);
 
         for (EntityRenderer e: world.getEntities().values()) {
             entities.add(e);
             drawables.add(e);
         }
 
-        entities.add(headsUpDisplay);
-        drawables.add(headsUpDisplay);
-        addKeyListener(headsUpDisplay);
 
-        entities.add(fpsViewer);
-        drawables.add(fpsViewer);
 
-        this.requestFocus();
-        System.setProperty("sun.java2d.translaccel","True");
-        System.setProperty("sun.java2d.d3d","True");
-        Window window = new Window (WIDTH, HEIGHT, TITLE, this);
+
         thread = new Thread(this);
         rendererThread = new Renderer("client");
         thread.start();
         rendererThread.start();
+        entities.add(headsUpDisplay);
+        drawables.add(headsUpDisplay);
+        addKeyListener(headsUpDisplay);
+        addMouseWheelListener(headsUpDisplay);
+
+        entities.add(fpsViewer);
+        drawables.add(fpsViewer);
 
     }
 
     public void run() {
+
         while (isRunning) {
             currentTime = System.nanoTime ();
             deltaTime += (currentTime - lastLoopTime) / OPTIMAL_TIME;
@@ -148,6 +154,28 @@ public class Game extends Canvas implements Runnable, KeyListener {
         world.updatePerSecond();
     }
 
+    private void splashScreen(){
+        BufferStrategy bufferstrategy = getBufferStrategy ();
+
+        if (bufferstrategy == null) {
+            createBufferStrategy(4);
+            return;
+        }
+
+        Graphics2D g = (Graphics2D) bufferstrategy.getDrawGraphics();
+
+        try {
+            g.drawImage(ImageIO.read(this.getClass().getClassLoader().getResource("tex/loading.png")), 0, 0, null);
+            g.setColor(new Color(0xFFFFFF));
+            g.setFont(new Font(null, Font.BOLD, 42));
+            g.drawString("World is loading.",640-160,320);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g.dispose ();
+        bufferstrategy.show();
+    }
+
     private void render() {
         BufferStrategy bufferstrategy = getBufferStrategy ();
 
@@ -166,6 +194,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
         }
 
         world.draw(g);
+
+        fpsViewer.draw(g);
+        headsUpDisplay.draw(g);
 
         count++;
 
@@ -187,12 +218,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
             world.draw(g);
 
+            fpsViewer.draw(g);
+            headsUpDisplay.draw(g);
+
             g.dispose ();
 
             File screenshotFolder = new File(".", "screenshots");
 
             if (screenshotFolder.exists()) {
-                File out = new File(screenshotFolder,"Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
+                File out = new File(screenshotFolder,"Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".png");
                 if (!out.exists()) {
                     out.createNewFile();
                     ImageIO.write(image, "png", out);
@@ -201,7 +235,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 }
             } else {
                 screenshotFolder.mkdir();
-                File out = new File(screenshotFolder,  "Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
+                File out = new File(screenshotFolder,  "Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".png");
                 if (!out.exists()) {
                     out.createNewFile();
                     ImageIO.write(image, "png", out);
@@ -264,6 +298,33 @@ public class Game extends Canvas implements Runnable, KeyListener {
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x1 = (int)(e.getX()/64)+ ((world.camX)/64) ;
+        int y1 = (int)(e.getY()/64) + (world.camY/64);
+        System.out.println("x "+x1+" y "+y1);
+        world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
     private class Renderer extends Thread{
 
         public Renderer(String name) {
@@ -277,7 +338,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
         @Override
         public void run() {
-            while (Game.isRunning) {
+            while (isRunning) {
                 Game.instance.render();
             }
         }
