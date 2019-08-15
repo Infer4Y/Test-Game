@@ -74,6 +74,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 
     public Game () {
+        this.requestFocus();
+        Window window = new Window (WIDTH, HEIGHT, TITLE, this);
         Sounds.init();
         Blocks.init();
         Items.init();
@@ -83,6 +85,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         addKeyListener(this);
         world = new World("test", 256,256);
         background = new Background(world);
+        long i = System.currentTimeMillis() + 3000;
+
+        while (System.currentTimeMillis() < i) {
+            splashScreen();
+        }
 
 
         entities.add(background);
@@ -97,8 +104,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 
 
-        this.requestFocus();
-        Window window = new Window (WIDTH, HEIGHT, TITLE, this);
+
         thread = new Thread(this);
         rendererThread = new Renderer("client");
         thread.start();
@@ -114,6 +120,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     }
 
     public void run() {
+
         while (isRunning) {
             currentTime = System.nanoTime ();
             deltaTime += (currentTime - lastLoopTime) / OPTIMAL_TIME;
@@ -145,6 +152,28 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
             e.second();
         }
         world.updatePerSecond();
+    }
+
+    private void splashScreen(){
+        BufferStrategy bufferstrategy = getBufferStrategy ();
+
+        if (bufferstrategy == null) {
+            createBufferStrategy(4);
+            return;
+        }
+
+        Graphics2D g = (Graphics2D) bufferstrategy.getDrawGraphics();
+
+        try {
+            g.drawImage(ImageIO.read(this.getClass().getClassLoader().getResource("tex/loading.png")), 0, 0, null);
+            g.setColor(new Color(0xFFFFFF));
+            g.setFont(new Font(null, Font.BOLD, 42));
+            g.drawString("World is loading.",640-160,320);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g.dispose ();
+        bufferstrategy.show();
     }
 
     private void render() {
@@ -276,7 +305,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     @Override
     public void mousePressed(MouseEvent e) {
         int offset = world.getEntities().get(world.player).offset;
-        int x1 = (int)(e.getX()/64)+ ((world.camX - offset)/64) ;
+        int x1 = (int)(e.getX()/64)+ ((world.camX)/64) ;
         int y1 = (int)(e.getY()/64) + (world.camY/64);
         System.out.println("x "+x1+" y "+y1);
         world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
@@ -310,7 +339,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
         @Override
         public void run() {
-            while (Game.isRunning) {
+            while (isRunning) {
                 Game.instance.render();
             }
         }

@@ -27,29 +27,15 @@ public class World {
     public Player player ;
     private Random r = new Random();
     private Block[][] ores = new Block[][]{
-            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.ore_ruby},
-            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.stone},
-            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.stone, Blocks.ore_tin, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.ore_tin, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.ore_coal, Blocks.stone, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.ore_coal, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone}
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.ore_ruby},//0
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.stone},   //1
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.stone, Blocks.stone},        //2
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.stone, Blocks.ore_tin, Blocks.stone, Blocks.stone},           //2
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.ore_tin, Blocks.stone, Blocks.stone},                 //3
+            {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},                   //4
+            {Blocks.stone, Blocks.ore_coal, Blocks.stone, Blocks.stone, Blocks.ore_iron, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},                        //5
+            {Blocks.stone, Blocks.ore_coal, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},                           //6
+            {Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone}                               //7
     };
     public int camX;
     public int camY;
@@ -69,7 +55,24 @@ public class World {
                 }
             } else if (i >= y-38  && i <= y-2){
                 for (int j = 0; j < x; j++) {
-                    int l1 = r.nextInt(ores.length-1);
+                    int l1 = 7;
+                    if (i >= y-38 && i <= y-31){
+                        l1 = 7;
+                    } else if (i >= y-30 && i <= y-26){
+                        l1 = 6;
+                    } else if (i >= y-25 && i <= y-21){
+                        l1 = 5;
+                    } else if (i >= y-20 && i <= y-16){
+                        l1 = 4;
+                    } else if (i >= y-15 && i <= y-11){
+                        l1 = 3;
+                    } else if (i >= y-10 && i <= y-6){
+                        l1 = 2;
+                    } else if (i >= y-5 && i <= y-3){
+                        l1 = 1;
+                    } else if (i >= y-2 && i <= y-1){
+                        l1 = 0;
+                    }
                     int l2 = r.nextInt(ores[l1].length-1);
                     mapR[i][j] = BlockHandler.handleBlockRenderer(ores[l1][l2], j * 64, i *64);
                 }
