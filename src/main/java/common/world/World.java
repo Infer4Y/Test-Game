@@ -97,7 +97,7 @@ public class World {
         }
 
         player = new Player("player", 10,10);
-        entities.put(player, new EntityRenderer(player, Game.WIDTH / 2, (y-50)*64, this));
+        entities.put(player, new EntityRenderer(player, Game.window.getWidth() / 2, (256-45)*64, this));
         time = 1199;
     }
 

@@ -99,7 +99,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         addKeyListener(this);
         world = new World("test", 256,256);
         background = new Background(world);
-        long i = System.currentTimeMillis() + 2000;
+        long i = System.currentTimeMillis() + 1500;
 
         while (System.currentTimeMillis() < i) {
             splashScreen();

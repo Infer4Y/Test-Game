@@ -34,8 +34,7 @@ public class Slot implements ISlot {
 
     public void draw(Graphics g, int x, int y, boolean selected) {
         texture = Game.textures.getTexture2(stack.getItem().getName());
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(x-1, y-1, 36, 36);
+        g.drawImage(Game.textures.slot, x-1,y-1,36, 36, Game.instance);
         g.drawImage(Game.textures.getTexture2("air"), x+1,y+1 , Game.instance);
         g.drawImage(texture, x+1,y+1 , Game.instance);
         g.setColor(new Color(0xE2596B));
