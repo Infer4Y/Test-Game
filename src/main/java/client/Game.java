@@ -74,17 +74,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     }
 
     private void fullscreen(){
-        if (!f11) {
-            window.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-            window.getGraphicsConfiguration().getDevice().setFullScreenWindow(window);
-            window.setVisible(true);
-            f11 = true;
-        } else {
-            window.getGraphicsConfiguration().getDevice().setFullScreenWindow(null);
-            window.setSize(new Dimension (WIDTH, HEIGHT));
-            window.setVisible(true);
-            f11=false;
-        }
     }
 
     public Game () {
