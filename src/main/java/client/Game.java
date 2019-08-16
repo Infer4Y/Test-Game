@@ -7,6 +7,7 @@ import common.registries.Items;
 import common.world.World;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -66,16 +67,29 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     private final FPSViewer fpsViewer = new FPSViewer();
     public static boolean up, down, left, right;
     private int count;
+    public static Window window;
 
     public static void main(String[] args) {
         instance = new Game();
     }
 
-
+    private void fullscreen(){
+        if (!f11) {
+            window.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+            window.getGraphicsConfiguration().getDevice().setFullScreenWindow(window);
+            window.setVisible(true);
+            f11 = true;
+        } else {
+            window.getGraphicsConfiguration().getDevice().setFullScreenWindow(null);
+            window.setSize(new Dimension (WIDTH, HEIGHT));
+            window.setVisible(true);
+            f11=false;
+        }
+    }
 
     public Game () {
         this.requestFocus();
-        Window window = new Window (WIDTH, HEIGHT, TITLE, this);
+        window =  new Window (WIDTH, HEIGHT, TITLE, this);
         Sounds.init();
         Blocks.init();
         Items.init();
@@ -204,6 +218,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         bufferstrategy.show();
     }
 
+    @SuppressWarnings("")
     public void saveCanvas() {
         try {
             BufferedImage image=new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
@@ -269,6 +284,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
                 break;
             case KeyEvent.VK_F3:
                 f3 = !f3;
+                break;
+            case KeyEvent.VK_F11:
+                fullscreen();
                 break;
             case KeyEvent.VK_F2:
                 saveCanvas();

@@ -27,12 +27,12 @@ public class Background implements Entity, Drawable {
         int allowedStars = (int) (random.nextInt(10)+20);
         this.stars = new Star[allowedStars];
         for (int i = 0; i < allowedStars; i++) {
-            stars[i] = new Star(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1, random.nextInt(10));
+            stars[i] = new Star(random.nextInt(Game.window.getWidth() ),random.nextInt(Game.window.getHeight()/2), random.nextInt(6)+1, random.nextInt(10));
         }
         int allowedRainDrops = (int) (random.nextInt(10)+40);
         this.rain = new Rain[allowedRainDrops];
         for (int i = 0; i < allowedRainDrops; i++) {
-            rain[i] = new Rain(random.nextInt(Game.WIDTH),random.nextInt(Game.HEIGHT/2), random.nextInt(6)+1);
+            rain[i] = new Rain(random.nextInt(Game.window.getWidth() ),random.nextInt(Game.window.getHeight() /2), random.nextInt(6)+1);
         }
         try {
             this.texture = ImageIO.read(this.getClass().getClassLoader().getResource("tex/background.png"));
@@ -95,16 +95,16 @@ public class Background implements Entity, Drawable {
             g.setColor(new Color(0xA6E2DB));
             size = 80;
         }
-        g.fillOval(600,40,size,size);
+        g.fillOval(Game.window.getWidth()/2 - 40,Game.window.getHeight()-(Game.window.getHeight()-40),size,size);
     }
 
     @Override
     public void draw(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setColor(c);
-        graphics2D.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
+        graphics2D.fillRect(0,0, Game.window.getWidth(), Game.window.getHeight());
         graphics2D.setColor(new Color(0x7F3D3DE2, true));
-        graphics2D.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
+        graphics2D.fillRect(0,0, Game.window.getWidth(), Game.window.getHeight());
         //graphics2D.drawImage(texture, 0,0, Game.WIDTH, Game.HEIGHT, c, Game.instance);
         graphics2D.setColor(Color.WHITE);
         graphics2D.translate(640,640);

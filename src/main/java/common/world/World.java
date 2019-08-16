@@ -102,12 +102,13 @@ public class World {
     }
 
     public void draw(Graphics g){
-        int offsetMaxX = this.getWidth()*64 - Game.WIDTH;
-        int offsetMaxY = this.getHeight()*64 - Game.HEIGHT;
+        int offsetMaxX = this.getWidth()*64 - Game.window.getWidth();
+        int offsetMaxY = this.getHeight()*64 - Game.window.getHeight();
         int offsetMinX = 0;
         int offsetMinY = 0;
-        camX = this.entities.get(player).getX() -  Game.WIDTH / 2;
-        camY = this.entities.get(player).getY() - Game.HEIGHT / 2;
+        camX = this.entities.get(player).getX() -  Game.window.getWidth() / 2;
+        camY = this.entities.get(player).getY() - Game.window.getHeight() / 2;
+
         if (camX > offsetMaxX) {
             camX = offsetMaxX;
         } else if (camX < offsetMinX) {
@@ -121,7 +122,7 @@ public class World {
         g.translate(-camX, -camY);
         for (BlockRender[] r: mapR) {
             for (BlockRender r1: r) {
-                if ((r1.x+r1.width >= camX-64 && r1.x+r1.width<= camX+1280+64) && (r1.y+r1.width >= camY-64 && r1.y+r1.width<= camY+640+64)) {
+                if ((r1.x+r1.width >= camX-64 && r1.x+r1.width<= camX+Game.window.getWidth() +64) && (r1.y+r1.width >= camY-64 && r1.y+r1.width<= camY+Game.window.getHeight() +64)) {
                     r1.draw(g);
                 }
             }
