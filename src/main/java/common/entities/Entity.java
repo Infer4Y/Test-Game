@@ -42,7 +42,7 @@ public class Entity implements IEntity {
     }
 
     @Override
-    public void onColision() {
+    public void onCollision() {
     }
 
     public Direction getFacing() {
