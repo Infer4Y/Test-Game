@@ -40,7 +40,7 @@ public class BlockRender implements Entity, Drawable {
                     if ((Game.headsUpDisplay.getSlots()[i].getItemStack().getItem().getName().equals(block.getBlockDrop().getName()))) {
                         Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(Game.headsUpDisplay.getSlots()[i].getItemStack().getAmount() + 1);
                         break;
-                    } else if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock().isAir()){
+                    } else if (Game.headsUpDisplay.getSlots()[i].getItemStack().getItem().equals(Items.getItem("air"))){
                         Game.headsUpDisplay.getSlots()[i].getItemStack().setItem(Items.getItem(block.getBlockDrop().getName()));
                         Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(1);
                         break;
