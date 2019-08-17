@@ -4,15 +4,13 @@ import client.handlers.BlockHandler;
 import client.renderables.*;
 import common.registries.Blocks;
 import common.registries.Items;
+import common.registries.Recipes;
 import common.world.World;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +24,7 @@ import java.util.List;
 
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
+public class Game extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     public static boolean f3;
     public static boolean f11;
@@ -93,6 +91,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         Sounds.init();
         Blocks.init();
         Items.init();
+        Recipes.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
         headsUpDisplay = new HeadsUpDisplay();
 
@@ -291,6 +290,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
             case KeyEvent.VK_F2:
                 saveCanvas();
                 break;
+            case KeyEvent.VK_ESCAPE:
+                world.closeCraftingUI();
+                break;
             default:
                 break;
         }
@@ -322,10 +324,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x1 = (int)Math.floor((e.getX()-world.getEntities().get(world.player).offX)/64)+ (int)Math.floor((world.camX)/64) ;
-        int y1 = (int)(e.getY()/64) + (world.camY/64);
-        System.out.println("x "+x1+" y "+y1);
-        world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
+        int x1 = (int) Math.floor((e.getX() - world.getEntities().get(world.player).offX) / 64) + (int) Math.floor((world.camX) / 64);
+        int y1 = (int) Math.floor((e.getY() - world.getEntities().get(world.player).offY) / 64) + (int) Math.floor((world.camY) / 64);
+        System.out.println("x " + x1 + " y " + y1);
+        if (!world.isCraftingUIOpen()) {
+            world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
+        } else {
+            world.getCraftingUI().handleMouseClick(e);
+        }
     }
 
     @Override
@@ -341,6 +347,17 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        System.out.println(e.getLocationOnScreen());
+        world.getCraftingUI().handleMouseMove(e);
     }
 
     private class Renderer extends Thread{

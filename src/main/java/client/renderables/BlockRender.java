@@ -2,27 +2,14 @@ package client.renderables;
 
 import client.Game;
 import client.Sounds;
-import client.Textures;
 import common.block.Block;
-import common.block.BlockAir;
-import common.block.BlockLeaf;
 import common.item.ItemBlock;
 import common.registries.Blocks;
 import common.registries.Items;
-import common.world.World;
-import utils.FileUtils;
 
-import javax.imageio.ImageIO;
-import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.Random;
 
 public class BlockRender implements Entity, Drawable {
@@ -50,15 +37,13 @@ public class BlockRender implements Entity, Drawable {
             if (!block.isAir()){
                 Sounds.playSound("block_break");
                 for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
-                    if (Game.headsUpDisplay.getSlots()[i].getItemStack().getItem() instanceof ItemBlock) {
-                        if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()) == block.getBlockDrop()) {
-                            Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(Game.headsUpDisplay.getSlots()[i].getItemStack().getAmount() + 1);
-                            break;
-                        } else if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock().isAir()){
-                            Game.headsUpDisplay.getSlots()[i].getItemStack().setItem(Items.getItem(block.getBlockDrop().getName()));
-                            Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(1);
-                            break;
-                        }
+                    if ((Game.headsUpDisplay.getSlots()[i].getItemStack().getItem().getName().equals(block.getBlockDrop().getName()))) {
+                        Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(Game.headsUpDisplay.getSlots()[i].getItemStack().getAmount() + 1);
+                        break;
+                    } else if (((ItemBlock) Game.headsUpDisplay.getSlots()[i].getItemStack().getItem()).getBlock().isAir()){
+                        Game.headsUpDisplay.getSlots()[i].getItemStack().setItem(Items.getItem(block.getBlockDrop().getName()));
+                        Game.headsUpDisplay.getSlots()[i].getItemStack().setAmount(1);
+                        break;
                     }
                 }
             }

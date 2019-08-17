@@ -22,8 +22,8 @@ public class Blocks {
     public static BlockOre ore_tin = new BlockOre("ore_tin", 0x989898);
     public static BlockOre ore_copper = new BlockOre("ore_copper", 0xFF7F50);
     public static BlockOre ore_silver = new BlockOre("ore_silver", 0x555);
-    public static BlockOre ore_coal = new BlockOre("ore_coal", 0x000);
-    public static BlockOre ore_diamond = new BlockOre("ore_diamond", 0x00ffff);
+    public static BlockOre ore_coal = new BlockOre("ore_coal", Items.coal, 0x000);
+    public static BlockOre ore_diamond = new BlockOre("ore_diamond",Items.diamond, 0x00ffff);
     public static BlockOre ore_ruby = new BlockOre("ore_ruby", 0xff2700);
     public static BlockOreProducer ore_producer = new BlockOreProducer("ore_producer");
     public static BlockStoneProducer stone_producer = new BlockStoneProducer("stone_producer");

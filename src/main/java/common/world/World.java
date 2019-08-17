@@ -3,6 +3,7 @@ package common.world;
 import client.Game;
 import client.handlers.BlockHandler;
 import client.renderables.BlockRender;
+import client.renderables.CraftingUI;
 import client.renderables.EntityRenderer;
 import common.block.Block;
 import common.block.BlockOre;
@@ -24,8 +25,11 @@ public class World {
     private HashMap<Entity, EntityRenderer> entities = new HashMap<>();
     private int x, y;
     private int time;
-    public Player player ;
+    public Player player;
     private Random r = new Random();
+
+    private CraftingUI craftingUI = new CraftingUI();
+
     private Block[][] ores = new Block[][]{
             {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.ore_ruby},//0
             {Blocks.stone, Blocks.ore_coal, Blocks.ore_copper, Blocks.ore_diamond, Blocks.ore_iron, Blocks.ore_gold, Blocks.ore_tin, Blocks.ore_silver, Blocks.stone},   //1
@@ -39,6 +43,7 @@ public class World {
     };
     public int camX;
     public int camY;
+    private boolean cui;
 
     public World (String name, int x, int y){
         this.x = x;
@@ -141,6 +146,9 @@ public class World {
             r.draw(g);
         }
         g.translate(camX, camY);
+        if (cui){
+            craftingUI.draw((Graphics2D) g);
+        }
     }
 
 
@@ -215,5 +223,21 @@ public class World {
                 }
             }
         }
+    }
+
+    public void openCraftingUI(){
+        cui = true;
+    }
+
+    public void closeCraftingUI(){
+        cui = false;
+    }
+
+    public boolean isCraftingUIOpen(){
+        return cui;
+    }
+
+    public CraftingUI getCraftingUI() {
+        return craftingUI;
     }
 }

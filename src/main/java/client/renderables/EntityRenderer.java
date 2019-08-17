@@ -27,7 +27,7 @@ public class EntityRenderer implements Entity, Drawable {
 
     public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
-            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/" + entity.getName() + "/ship.png")), 4.0);
+            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png")), 4.0);
             System.out.println(entity.getName());
         } catch (IOException | NullPointerException e) {
             try {
@@ -168,9 +168,21 @@ public class EntityRenderer implements Entity, Drawable {
         if (checkColision(blockRight)){
             blockRight.getBlock().onBlockCollision(world, this);
         }
-        if (!(this.onGround(nearestBlock)) && !(this.isJumping())){ y++; } else if (jumpVel != 0) {
+        if (!(this.onGround(nearestBlock)) && !(this.isJumping())){
+            y++;
+            if (offY == -64){
+                offY=0;
+            } else {
+                offY--;
+            }
+        } else if (jumpVel != 0) {
             if (this.y > 0) {
                 y--;
+                if (offY == 64){
+                    offY=0;
+                } else {
+                    offY++;
+                }
             }
             jumpVel--;
         } else {
