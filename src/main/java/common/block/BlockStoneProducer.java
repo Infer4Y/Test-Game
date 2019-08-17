@@ -1,6 +1,7 @@
 package common.block;
 
 import client.Game;
+import client.renderables.BlockRender;
 import client.renderables.EntityRenderer;
 import common.item.ItemBlock;
 import common.registries.Blocks;
@@ -13,8 +14,8 @@ public class BlockStoneProducer extends Block {
     }
 
     @Override
-    public void onBlockRightClick(World world, EntityRenderer entity) {
-        super.onBlockRightClick(world, entity);
+    public void onBlockRightClick(World world, EntityRenderer entity, BlockRender block) {
+        super.onBlockRightClick(world, entity, block);
         if (Blocks.sapling.getName().equals(Game.headsUpDisplay.getSelected().getItemStack().getItem().getName())&& Game.headsUpDisplay.getSelected().getItemStack().getAmount() >= 4){
             for (int i = 0; i < Game.headsUpDisplay.getSlots().length; i++) {
                 if (Game.headsUpDisplay.getSlots()[i].getItemStack().getItem() instanceof ItemBlock) {

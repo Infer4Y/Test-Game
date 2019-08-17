@@ -351,13 +351,18 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        if (world.isCraftingUIOpen()) {
+            System.out.println(e.getLocationOnScreen());
+            world.getCraftingUI().handleMouseMove(e);
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println(e.getLocationOnScreen());
-        world.getCraftingUI().handleMouseMove(e);
+        if (world.isCraftingUIOpen()) {
+            System.out.println(e.getLocationOnScreen());
+            world.getCraftingUI().handleMouseMove(e);
+        }
     }
 
     private class Renderer extends Thread{

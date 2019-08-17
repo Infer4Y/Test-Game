@@ -10,7 +10,7 @@ public class Blocks {
     public static Block dirt = new Block("dirt");
     public static Block stone = new Block("stone");
     public static BlockAir air = new BlockAir("air");
-    public static BlockLanchPad launcher = new BlockLanchPad("launcher");
+    public static BlockLaunchPad launcher = new BlockLaunchPad("launcher");
     public static BlockLog log = new BlockLog("log");
     public static BlockLeaf leaf = new BlockLeaf("leaves");
     public static Block planks = new Block("planks");

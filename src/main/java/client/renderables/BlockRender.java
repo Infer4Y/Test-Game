@@ -66,7 +66,7 @@ public class BlockRender implements Entity, Drawable {
                     }
                 }
             } else {
-                block.onBlockRightClick(Game.world, null);
+                block.onBlockRightClick(Game.world, Game.world.getEntities().get(Game.world.player), this);
             }
         }
     }

@@ -7,7 +7,7 @@ public interface IEntity {
     void setFacing(Direction direction);
     void setHealth(int health);
     void setMaxHealth(int health);
-    void onColision();
+    void onCollision();
     String getName();
     Direction getFacing();
     int getHealth();

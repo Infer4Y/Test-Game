@@ -25,7 +25,7 @@ public class CraftingUI {
         for (int i = 0; i < craftingSlots.length; i++) {
             for (int j = 0; j < craftingSlots[i].length; j++) {
                 try {
-                    craftingSlots[i][j].draw((Graphics) g, j * 36 + 16, i * 36 + 64, (new Rectangle(j * 36 + 320, i * 36 + 64, 36, 36).contains(loc)));
+                    craftingSlots[i][j].draw((Graphics) g, j * 36 + 16, i * 36 + 64, (new Rectangle(j * 36 + 16, i * 36 + 64, 36, 36).contains(loc)));
                 } catch (NullPointerException e){
                     e.printStackTrace();
                 }

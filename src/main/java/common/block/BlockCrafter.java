@@ -1,6 +1,7 @@
 package common.block;
 
 import client.Game;
+import client.renderables.BlockRender;
 import client.renderables.EntityRenderer;
 import common.item.ItemBlock;
 import common.registries.Blocks;
@@ -13,8 +14,8 @@ public class BlockCrafter extends Block {
     }
 
     @Override
-    public void onBlockRightClick(World world, EntityRenderer entity) {
-        super.onBlockRightClick(world, entity);
+    public void onBlockRightClick(World world, EntityRenderer entity, BlockRender block) {
+        super.onBlockRightClick(world, entity, block);
         Game.world.openCraftingUI();
     }
 

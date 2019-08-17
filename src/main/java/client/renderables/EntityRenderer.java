@@ -4,13 +4,11 @@ import client.Game;
 import common.entities.Player;
 import common.world.Direction;
 import common.world.World;
-import org.ietf.jgss.GSSManager;
 import utils.FileUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class EntityRenderer implements Entity, Drawable {
@@ -159,14 +157,14 @@ public class EntityRenderer implements Entity, Drawable {
                 }else {}
             }
         }
-        if (checkColision(nearestBlock)){
-            nearestBlock.getBlock().onBlockCollision(world, this);
+        if (checkCollision(nearestBlock)){
+            nearestBlock.getBlock().onBlockCollision(world, this, nearestBlock);
         }
-        if (checkColision(blockLeft)){
-            blockLeft.getBlock().onBlockCollision(world, this);
+        if (checkCollision(blockLeft)){
+            blockLeft.getBlock().onBlockCollision(world, this, blockLeft);
         }
-        if (checkColision(blockRight)){
-            blockRight.getBlock().onBlockCollision(world, this);
+        if (checkCollision(blockRight)){
+            blockRight.getBlock().onBlockCollision(world, this, blockRight);
         }
         if (!(this.onGround(nearestBlock)) && !(this.isJumping())){
             y++;
@@ -213,7 +211,7 @@ public class EntityRenderer implements Entity, Drawable {
         return false;
     }
 
-    private boolean checkColision(BlockRender blockRender){
+    private boolean checkCollision(BlockRender blockRender){
         if (blockRender != null) {
             if (this.getBounds().intersects(blockRender.getBounds())) {
                 return true;
@@ -222,7 +220,7 @@ public class EntityRenderer implements Entity, Drawable {
         return false;
     }
 
-    private boolean checkColision(EntityRenderer blockRender){
+    private boolean checkCollision(EntityRenderer blockRender){
         if (blockRender != null) {
             if (this.getBounds().intersects(blockRender.getBounds())) {
                 return true;
