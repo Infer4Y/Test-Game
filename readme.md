@@ -16,5 +16,5 @@ Currently I would recommend using Intellij Idea.
 Clone the repository and Open `build.gradle` as a Project. Then you should be all set.
 To build a runnable jar file you would run the command `.\gradlew jar` then look in `build\lib` folder the launch `game-MMDDYYYY-SNAPSHOT.jar`.
 ## Recent screenshots?
-![Screenshot-14-08-2019 02-41-18](https://github.com/inferno4you/Test-Game/tree/master/screenshots/Screenshot-14-08-2019_02-41-18.png)
-![Screenshot-13-08-2019 16-06-29](https://github.com/inferno4you/Test-Game/tree/master/screenshots/Screenshot-13-08-2019_16-06-29.png)
+![Screenshot-14-08-2019 02-41-18](https://raw.githubusercontent.com/inferno4you/Test-Game/master/screenshots/Screenshot-14-08-2019_02-41-18.png)
+![Screenshot-13-08-2019 16-06-29](https://raw.githubusercontent.com/inferno4you/Test-Game/master/screenshots/Screenshot-13-08-2019_16-06-29.png)
