@@ -24,6 +24,8 @@ public class Textures {
     private BufferedImage placeholder2;
     private BufferedImage placeholder1;
 
+    public static BufferedImage slot;
+
 
 
     public void init(HashMap<String, Item> items, HashMap<String, Block> blocks){
@@ -42,6 +44,11 @@ public class Textures {
         } try {
             placeholder1 = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 1.0);
         } catch (NullPointerException|IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            slot = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/slot.png")), 1.0);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         for (Item i: items.values()) {

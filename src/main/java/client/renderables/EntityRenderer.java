@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class EntityRenderer implements Entity, Drawable {
-    public int offX;
+    public int offX, offY;
     private Hand hand = new Hand();
     private BufferedImage texture;
     private common.entities.Entity entity;
@@ -23,10 +23,11 @@ public class EntityRenderer implements Entity, Drawable {
     private World world;
     private float jumpVel = 0.0f;
     private int count;
+    private boolean hasLanded;
 
     public EntityRenderer(common.entities.Entity entity, int x, int y, World world) {
         try {
-            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/"+entity.getName()+".png")), 4.0);
+            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png")), 4.0);
             System.out.println(entity.getName());
         } catch (IOException | NullPointerException e) {
             try {
@@ -44,40 +45,46 @@ public class EntityRenderer implements Entity, Drawable {
         this.width = 64;
         this.height = 128;
         this.world = world;
+        prevDirection = entity.getFacing();
+        hasLanded=false;
     }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(texture, x, y-64,64,128, null);
-        hand.draw(g,x,y,Game.headsUpDisplay.getSelected().getItemStack(),entity.getFacing());
+        if (hasLanded) {
+            hand.draw(g, x, y, Game.headsUpDisplay.getSelected().getItemStack(), entity.getFacing());
+        }
     }
 
     @Override
     public void tick() {
-        if (!(prevDirection == entity.getFacing())) {
-            if (entity.getFacing() == Direction.LEFT) {
-                try {
-                    this.texture = FileUtils.scale1(ImageIO.read((this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png"))), 4.0);
-                } catch (IOException | NullPointerException e) {
+        if (hasLanded) {
+            if (!(prevDirection == entity.getFacing())) {
+                if (entity.getFacing() == Direction.LEFT) {
                     try {
-                        this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
-                    } catch (IOException ex) {
-                        texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
-                        ex.printStackTrace();
+                        this.texture = FileUtils.scale1(ImageIO.read((this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png"))), 4.0);
+                    } catch (IOException | NullPointerException e) {
+                        try {
+                            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
+                        } catch (IOException ex) {
+                            texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+                            ex.printStackTrace();
+                        }
+                        e.printStackTrace();
                     }
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    this.texture = FileUtils.horizontalFlip(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png")), 4.0));
-                } catch (IOException | NullPointerException e) {
+                } else {
                     try {
-                        this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
-                    } catch (IOException ex) {
-                        texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
-                        ex.printStackTrace();
+                        this.texture = FileUtils.horizontalFlip(FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/entities/" + entity.getName() + ".png")), 4.0));
+                    } catch (IOException | NullPointerException e) {
+                        try {
+                            this.texture = FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/placeholder.png")), 4.0);
+                        } catch (IOException ex) {
+                            texture = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+                            ex.printStackTrace();
+                        }
+                        e.printStackTrace();
                     }
-                    e.printStackTrace();
                 }
             }
         }
@@ -161,13 +168,29 @@ public class EntityRenderer implements Entity, Drawable {
         if (checkColision(blockRight)){
             blockRight.getBlock().onBlockCollision(world, this);
         }
-        if (!(this.onGround(nearestBlock)) && !(this.isJumping())){ y++; } else if (jumpVel != 0) {
+        if (!(this.onGround(nearestBlock)) && !(this.isJumping())){
+            y++;
+            if (offY == -64){
+                offY=0;
+            } else {
+                offY--;
+            }
+        } else if (jumpVel != 0) {
             if (this.y > 0) {
                 y--;
+                if (offY == 64){
+                    offY=0;
+                } else {
+                    offY++;
+                }
             }
             jumpVel--;
+        } else {
+            if (!hasLanded) {
+                hasLanded = true;
+                prevDirection = null;
+            }
         }
-        //world.transition(x,y);
     }
 
     private boolean onGround(BlockRender blockRender){
