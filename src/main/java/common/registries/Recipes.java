@@ -8,10 +8,11 @@ import java.util.HashMap;
 
 public class Recipes {
     public static final HashMap<String, Recipe> RECIPE_MAP = new HashMap<>();
-    public static Recipe stone_producer = new Recipe("stone_producer", Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("planks"), 4)}), Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("stone_producer"), 1)}));
+    public static Recipe stone_producer = new Recipe("stone_producer", Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("planks"), 4),new ItemStack(Items.getItem("log"), 2),new ItemStack(Items.getItem("stone"), 6)}), Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("stone_producer"), 1)}));
     public static Recipe wood_producer = new Recipe("wood_producer", Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("planks"), 4),new ItemStack(Items.getItem("log"), 4),new ItemStack(Items.getItem("stone"), 4)}), Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("wood_producer"), 1)}));
     public static Recipe planks = new Recipe("planks", Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("log"), 1)}), Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("planks"), 4)}));
-    public static Recipe sticks = new Recipe("planks", Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("planks"), 1)}), Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("sticks"), 2)}));
+    public static Recipe sticks = new Recipe("stick", Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("planks"), 1)}), Arrays.asList(new ItemStack[]{new ItemStack(Items.getItem("sticks"), 2)}));
+    public static Recipe ore_processor;
 
     public static void init(){
         register(stone_producer, wood_producer, planks, sticks);

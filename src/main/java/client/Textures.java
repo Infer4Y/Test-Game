@@ -5,6 +5,7 @@ import common.block.BlockOre;
 import common.item.IItem;
 import common.item.Item;
 import common.item.ItemBlock;
+import common.item.ItemIngot;
 import utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -146,13 +147,9 @@ public class Textures {
         }
     }
 
-    private void register2(Block... block){
-        for (Block b : block) {
-            try {
-                textures2.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 2.0));
-            } catch (NullPointerException|IOException e) {
-                e.printStackTrace();
-            }
+    private void register2(Block... blocks){
+        for (Block block : blocks) {
+            register2(block);
         }
     }
 
@@ -187,6 +184,8 @@ public class Textures {
     private void register4(Item block){
         try {
             if (block instanceof ItemBlock){
+                //textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
+            } else if (block instanceof ItemIngot){
                 //textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
             } else {
                 textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 4.0));

@@ -44,7 +44,7 @@ public class Recipe {
                 }
             }
         }
-        if (amount >= ingredients.size()-1){
+        if (amount >= ingredients.size()){
             return true;
         }
 
