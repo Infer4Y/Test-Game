@@ -1,9 +1,11 @@
 package common.registries;
 
 import common.block.Block;
+import common.block.BlockOre;
 import common.item.IItem;
 import common.item.Item;
 import common.item.ItemBlock;
+import common.item.ItemIngot;
 
 import java.util.HashMap;
 
@@ -21,6 +23,11 @@ public class Items {
         register(diamond);
         for (Block b: Blocks.BLOCK_MAP.values()) {
             register(new ItemBlock(b));
+            if (b instanceof BlockOre){
+                if (b.getName().equals(b.getBlockDrop().getName())){
+                    register(new ItemIngot(b.getName().replace("ore", "ingot"), ((BlockOre) b).getColor().getRGB()));
+                }
+            }
         }
     }
 

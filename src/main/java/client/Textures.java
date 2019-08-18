@@ -95,11 +95,7 @@ public class Textures {
 
     private void register4(Block... block){
         for (Block b : block) {
-            try {
-                textures4.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 4.0));
-            } catch (NullPointerException|IOException e) {
-                e.printStackTrace();
-            }
+            register4(b);
         }
     }
 
@@ -119,17 +115,7 @@ public class Textures {
 
     private void register3(Block... block){
         for (Block b : block) {
-            try {
-                if (b instanceof BlockOre){
-                    textures3.put(b.getName(),  FileUtils.scale1(FileUtils.joinBufferedImage(ImageIO.read(
-                            this.getClass().getClassLoader().getResource("tex/blocks/stone.png")), FileUtils.dye(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/ore_overlay.png")), ((BlockOre) b).getColor())),3.0
-                    ));
-                } else {
-                    textures3.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/" + b.getName() + ".png")), 3.0));
-                }
-            } catch (NullPointerException|IOException e) {
-                e.printStackTrace();
-            }
+            register3(b);
         }
     }
 
@@ -173,11 +159,7 @@ public class Textures {
 
     private void register1(Block... block){
         for (Block b : block) {
-            try {
-                textures1.put(b.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/blocks/"+b.getName()+".png")), 1.0));
-            } catch (NullPointerException|IOException e) {
-                e.printStackTrace();
-            }
+            register1(b);
         }
     }
 
@@ -186,7 +168,9 @@ public class Textures {
             if (block instanceof ItemBlock){
                 //textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
             } else if (block instanceof ItemIngot){
-                //textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
+                textures4.put(block.getName(),  FileUtils.scale1(
+                        FileUtils.dye(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/ingot.png")),((ItemIngot) block).getColor()), 4.0
+                ));
             } else {
                 textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 4.0));
             }
@@ -199,11 +183,7 @@ public class Textures {
         for (Item block : blocks) {
             if (block instanceof ItemBlock){
             } else {
-                try {
-                    textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 4.0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                register4(block);
             }
         }
     }
@@ -212,6 +192,10 @@ public class Textures {
         try {
             if (block instanceof ItemBlock){
                 //textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 3.0));
+            } else if (block instanceof ItemIngot){
+                textures3.put(block.getName(),  FileUtils.scale1(
+                        FileUtils.dye(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/ingot.png")),((ItemIngot) block).getColor()), 3.0
+                ));
             } else {
                 textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 3.0));
             }
@@ -224,11 +208,7 @@ public class Textures {
         for (Item block : blocks) {
             if (block instanceof ItemBlock){
             } else {
-                try {
-                    textures3.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 3.0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                register3(block);
             }
         }
     }
@@ -237,6 +217,10 @@ public class Textures {
         try {
             if (block instanceof ItemBlock){
                 //textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 2.0));
+            } else if (block instanceof ItemIngot){
+                textures1.put(block.getName(),  FileUtils.scale1(
+                        FileUtils.dye(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/ingot.png")),((ItemIngot) block).getColor()), 2.0
+                ));
             } else {
                 textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 2.0));
             }
@@ -247,14 +231,7 @@ public class Textures {
 
     private void register2(Item... blocks){
         for (Item block : blocks) {
-            if (block instanceof ItemBlock){
-            } else {
-                try {
-                    textures2.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 2.0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            register2(block);
         }
     }
 
@@ -262,6 +239,10 @@ public class Textures {
         try {
             if (block instanceof ItemBlock){
                 //textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 1.0));
+            } else if (block instanceof ItemIngot){
+                textures1.put(block.getName(),  FileUtils.scale1(
+                        FileUtils.dye(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/ingot.png")),((ItemIngot) block).getColor()), 1.0
+                ));
             } else {
                 textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 1.0));
             }
@@ -272,14 +253,7 @@ public class Textures {
 
     private void register1(Item... blocks) {
         for (Item block : blocks) {
-            if (block instanceof ItemBlock) {
-            } else {
-                try {
-                    textures1.put(block.getName(), FileUtils.scale1(ImageIO.read(this.getClass().getClassLoader().getResource("tex/items/" + block.getName() + ".png")), 1.0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            register1(block);
         }
     }
 }

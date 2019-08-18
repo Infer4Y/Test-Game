@@ -37,6 +37,17 @@ public class CraftingUI {
         recipesFromCraftingSlots[1][0] = Recipes.wood_producer;
         craftingSlots[1][1].setItemStack(Recipes.ore_processor.getResult().get(0));
         recipesFromCraftingSlots[1][1] = Recipes.ore_processor;
+        int ore = 0;
+        for (int i = 1; i < craftingSlots.length; i++) {
+            for (int j = 0; j < craftingSlots[i].length; j++) {
+                if ((recipesFromCraftingSlots[i][j].getName().equals("null"))) {
+                    craftingSlots[i][j].setItemStack(Recipes.ore[ore].getResult().get(0));
+                    recipesFromCraftingSlots[i][j] = Recipes.ore[ore];
+                    ore++;
+                }
+            }
+        }
+
         ingredientSlots = new CraftingSlots[recipesFromCraftingSlots[0][0].getIngredients().toArray().length];
         for (int i = 0; i < ingredientSlots.length; i++) {
             ingredientSlots[i] = new CraftingSlots();
