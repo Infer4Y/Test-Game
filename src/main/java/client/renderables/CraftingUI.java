@@ -56,7 +56,7 @@ public class CraftingUI {
         for (int i = 0; i < ingredientSlots.length; i++) {
             ingredientSlots[i] = new CraftingSlots();
             ingredientSlots[i].setItemStack(recipesFromCraftingSlots[0][0].getIngredients().get(i));
-            ingredientSlots[i].setRectangle(new Rectangle(4 * 36 + 4, i * 36 + 64, 36, 36));
+            ingredientSlots[i].setRectangle(new Rectangle(4 * 36 + 4, (i+1) * 36 + 64, 36, 36));
         }
     }
 
@@ -65,6 +65,11 @@ public class CraftingUI {
             for (int j = 0; j < craftingSlots[i].length; j++) {
                 try {
                     craftingSlots[i][j].draw((Graphics) g, j * 36 + 16, i * 36 + 64, craftingSlots[i][j].getRectangle().contains(loc));
+                    if (craftingSlots[i][j].getRectangle().contains(loc)) {
+                        g.setColor(new Color(0xFF00D5));
+                        g.setFont(new Font(null, Font.BOLD, 24));
+                        g.drawString(craftingSlots[i][j].getItemStack().getItem().getName(), 4 * 36 + 4, 64);
+                    }
                 } catch (NullPointerException e){
                     e.printStackTrace();
                 }
@@ -72,7 +77,7 @@ public class CraftingUI {
         }
         for (int i = 0; i < ingredientSlots.length; i++) {
             try {
-                ingredientSlots[i].draw(g, 4 * 36 + 4, i * 36 + 64, false);
+                ingredientSlots[i].draw(g, 4 * 36 + 4, (i+1) * 36 + 64, false);
             } catch (ArrayIndexOutOfBoundsException|NullPointerException e){
                 e.printStackTrace();
             }
