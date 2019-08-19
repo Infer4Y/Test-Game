@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.Arrays;
 
 public class CraftingUI {
-    private CraftingSlots[][] craftingSlots = new CraftingSlots[5][3];
+    private CraftingSlots[][] craftingSlots = new CraftingSlots[6][3];
     private Recipe[][] recipesFromCraftingSlots = new Recipe[5][3];
     private CraftingSlots[] ingredientSlots;
     private Point loc = new Point(16, 64);
@@ -18,6 +18,7 @@ public class CraftingUI {
     public CraftingUI(){
         for (int i = 0; i < craftingSlots.length; i++) {
             for (int j = 0; j < craftingSlots[i].length; j++) {
+                System.out.println(i+" "+j);
                 craftingSlots[i][j] = new CraftingSlots();
                 craftingSlots[i][j].setRectangle(new Rectangle(j * 36 + 16, i * 36 + 64, 36, 36));
             }
@@ -35,15 +36,18 @@ public class CraftingUI {
         recipesFromCraftingSlots[0][2] = Recipes.stone_producer;
         craftingSlots[1][0].setItemStack(Recipes.wood_producer.getResult().get(0));
         recipesFromCraftingSlots[1][0] = Recipes.wood_producer;
-        craftingSlots[1][1].setItemStack(Recipes.ore_processor.getResult().get(0));
-        recipesFromCraftingSlots[1][1] = Recipes.ore_processor;
         int ore = 0;
-        for (int i = 1; i < craftingSlots.length; i++) {
+        for (int i = 0; i < craftingSlots.length; i++) {
             for (int j = 0; j < craftingSlots[i].length; j++) {
-                if ((recipesFromCraftingSlots[i][j].getName().equals("null"))) {
-                    craftingSlots[i][j].setItemStack(Recipes.ore[ore].getResult().get(0));
-                    recipesFromCraftingSlots[i][j] = Recipes.ore[ore];
-                    ore++;
+                try {
+                    if ((recipesFromCraftingSlots[i][j].getName().equals("null")) && ore!=Recipes.ore.length) {
+                        craftingSlots[i][j].setItemStack(Recipes.ore[ore].getResult().get(0));
+                        recipesFromCraftingSlots[i][j] = Recipes.ore[ore];
+                        ore++;
+                    } else {
+                    }
+                } catch (ArrayIndexOutOfBoundsException|NullPointerException e){
+                    e.printStackTrace();
                 }
             }
         }
@@ -139,7 +143,7 @@ public class CraftingUI {
                                     System.out.println(stack.getItem().getName());
                                 }
                                 System.out.println(recipesFromCraftingSlots[i][j].getIngredients().toArray().length-1);
-                                for (int l = 0; i < ingredientSlots.length; l++) {
+                                for (int l = 0; l < ingredientSlots.length; l++) {
                                     ingredientSlots[l] = new CraftingSlots();
                                     ingredientSlots[l].setItemStack(recipesFromCraftingSlots[i][j].getIngredients().get(l));
                                     ingredientSlots[l].setRectangle(new Rectangle(4 * 36 + 4, i * 36 + 64, 36, 36));
