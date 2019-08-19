@@ -61,14 +61,18 @@ public class CraftingUI {
     }
 
     public void draw(Graphics2D g){
+        g.setColor(new Color(0x9D7F41BF, true));
+        g.fillRect(  16-4,  64-4,7 * 36+4, 7 * 36 + 10);
+        g.setColor(new Color(0xED646668, true));
+        g.fillRoundRect(  18, 6 * 36 + 64,6 * 36 + 28, 38,4,4);
         for (int i = 0; i < craftingSlots.length; i++) {
             for (int j = 0; j < craftingSlots[i].length; j++) {
                 try {
                     craftingSlots[i][j].draw((Graphics) g, j * 36 + 16, i * 36 + 64, craftingSlots[i][j].getRectangle().contains(loc));
                     if (craftingSlots[i][j].getRectangle().contains(loc)) {
-                        g.setColor(new Color(0xFF00D5));
+                        g.setColor(new Color(0x98ACFF));
                         g.setFont(new Font(null, Font.BOLD, 24));
-                        g.drawString(craftingSlots[i][j].getItemStack().getItem().getName(), 4 * 36 + 4, 64);
+                        g.drawString(craftingSlots[i][j].getItemStack().getItem().getName(),  24, 6 * 36 + 24 + 64);
                     }
                 } catch (NullPointerException e){
                     e.printStackTrace();
@@ -77,11 +81,16 @@ public class CraftingUI {
         }
         for (int i = 0; i < ingredientSlots.length; i++) {
             try {
-                ingredientSlots[i].draw(g, 4 * 36 + 4, (i+1) * 36 + 64, false);
+                ingredientSlots[i].draw(g, 3 * 36 + 20, (i+1) * 36 + 66, false);
             } catch (ArrayIndexOutOfBoundsException|NullPointerException e){
                 e.printStackTrace();
             }
         }
+        g.setColor(new Color(0xED646668, true));
+        g.fillRoundRect(  18+(3*36), 62,3 * 36 + 32, 28,2,2);
+        g.setColor(new Color(0x98ACFF));
+        g.setFont(new Font(null, Font.BOLD, 24));
+        g.drawString("Ingredients",  24+(3*36), 64+18);
     }
 
     public void handleMouseMove(MouseEvent e){

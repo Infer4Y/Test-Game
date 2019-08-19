@@ -47,10 +47,6 @@ public class FileUtils {
         BufferedImage newImage = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = newImage.createGraphics();
-        Color oldColor = g2.getColor();
-        g2.setPaint(Color.BLACK);
-        g2.fillRect(0, 0, width, height);
-        g2.setColor(oldColor);
         g2.drawImage(img1, null, 0, 0);
         g2.drawImage(img2, null, 0, 0);
         g2.dispose();
