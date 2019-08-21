@@ -1,2 +1,6 @@
 include 'core', 'desktop'
 rootProject.name = 'project-iodine'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
