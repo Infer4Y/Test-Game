@@ -1,0 +1,26 @@
+
+
+apply plugin: "application"
+
+sourceCompatibility = 1.8
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+mainClassName = "xavier.project-iodine.desktop.DesktopLauncher"
+project.ext.assetsDir = new File("$projectDir/../assets");
+
+sourceSets.main.resources.srcDirs = [project.ext.assetsDir.getAbsolutePath()]
+
+task launchDesktop(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    workingDir = project.assetsDir
+    ignoreExitValue = true
+}
+
+eclipse {
+    project {
+        name = appName + "-desktop"
+        linkedResource name: 'assets', type: '2', location: 'PARENT-1-PROJECT_LOC/assets'
+    }
+}

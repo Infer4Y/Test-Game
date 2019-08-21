@@ -1,1 +1,2 @@
-rootProject.name = 'game'
+include 'core', 'desktop'
+rootProject.name = 'project-iodine'
