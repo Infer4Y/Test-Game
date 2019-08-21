@@ -74,6 +74,9 @@ public class Textures {
     }
 
     public static Texture getTexture(String name) {
-        return textures.getOrDefault(name, placeholder);
+        if (textures.containsKey(name)) {
+            return textures.get(name);
+        }
+        return placeholder;
     }
 }
