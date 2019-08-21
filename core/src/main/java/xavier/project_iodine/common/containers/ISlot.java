@@ -1,6 +1,7 @@
 package xavier.project_iodine.common.containers;
 
-import common.item.ItemStack;
+
+import xavier.project_iodine.common.item.ItemStack;
 
 public interface ISlot {
     void setItemStack(ItemStack stack);

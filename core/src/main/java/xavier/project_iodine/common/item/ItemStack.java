@@ -1,11 +1,17 @@
 package xavier.project_iodine.common.item;
 
-import common.registries.Blocks;
-import common.registries.Items;
+
+import xavier.project_iodine.common.block.Block;
+import xavier.project_iodine.common.registries.Items;
 
 public class ItemStack {
     private Item item;
     private int amount;
+
+    public ItemStack(Block item, int amount) {
+        this.item = Items.getItem(item.getName());
+        this.amount = amount;
+    }
 
     public ItemStack(Item item, int amount) {
         this.item = item;

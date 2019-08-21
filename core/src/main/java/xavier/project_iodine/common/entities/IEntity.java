@@ -1,6 +1,7 @@
 package xavier.project_iodine.common.entities;
 
-import common.world.Direction;
+
+import xavier.project_iodine.common.world.Direction;
 
 public interface IEntity {
     void setName(String name);

@@ -1,8 +1,9 @@
 package xavier.project_iodine.common.registries;
 
-import common.block.BlockOre;
-import common.item.ItemStack;
-import common.recipes.Recipe;
+
+import xavier.project_iodine.common.block.BlockOre;
+import xavier.project_iodine.common.item.ItemStack;
+import xavier.project_iodine.common.recipes.Recipe;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,7 +1,6 @@
 package xavier.project_iodine.common.entities;
 
-import client.renderables.Drawable;
-import common.world.Direction;
+import xavier.project_iodine.common.world.Direction;
 
 import java.awt.*;
 
