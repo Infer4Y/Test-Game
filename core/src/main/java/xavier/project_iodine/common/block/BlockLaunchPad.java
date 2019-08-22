@@ -1,8 +1,7 @@
 package xavier.project_iodine.common.block;
 
-import client.renderables.BlockRender;
-import client.renderables.EntityRenderer;
-import common.world.World;
+import xavier.project_iodine.common.entities.Entity;
+import xavier.project_iodine.common.world.World;
 
 public class BlockLaunchPad extends Block{
     public BlockLaunchPad(String name) {
@@ -10,8 +9,8 @@ public class BlockLaunchPad extends Block{
     }
 
     @Override
-    public void onBlockCollision(World world, EntityRenderer entity, BlockRender block) {
-        super.onBlockCollision(world, entity, block);
-        entity.setJumping(3.5f);
+    public void onBlockCollision(World world, Entity entity) {
+        super.onBlockCollision(world, entity);
+        // TODO : apply an upwards velocity.
     }
 }

@@ -1,6 +1,7 @@
 package xavier.project_iodine.common.registries;
 
 import xavier.project_iodine.common.block.*;
+import xavier.project_iodine.utils.Logger;
 
 import java.util.HashMap;
 
@@ -50,17 +51,17 @@ public class Blocks {
                 ore_tin,
                 ore_producer,
                 stone_producer);
+
     }
 
     private static void register(Block block){
         BLOCK_MAP.put(block.getName(), block);
-        System.out.println(block.getName());
+        Logger.log(Logger.Type.REGISTRY, "[Registry:Blocks] %s has been registered.".replace("%s", block.getName()));
     }
 
     private static void register(Block... block){
         for (Block b : block) {
-            BLOCK_MAP.put(b.getName(), b);
-            System.out.println(b.getName());
+            register(b);
         }
     }
 }

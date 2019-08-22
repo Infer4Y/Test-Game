@@ -1,7 +1,8 @@
 package xavier.project_iodine.common.world.gen;
 
-import common.block.Block;
-import common.registries.Blocks;
+
+import xavier.project_iodine.common.block.Block;
+import xavier.project_iodine.common.registries.Blocks;
 
 import java.util.Random;
 
@@ -45,7 +46,7 @@ public class Tree {
     public Block[][] getStruct() {
         Block[][] structBlock = new Block[5][5];
         Random r = new Random();
-        int c = r.nextInt(struct.length-1);
+        int c = r.nextInt(struct.length);
         for (int i = 0; i < struct[c].length; i++) {
             for (int j = 0; j < struct[c][i].length; j++) {
                 System.out.print(struct[c][j][i] + " ");

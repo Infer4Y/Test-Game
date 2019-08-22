@@ -5,6 +5,7 @@ import xavier.project_iodine.common.block.BlockOre;
 import xavier.project_iodine.common.item.Item;
 import xavier.project_iodine.common.item.ItemBlock;
 import xavier.project_iodine.common.item.ItemIngot;
+import xavier.project_iodine.utils.Logger;
 
 import java.util.HashMap;
 
@@ -36,6 +37,6 @@ public class Items {
 
     private static void register(Item item){
         ITEM_MAP.put(item.getName(), item);
-        System.out.println(item.getName());
+        Logger.log(Logger.Type.REGISTRY, "[Registry:Items] %s has been registered.".replace("%s", item.getName()));
     }
 }

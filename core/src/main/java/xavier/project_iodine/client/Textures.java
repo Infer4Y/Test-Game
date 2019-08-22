@@ -18,6 +18,7 @@ import java.util.Objects;
 
 public class Textures {
     private static final HashMap<String, Texture> textures = new HashMap<>();
+    public static Texture ball = new Texture(Gdx.files.internal("tex/entities/ball.png"));
 
     private static Texture placeholder;
 
@@ -38,9 +39,9 @@ public class Textures {
 
     private static void register(Block block){
         if (block instanceof BlockOre){
-            textures.put(block.getName(),  FileUtils.joinBufferedImage(new Texture(Gdx.files.internal("tex/blocks/stone.png")), FileUtils.dye(new Texture(Gdx.files.internal("tex/blocks/ore_overlay.png")), ((BlockOre) block).getColor())));
+            textures.put(block.getName(),  FileUtils.dye(new Texture(Gdx.files.internal("tex/blocks/ore_overlay.png")), ((BlockOre) block).getColor()));
         } else {
-            textures.put(block.getName(), new Texture(Gdx.files.internal("tex/items/" + block.getName() + ".png")));
+            textures.put(block.getName(), new Texture(Gdx.files.internal("tex/blocks/" + block.getName() + ".png")));
         }
     }
 
@@ -78,5 +79,13 @@ public class Textures {
             return textures.get(name);
         }
         return placeholder;
+    }
+
+    public static void dispose() {
+        for (Texture tex : textures.values()) {
+            tex.dispose();
+        }
+        placeholder.dispose();
+        slot.dispose();
     }
 }

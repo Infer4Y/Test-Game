@@ -4,6 +4,7 @@ package xavier.project_iodine.common.registries;
 import xavier.project_iodine.common.block.BlockOre;
 import xavier.project_iodine.common.item.ItemStack;
 import xavier.project_iodine.common.recipes.Recipe;
+import xavier.project_iodine.utils.Logger;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,5 +52,6 @@ public class Recipes {
 
     private static void register(Recipe recipe){
         RECIPE_MAP.put(recipe.getName(), recipe);
+        Logger.log(Logger.Type.REGISTRY, "[Registry:Recipes] %s has been registered.".replace("%s", recipe.getName()));
     }
 }
