@@ -14,12 +14,6 @@ public class Game extends ScreenBasedGame {
 
     public static World world;
 
-    float ballY = 0f, max = 0f, ballX = 0f;
-    float tileSize = 64f;
-    private float direction = 1f;
-
-
-
     @Override
     public void initialise() {
         Sounds.init();
@@ -27,6 +21,8 @@ public class Game extends ScreenBasedGame {
         Items.init();
         Recipes.init();
         Textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
+
+        world = new World("",64, 64);
     }
 
     @Override
@@ -46,22 +42,7 @@ public class Game extends ScreenBasedGame {
     
     @Override
     public void render(Graphics g) {
-        for (int i = 0; i < 20; i++) {
-            g.drawTexture(Textures.getTexture("launcher"), i * tileSize ,640f-tileSize, tileSize ,tileSize);
-        }
-
-        g.drawTexture(Textures.ball, ballX ,ballY, tileSize ,tileSize);
-        ballY+=((9.85f)*direction);
-        if (ballY >= 640f-tileSize*2){
-            direction = -0.5f;
-        }
-
-        direction+=0.003f;
-        ballX+=0.75f;
-
-        if (ballX >= 1280f+tileSize){
-            ballX=(-tileSize)+1;
-        }
+        world.draw(g);
     }
 
     @Override
