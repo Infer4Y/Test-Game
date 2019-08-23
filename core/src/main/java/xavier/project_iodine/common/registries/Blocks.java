@@ -18,14 +18,14 @@ public class Blocks {
     public static Block sapling = new BlockSapling("sapling");
     public static BlockWoodProducer wood_producer = new BlockWoodProducer("wood_producer");
     public static BlockCrafter crafter = new BlockCrafter("crafter");
-    public static BlockOre ore_iron = new BlockOre("ore_iron", 0xA09090);
-    public static BlockOre ore_gold = new BlockOre("ore_gold", 0xFFD700);
-    public static BlockOre ore_tin = new BlockOre("ore_tin", 0xD3C4C4);
-    public static BlockOre ore_copper = new BlockOre("ore_copper", 0xFF7F50);
-    public static BlockOre ore_silver = new BlockOre("ore_silver", 0x706868);
-    public static BlockOre ore_coal = new BlockOre("ore_coal", Items.coal, 0x000);
-    public static BlockOre ore_diamond = new BlockOre("ore_diamond",Items.diamond, 0x00ffff);
-    public static BlockOre ore_ruby = new BlockOre("ore_ruby", 0xff2700);
+    public static BlockOre ore_iron = new BlockOre("ore_iron", 0xffA09090);
+    public static BlockOre ore_gold = new BlockOre("ore_gold", 0xffFFD700);
+    public static BlockOre ore_tin = new BlockOre("ore_tin", 0xffD3C4C4);
+    public static BlockOre ore_copper = new BlockOre("ore_copper", 0xffFF7F50);
+    public static BlockOre ore_silver = new BlockOre("ore_silver", 0xff706868);
+    public static BlockOre ore_coal = new BlockOre("ore_coal", Items.coal, 0xff000000);
+    public static BlockOre ore_diamond = new BlockOre("ore_diamond",Items.diamond, 0xff00ffff);
+    public static BlockOre ore_ruby = new BlockOre("ore_ruby", 0xffff2700);
     public static BlockOreProducer ore_producer = new BlockOreProducer("ore_producer");
     public static BlockStoneProducer stone_producer = new BlockStoneProducer("stone_producer");
 

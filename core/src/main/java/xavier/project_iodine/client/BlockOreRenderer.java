@@ -12,13 +12,13 @@ public class BlockOreRenderer extends BlockRenderer {
     public BlockOreRenderer(int layer, BlockOre block) {
         super(layer, block);
         vein = new Sprite(Textures.ore_overlay);
-        color = Color.valueOf(""+block.getColor());
+        color = new Color(block.getColor());
     }
 
     public BlockOreRenderer(BlockOre block) {
         super(2, block);
         vein = new Sprite(Textures.ore_overlay);
-        color = Color.valueOf(""+block.getColor());
+        color = new Color(block.getColor());
     }
 
     @Override
