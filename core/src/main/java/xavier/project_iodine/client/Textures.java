@@ -22,13 +22,16 @@ public class Textures {
 
     private static Texture placeholder;
 
-    public static Texture slot;
+    public static Texture slot, ore_overlay, ingot, ingot_overlay;
 
 
 
     public static void init(HashMap<String, Item> items, HashMap<String, Block> blocks){
         placeholder = new Texture(Gdx.files.internal("tex/placeholder.png"));
         slot = new Texture(Gdx.files.internal("tex/slot.png"));
+        ore_overlay = new Texture(Gdx.files.internal("tex/blocks/ore_overlay.png"));
+        ingot = new Texture(Gdx.files.internal("tex/items/ingot.png"));
+        ingot_overlay = new Texture(Gdx.files.internal("tex/items/ingot_1.png"));
         for (Item i: items.values()) {
             register(i);
         }
@@ -39,7 +42,6 @@ public class Textures {
 
     private static void register(Block block){
         if (block instanceof BlockOre){
-            textures.put(block.getName(),  FileUtils.dye(new Texture(Gdx.files.internal("tex/blocks/ore_overlay.png")), ((BlockOre) block).getColor()));
         } else {
             textures.put(block.getName(), new Texture(Gdx.files.internal("tex/blocks/" + block.getName() + ".png")));
         }
@@ -55,11 +57,6 @@ public class Textures {
         if (block instanceof ItemBlock){
             //textures4.put(block.getName(), FileUtils.scale1(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResource("tex/blocks/" + block.getName() + ".png"))), 4.0));
         } else if (block instanceof ItemIngot){
-            textures.put(block.getName(),
-                    FileUtils.joinBufferedImage(
-                            FileUtils.dye(new Texture(Gdx.files.internal("tex/items/ingot.png")),((ItemIngot) block).getColor()),
-                            new Texture(Gdx.files.internal("tex/items/ingot_1.png"))
-            ));
         } else {
             textures.put(block.getName(), new Texture(Gdx.files.internal("tex/items/" + block.getName() + ".png")));
         }
