@@ -7,22 +7,26 @@ import xavier.project_iodine.common.block.BlockOre;
 
 public class BlockOreRenderer extends BlockRenderer {
     private Sprite vein;
+    private Color color;
+
     public BlockOreRenderer(int layer, BlockOre block) {
         super(layer, block);
         vein = new Sprite(Textures.ore_overlay);
-        vein.setColor(new Color(block.getColor()));
+        color = Color.valueOf(""+block.getColor());
     }
 
     public BlockOreRenderer(BlockOre block) {
         super(2, block);
         vein = new Sprite(Textures.ore_overlay);
-        vein.setColor(new Color(block.getColor()));
+        color = Color.valueOf(""+block.getColor());
     }
 
     @Override
     public void draw(Graphics g, float x, float y) {
         g.drawTexture(Textures.getTexture("stone"), x, y);
+        g.setColor(color);
         g.drawSprite(vein, x, y);
+        g.setColor(Color.WHITE);
     }
 }
 

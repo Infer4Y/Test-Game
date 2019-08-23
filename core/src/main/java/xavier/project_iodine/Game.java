@@ -15,7 +15,7 @@ public class Game extends ScreenBasedGame {
 	public static final String GAME_IDENTIFIER = "xavier.project-iodine";
 
     public static World world;
-    public BlockOreRenderer iron;
+    public BlockOreRenderer coal;
 
     @Override
     public void initialise() {
@@ -24,7 +24,7 @@ public class Game extends ScreenBasedGame {
         Items.init();
         Recipes.init();
         Textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
-        iron = new BlockOreRenderer(Blocks.ore_iron);
+        coal = new BlockOreRenderer(Blocks.ore_coal);
         world = new World("",64, 64);
     }
 
@@ -46,7 +46,7 @@ public class Game extends ScreenBasedGame {
     @Override
     public void render(Graphics g) {
         world.draw(g);
-        iron.draw(g, 0 , 0 );
+        coal.draw(g, 0 , 0 );
     }
 
     @Override
