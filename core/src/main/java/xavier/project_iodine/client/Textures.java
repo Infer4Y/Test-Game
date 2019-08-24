@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import xavier.project_iodine.common.block.Block;
 import xavier.project_iodine.common.block.BlockOre;
+import xavier.project_iodine.common.entities.Entity;
 import xavier.project_iodine.common.item.Item;
 import xavier.project_iodine.common.item.ItemBlock;
 import xavier.project_iodine.common.item.ItemIngot;

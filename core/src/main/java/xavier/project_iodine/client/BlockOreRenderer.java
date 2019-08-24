@@ -14,22 +14,20 @@ public class BlockOreRenderer extends BlockRenderer {
         vein = new Sprite(Textures.ore_overlay);
         vein.scale(4.0f);
         color = new Color(block.getColor());
-        vein.setColor(color);
     }
 
     public BlockOreRenderer(BlockOre block) {
         super(2, block);
         vein = new Sprite(Textures.ore_overlay);
         color = new Color(block.getColor());
-        vein.setColor(color);
     }
 
     @Override
     public void draw(Graphics g, float x, float y) {
         g.drawTexture(Textures.getTexture("stone"), x, y,64,64);
-        g.setColor(color);
+        g.setTint(color);
         g.drawTexture(Textures.ore_overlay, x, y,64,64);
-        g.setColor(Color.WHITE);
+        g.setTint(Color.WHITE);
     }
 }
 
