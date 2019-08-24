@@ -20,26 +20,8 @@ import java.util.Random;
 public class Game extends ScreenBasedGame {
 	public static final String GAME_IDENTIFIER = "xavier.project-iodine";
 
-	public static FillViewport viewport;
-
-	private Random r = new Random();
-
-	float x, y;
-
     public static World world;
-    public BlockOreRenderer[] ore_renderer;
-    public BlockOreRenderer[][] ore_renderer1 = new BlockOreRenderer[20][10];
-    public static BlockOre[] ores =
-            {
-                    Blocks.ore_coal,
-                    Blocks.ore_copper,
-                    Blocks.ore_diamond,
-                    Blocks.ore_iron,
-                    Blocks.ore_gold,
-                    Blocks.ore_tin,
-                    Blocks.ore_silver,
-                    Blocks.ore_ruby
-            };
+    public static ScreenBasedGame instance;
 
     @Override
     public void initialise() {
@@ -49,30 +31,21 @@ public class Game extends ScreenBasedGame {
         Entities.init();
         Recipes.init();
         Textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
-        ore_renderer = new BlockOreRenderer[ores.length];
-        for (int i = 0; i < ores.length; i++) {
-            ore_renderer[i] = new BlockOreRenderer(ores[i]);
-        }
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
-                ore_renderer1[i][j] = ore_renderer[r.nextInt(ores.length)];
-            }
-        }
-        world = new World("",64, 64);
-        viewport = new FillViewport(this.width, this.height);
-        x = y = 0;
+
+        instance = this;
+
+        this.addScreen(new MainMenu());
+        this.addScreen(world = new World("", 256, 256));
     }
 
     @Override
     public int getInitialScreenId() {
-        return 0;
+        return MainMenu.ID;
     }
 
     @Override
     public void update(float delta) {
-        viewport.toWorldCoordinates(new Vector2(x, y));
-        x++;
-        y++;
+        super.update(delta);
     }
     
     @Override
@@ -82,13 +55,7 @@ public class Game extends ScreenBasedGame {
     
     @Override
     public void render(Graphics g) {
-        viewport.apply(g);
-        world.draw(g);
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
-                ore_renderer1[i][j].draw(g, i * 64 , j * 64);
-            }
-        }
+        super.render(g);
     }
 
     @Override
