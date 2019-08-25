@@ -28,6 +28,8 @@ public class Blocks {
     public static BlockOre ore_ruby = new BlockOre("ore_ruby", 0xff2700ff);
     public static BlockOreProducer ore_producer = new BlockOreProducer("ore_producer");
     public static BlockStoneProducer stone_producer = new BlockStoneProducer("stone_producer");
+    public static BlockColored plastic = new BlockColored("plastic");
+    public static BlockColored plastic_smooth = new BlockColored("plastic_smooth");
 
     public static void init(){
         register(grass,
@@ -51,7 +53,8 @@ public class Blocks {
                 ore_tin,
                 ore_producer,
                 stone_producer);
-
+        register(plastic.getRegistyInstance(plastic));
+        register(plastic_smooth.getRegistyInstance(plastic_smooth));
     }
 
     private static void register(Block block){
@@ -63,6 +66,10 @@ public class Blocks {
         for (Block b : block) {
             register(b);
         }
+    }
+
+    public static Block getBlock(String name){
+        return BLOCK_MAP.getOrDefault(name, air);
     }
 }
 

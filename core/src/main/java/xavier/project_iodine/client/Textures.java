@@ -4,6 +4,7 @@ package xavier.project_iodine.client;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import xavier.project_iodine.common.block.Block;
+import xavier.project_iodine.common.block.BlockColored;
 import xavier.project_iodine.common.block.BlockOre;
 import xavier.project_iodine.common.entities.Entity;
 import xavier.project_iodine.common.item.Item;
@@ -45,6 +46,8 @@ public class Textures {
 
     private static void register(Block block){
         if (block instanceof BlockOre){
+        } else if (block instanceof BlockColored){
+            textures.put(block.getName().replace("_"+ ((BlockColored) block).getColorState().get_name(),""), new Texture(Gdx.files.internal("tex/blocks/" + block.getName().replace("_"+ ((BlockColored) block).getColorState().get_name(),"")+ ".png")));
         } else {
             textures.put(block.getName(), new Texture(Gdx.files.internal("tex/blocks/" + block.getName() + ".png")));
         }

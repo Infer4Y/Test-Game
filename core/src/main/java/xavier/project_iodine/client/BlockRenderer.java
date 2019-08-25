@@ -5,7 +5,7 @@ import xavier.project_iodine.common.block.Block;
 import xavier.project_iodine.common.registries.Blocks;
 
 public class BlockRenderer extends Renderer {
-    private Block block;
+    protected Block block;
 
     public BlockRenderer(int layer, Block block) {
         super(layer);
