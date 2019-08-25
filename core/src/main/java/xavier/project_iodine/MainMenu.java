@@ -5,18 +5,18 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Color;
 import org.mini2Dx.core.assets.FallbackFileHandleResolver;
 import org.mini2Dx.core.game.GameContainer;
-import org.mini2Dx.core.game.ScreenBasedGame;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.GameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
-import org.mini2Dx.core.screen.transition.FadeInTransition;
-import org.mini2Dx.core.screen.transition.FadeOutTransition;
 import org.mini2Dx.ui.UiContainer;
 import org.mini2Dx.ui.UiThemeLoader;
 import org.mini2Dx.ui.element.Button;
+import org.mini2Dx.ui.element.Label;
+import org.mini2Dx.ui.element.TextButton;
 import org.mini2Dx.ui.element.Visibility;
 import org.mini2Dx.ui.event.ActionEvent;
 import org.mini2Dx.ui.listener.ActionListener;
@@ -32,7 +32,7 @@ public class MainMenu extends BasicGameScreen {
     public static final int ID = 0;
 
     private UiContainer container;
-    private Button button;
+    private TextButton button;
 
     //private float loadingTime = 10;
 
@@ -62,9 +62,11 @@ public class MainMenu extends BasicGameScreen {
 
         assetManager.setLoader(UiTheme.class, new UiThemeLoader(fileHandleResolver));
 
-        assetManager.load("ui/neon/skin/neon-ui.json", UiTheme.class);
-        container = new UiContainer(800,600,assetManager);
+        assetManager.load(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class);
+
+        container = new UiContainer(800,600, assetManager);
         container.set(220, 20, 800,600);
+        container.setVisibility(Visibility.VISIBLE);
         ore_renderer = new BlockOreRenderer[ores.length];
         for (int i = 0; i < ores.length; i++) {
             ore_renderer[i] = new BlockOreRenderer(ores[i]);
@@ -75,7 +77,8 @@ public class MainMenu extends BasicGameScreen {
             }
         }
         x = y = 0;
-        button = new Button(160,160,1280-320,80);
+        button = new TextButton(160,160,1280-320,80);
+        button.setText("Start World");
         button.addActionListener(new ActionListener() {
             @Override
             public void onActionBegin(ActionEvent event) {
@@ -95,9 +98,10 @@ public class MainMenu extends BasicGameScreen {
 
     @Override
     public void update(GameContainer gc, ScreenManager<? extends GameScreen> screenManager, float delta) {
-        x++; y++; rot+=0.003;
+        //x++; y++;
+        //rot+=0.003;
         if (x==256*64){
-            x = y = 0;
+             x = y = 0;
         }
         if(!assetManager.update()) {
             //Wait for asset manager to finish loading assets
@@ -116,7 +120,7 @@ public class MainMenu extends BasicGameScreen {
 
     @Override
     public void render(GameContainer gc, Graphics g) {
-        g.rotate(-rot, 0, 0);
+        g.rotate(-rot, 640, 320);
         for (int i = 0; i < 256; i++) {
             for (int j = 0; j < 256; j++) {
                 if ((i * 64 - x >= -128 && i * 64 - x <= gc.getWidth() +128) && (j * 64 - y >= -128 && j * 64 - y <= gc.getHeight() +128)) {
@@ -124,6 +128,7 @@ public class MainMenu extends BasicGameScreen {
                 }
             }
         }
+        g.rotate(rot, 640, 320);
         container.render(g);
     }
 
