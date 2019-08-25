@@ -29,7 +29,7 @@ public class BlockRenderer extends Renderer {
 
     @Override
     public void draw(Graphics g, float x, float y) {
-        g.drawTexture(Textures.getTexture(block.getName()), x, y);
+        g.drawTexture(Textures.getTexture(block.getName()), x, y,64, 64);
     }
 
     @Override

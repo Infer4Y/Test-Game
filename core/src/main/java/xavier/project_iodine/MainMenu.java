@@ -40,8 +40,7 @@ public class MainMenu extends BasicGameScreen {
 
     float x, y, rot, cout;
 
-    public BlockOreRenderer[] ore_renderer;
-    public BlockOreRenderer[][] ore_renderer1 = new BlockOreRenderer[256][256];
+    public BlockOre[][] ore_renderer1 = new BlockOre[256][256];
     public static BlockOre[] ores =
             {
                     Blocks.ore_coal,
@@ -67,13 +66,9 @@ public class MainMenu extends BasicGameScreen {
         container = new UiContainer(800,600, assetManager);
         container.set(220, 20, 800,600);
         container.setVisibility(Visibility.VISIBLE);
-        ore_renderer = new BlockOreRenderer[ores.length];
-        for (int i = 0; i < ores.length; i++) {
-            ore_renderer[i] = new BlockOreRenderer(ores[i]);
-        }
         for (int i = 0; i < 256; i++) {
             for (int j = 0; j < 256; j++) {
-                ore_renderer1[i][j] = ore_renderer[r.nextInt(ores.length)];
+                ore_renderer1[i][j] = ores[r.nextInt(ores.length)];
             }
         }
         x = y = 0;
@@ -82,6 +77,7 @@ public class MainMenu extends BasicGameScreen {
         button.addActionListener(new ActionListener() {
             @Override
             public void onActionBegin(ActionEvent event) {
+                Game.world.generate();
                 Game.instance.enterGameScreen(World.ID, null, null);
             }
 

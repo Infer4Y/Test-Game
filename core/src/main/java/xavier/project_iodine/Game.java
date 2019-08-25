@@ -26,11 +26,12 @@ public class Game extends ScreenBasedGame {
     @Override
     public void initialise() {
         Sounds.init();
+        Textures.init();
         Blocks.init();
         Items.init();
         Entities.init();
         Recipes.init();
-        Textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
+        Textures.init();
 
         instance = this;
 

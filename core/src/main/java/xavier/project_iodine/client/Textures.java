@@ -9,6 +9,8 @@ import xavier.project_iodine.common.entities.Entity;
 import xavier.project_iodine.common.item.Item;
 import xavier.project_iodine.common.item.ItemBlock;
 import xavier.project_iodine.common.item.ItemIngot;
+import xavier.project_iodine.common.registries.Blocks;
+import xavier.project_iodine.common.registries.Items;
 import xavier.project_iodine.utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -21,22 +23,22 @@ public class Textures {
     private static final HashMap<String, Texture> textures = new HashMap<>();
     public static Texture ball = new Texture(Gdx.files.internal("tex/entities/ball.png"));
 
-    private static Texture placeholder;
+    public static Texture placeholder;
 
     public static Texture slot, ore_overlay, ingot, ingot_overlay;
 
 
 
-    public static void init(HashMap<String, Item> items, HashMap<String, Block> blocks){
+    public static void init(){
         placeholder = new Texture(Gdx.files.internal("tex/placeholder.png"));
         slot = new Texture(Gdx.files.internal("tex/slot.png"));
         ore_overlay = new Texture(Gdx.files.internal("tex/blocks/ore_overlay.png"));
         ingot = new Texture(Gdx.files.internal("tex/items/ingot.png"));
         ingot_overlay = new Texture(Gdx.files.internal("tex/items/ingot_1.png"));
-        for (Item i: items.values()) {
+        for (Block i: Blocks.BLOCK_MAP.values()) {
             register(i);
         }
-        for (Block i: blocks.values()) {
+        for (Item i: Items.ITEM_MAP.values()) {
             register(i);
         }
     }

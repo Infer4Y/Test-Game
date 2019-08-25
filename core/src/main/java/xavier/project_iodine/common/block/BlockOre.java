@@ -1,6 +1,7 @@
 package xavier.project_iodine.common.block;
 
 
+import xavier.project_iodine.client.BlockOreRenderer;
 import xavier.project_iodine.common.item.Item;
 import xavier.project_iodine.common.registries.Items;
 
@@ -14,20 +15,24 @@ public class BlockOre extends Block {
         super(name,true);
         this.drop = drop;
         this.color = color;
+        this.setRenderer(new BlockOreRenderer(this));
     }
 
     public BlockOre(String name, Item drop) {
         super(name,true);
         this.drop = drop;
+        this.setRenderer(new BlockOreRenderer(this));
     }
 
     public BlockOre(String name, int color) {
         super(name,true);
         this.color = color;
+        this.setRenderer(new BlockOreRenderer(this));
     }
 
     public BlockOre(String name) {
         super(name,true);
+        this.setRenderer(new BlockOreRenderer(this));
     }
 
     @Override
