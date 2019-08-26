@@ -56,7 +56,7 @@ public class MainMenu extends BasicGameScreen {
         stage = new Stage();
         stage.setViewport(viewport);
         viewport.getCamera().translate(new Vector3(640, 320,0));
-        skin = new Skin(Gdx.files.internal("ui/flat/skin/skin.json"));
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
         for (int i = 0; i < 256; i++) {
             for (int j = 0; j < 256; j++) {
                 ore_renderer1[i][j] = ores[r.nextInt(ores.length)];
@@ -65,7 +65,7 @@ public class MainMenu extends BasicGameScreen {
         x = y = 0;
         button = new TextButton("Start World",skin);
         button.setBounds(240, 320, 800, 80);
-        button.setColor(Color.SKY);
+        button.setColor(Color.CHARTREUSE);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -76,7 +76,7 @@ public class MainMenu extends BasicGameScreen {
         });
         button1 = new TextButton("Options",skin);
         button1.setBounds(240, 220, 390, 80);
-        button1.setColor(Color.SKY);
+        button1.setColor(Color.GOLDENROD);
         button1.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -85,7 +85,7 @@ public class MainMenu extends BasicGameScreen {
         });
         button2 = new TextButton("Credits",skin);
         button2.setBounds(650, 220, 390, 80);
-        button2.setColor(Color.SKY);
+        button2.setColor(Color.TAN);
         button2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
