@@ -1,20 +1,33 @@
 package xavier.project_iodine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import org.mini2Dx.core.assets.FallbackFileHandleResolver;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.GameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
+import org.mini2Dx.ui.UiContainer;
+import org.mini2Dx.ui.UiThemeLoader;
+import org.mini2Dx.ui.element.TextButton;
+import org.mini2Dx.ui.element.Visibility;
+import org.mini2Dx.ui.event.ActionEvent;
+import org.mini2Dx.ui.event.EventTrigger;
+import org.mini2Dx.ui.layout.HorizontalAlignment;
+import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
 import xavier.project_iodine.common.block.BlockOre;
 import xavier.project_iodine.common.registries.Blocks;
@@ -24,9 +37,7 @@ import java.util.Random;
 
 public class MainMenu extends BasicGameScreen {
     public static final int ID = 0;
-
-    private FitViewport viewport;
-    private Stage stage;
+    private UiContainer container;
     private TextButton button, button1, button2, button3;
     private UiTheme theme = new UiTheme();
 
@@ -48,66 +59,121 @@ public class MainMenu extends BasicGameScreen {
                     Blocks.ore_silver,
                     Blocks.ore_ruby
             };
-    private Skin skin;
+    private AssetManager assetManager;
 
     @Override
     public void initialise(GameContainer gc) {
-        viewport = new FitViewport(gc.getWidth(), gc.getHeight());
-        stage = new Stage();
-        stage.setViewport(viewport);
-        viewport.getCamera().translate(new Vector3(640, 320,0));
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
+        assetManager = new AssetManager(fileHandleResolver);
+
+        assetManager.setLoader(UiTheme.class, new UiThemeLoader(fileHandleResolver));
+
+        assetManager.load(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class);
+
+        container = new UiContainer(800,600,assetManager);
+        container.set(220, 20, 800,600);
         for (int i = 0; i < 256; i++) {
             for (int j = 0; j < 256; j++) {
                 ore_renderer1[i][j] = ores[r.nextInt(ores.length)];
             }
         }
         x = y = 0;
-        button = new TextButton("Start World",skin);
-        button.setBounds(240, 320, 800, 80);
-        button.setColor(Color.CHARTREUSE);
-        button.addListener(new ClickListener() {
+        button = new TextButton();
+        button.setText("Start World");
+        button.set(240, 260, 800, 80);
+        button.getLabel().set(0, 0, 800, 80);
+        button.getLabel().setColor(Color.VIOLET);
+        button.getLabel().setResponsive(true);
+        button.setTextAlignment(HorizontalAlignment.CENTER);
+        button.addActionListener(new ActionListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                Game.world.generate();
-                Game.instance.enterGameScreen(World.ID, null, null);
+            public void onActionEnd(ActionEvent event) {
+            }
+
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                if (event.getEventTrigger().equals(EventTrigger.LEFT_MOUSE_CLICK)) {
+                    Game.world.generate();
+                    Game.instance.enterGameScreen(World.ID, null, null);
+                }
             }
         });
-        button1 = new TextButton("Options",skin);
-        button1.setBounds(240, 220, 390, 80);
-        button1.setColor(Color.GOLDENROD);
-        button1.addListener(new ClickListener() {
+        button1 = new TextButton();
+        button1.setText("Options");
+        button1.set(240, 360, 390, 80);
+        button1.getLabel().set(0, 0, 800, 80);
+        button1.getLabel().setColor(Color.VIOLET);
+        button1.getLabel().setResponsive(true);
+        button1.setTextAlignment(HorizontalAlignment.CENTER);
+        button1.addActionListener(new ActionListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
+            public void onActionEnd(ActionEvent event) {
+            }
+
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                if (event.getEventTrigger().equals(EventTrigger.LEFT_MOUSE_CLICK)) {
+                }
             }
         });
-        button2 = new TextButton("Credits",skin);
-        button2.setBounds(650, 220, 390, 80);
-        button2.setColor(Color.TAN);
-        button2.addListener(new ClickListener() {
+        button2 = new TextButton();
+        button2.setText("Credits");
+        button2.set(650, 360, 390, 80);
+        button2.getLabel().set(0, 0, 800, 80);
+        button2.getLabel().setColor(Color.VIOLET);
+        button2.getLabel().setResponsive(true);
+        button2.setTextAlignment(HorizontalAlignment.CENTER);
+        button2.addActionListener(new ActionListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
+            public void onActionEnd(ActionEvent event) {
+            }
+
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                if (event.getEventTrigger().equals(EventTrigger.LEFT_MOUSE_CLICK)) {
+                }
             }
         });
 
-        button3 = new TextButton("Exit",skin);
-        button3.setBounds(240, 120, 800, 80);
-        button3.setColor(Color.RED);
-        button3.addListener(new ClickListener() {
+        button3 = new TextButton();
+        button3.setText("Exit");
+        button3.set(240, 460, 800, 80);
+        button3.getLabel().set(0, 0, 800, 80);
+        button3.getLabel().setColor(Color.SCARLET);
+        button3.getLabel().setResponsive(true);
+        button3.setTextAlignment(HorizontalAlignment.CENTER);
+        button3.addActionListener(new ActionListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                Gdx.app.exit();
+            public void onActionEnd(ActionEvent event) {
+            }
+
+            @Override
+            public void onActionBegin(ActionEvent event) {
+                if (event.getEventTrigger().equals(EventTrigger.LEFT_MOUSE_CLICK)) {
+                    Gdx.app.exit();
+                }
             }
         });
-        stage.addActor(button);
-        stage.addActor(button1);
-        stage.addActor(button2);
-        stage.addActor(button3);
-        Gdx.input.setInputProcessor(stage);
+        button.setEnabled(true);
+        button.setVisibility(Visibility.VISIBLE);
+
+        button1.setEnabled(true);
+        button1.setVisibility(Visibility.VISIBLE);
+
+        button2.setEnabled(true);
+        button2.setVisibility(Visibility.VISIBLE);
+
+        button3.setEnabled(true);
+        button3.setVisibility(Visibility.VISIBLE);
+
+        container.add(button);
+        container.add(button1);
+        container.add(button2);
+        container.add(button3);
+
+        container.setVisibility(Visibility.VISIBLE);
+        Gdx.input.setInputProcessor(container);
     }
 
     @Override
@@ -117,7 +183,14 @@ public class MainMenu extends BasicGameScreen {
         if (x==256*64){
              x = y = 0;
         }
-        viewport.update(gc.getWidth(), gc.getHeight());
+        if(!assetManager.update()) {
+            //Wait for asset manager to finish loading assets
+            return;
+        }
+        if(!UiContainer.isThemeApplied()) {
+            UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
+        }
+        container.update(delta);
     }
 
     @Override
@@ -135,7 +208,7 @@ public class MainMenu extends BasicGameScreen {
             }
         }
         g.rotate(rot, 640, 320);
-        stage.draw();
+        container.render(g);
     }
 
     @Override
