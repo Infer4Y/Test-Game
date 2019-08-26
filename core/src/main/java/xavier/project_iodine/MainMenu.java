@@ -1,27 +1,21 @@
 package xavier.project_iodine;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
-import org.mini2Dx.core.assets.FallbackFileHandleResolver;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import org.mini2Dx.core.game.GameContainer;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.screen.BasicGameScreen;
 import org.mini2Dx.core.screen.GameScreen;
 import org.mini2Dx.core.screen.ScreenManager;
-import org.mini2Dx.ui.UiContainer;
-import org.mini2Dx.ui.UiThemeLoader;
-import org.mini2Dx.ui.element.Button;
-import org.mini2Dx.ui.element.Label;
-import org.mini2Dx.ui.element.TextButton;
-import org.mini2Dx.ui.element.Visibility;
-import org.mini2Dx.ui.event.ActionEvent;
-import org.mini2Dx.ui.listener.ActionListener;
 import org.mini2Dx.ui.style.UiTheme;
-import xavier.project_iodine.client.BlockOreRenderer;
 import xavier.project_iodine.common.block.BlockOre;
 import xavier.project_iodine.common.registries.Blocks;
 import xavier.project_iodine.common.world.World;
@@ -31,8 +25,10 @@ import java.util.Random;
 public class MainMenu extends BasicGameScreen {
     public static final int ID = 0;
 
-    private UiContainer container;
-    private TextButton button;
+    private FitViewport viewport;
+    private Stage stage;
+    private TextButton button, button1, button2, button3;
+    private UiTheme theme = new UiTheme();
 
     //private float loadingTime = 10;
 
@@ -52,66 +48,80 @@ public class MainMenu extends BasicGameScreen {
                     Blocks.ore_silver,
                     Blocks.ore_ruby
             };
-    private AssetManager assetManager;
+    private Skin skin;
 
     @Override
     public void initialise(GameContainer gc) {
-        FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new ClasspathFileHandleResolver(), new InternalFileHandleResolver());
-        assetManager = new AssetManager(fileHandleResolver);
-
-        assetManager.setLoader(UiTheme.class, new UiThemeLoader(fileHandleResolver));
-
-        assetManager.load(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class);
-
-        container = new UiContainer(800,600, assetManager);
-        container.set(220, 20, 800,600);
-        container.setVisibility(Visibility.VISIBLE);
+        viewport = new FitViewport(gc.getWidth(), gc.getHeight());
+        stage = new Stage();
+        stage.setViewport(viewport);
+        viewport.getCamera().translate(new Vector3(640, 320,0));
+        skin = new Skin(Gdx.files.internal("ui/flat/skin/skin.json"));
         for (int i = 0; i < 256; i++) {
             for (int j = 0; j < 256; j++) {
                 ore_renderer1[i][j] = ores[r.nextInt(ores.length)];
             }
         }
         x = y = 0;
-        button = new TextButton(160,160,1280-320,80);
-        button.setText("Start World");
-        button.addActionListener(new ActionListener() {
+        button = new TextButton("Start World",skin);
+        button.setBounds(240, 320, 800, 80);
+        button.setColor(Color.SKY);
+        button.addListener(new ClickListener() {
             @Override
-            public void onActionBegin(ActionEvent event) {
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
                 Game.world.generate();
                 Game.instance.enterGameScreen(World.ID, null, null);
             }
-
+        });
+        button1 = new TextButton("Options",skin);
+        button1.setBounds(240, 220, 390, 80);
+        button1.setColor(Color.SKY);
+        button1.addListener(new ClickListener() {
             @Override
-            public void onActionEnd(ActionEvent event) {
-
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
             }
         });
-        button.setEnabled(true);
-        button.setVisibility(Visibility.VISIBLE);
-        container.add(button);
-        Gdx.input.setInputProcessor(container);
+        button2 = new TextButton("Credits",skin);
+        button2.setBounds(650, 220, 390, 80);
+        button2.setColor(Color.SKY);
+        button2.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+            }
+        });
+
+        button3 = new TextButton("Exit",skin);
+        button3.setBounds(240, 120, 800, 80);
+        button3.setColor(Color.RED);
+        button3.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                Gdx.app.exit();
+            }
+        });
+        stage.addActor(button);
+        stage.addActor(button1);
+        stage.addActor(button2);
+        stage.addActor(button3);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void update(GameContainer gc, ScreenManager<? extends GameScreen> screenManager, float delta) {
-        //x++; y++;
+        x++; y++;
         //rot+=0.003;
         if (x==256*64){
              x = y = 0;
         }
-        if(!assetManager.update()) {
-            //Wait for asset manager to finish loading assets
-            return;
-        }
-        if(!UiContainer.isThemeApplied()) {
-            UiContainer.setTheme(assetManager.get(UiTheme.DEFAULT_THEME_FILENAME, UiTheme.class));
-        }
-        container.update(delta);
+        viewport.update(gc.getWidth(), gc.getHeight());
     }
 
     @Override
     public void interpolate(GameContainer gc, float alpha) {
-        container.interpolate(alpha);
     }
 
     @Override
@@ -125,7 +135,7 @@ public class MainMenu extends BasicGameScreen {
             }
         }
         g.rotate(rot, 640, 320);
-        container.render(g);
+        stage.draw();
     }
 
     @Override

@@ -23,6 +23,8 @@ public class World extends BasicGameScreen {
         this.y = y;
         this.name = name;
         time = 1199;
+
+        yOff = (256*64)/2;
     }
 
     public String getName() {
@@ -54,9 +56,9 @@ public class World extends BasicGameScreen {
     public void update(GameContainer gc, ScreenManager<? extends GameScreen> screenManager, float delta) {
         yOff--; xOff++;
         if (yOff <= 0){
-            yOff = 256;
+            yOff = 256*64;
         }
-        if (xOff >= 256){
+        if (xOff >= 256*64){
             xOff = 0;
         }
     }
@@ -72,10 +74,10 @@ public class World extends BasicGameScreen {
         g.enableBlending();
         for (int i = 0; i < layer2.length; i++) {
             for (int j = 0; j < layer2[i].length; j++) {
-                if ((i * 64 - xOff >= -128 && i * 64 - xOff <= gc.getWidth() +128) && (j * 64 - yOff >= -128 && j * 64 - yOff <= gc.getHeight() +128)) {
+                if ((i * 64 - xOff >= -128 && i * 64 - xOff <= gc.getWidth() +128) && (j * 64 - yOff >= -128 && j * 64 - yOff <= gc.getHeight() +128) && layer1[i][j] != null) {
                     layer1[i][j].draw(g, i * 64 - xOff, j * 64 - yOff);
                 }
-                if ((i * 64 - xOff >= -128 && i * 64 - xOff <= gc.getWidth() +128) && (j * 64 - yOff >= -128 && j * 64 - yOff <= gc.getHeight() +128)) {
+                if ((i * 64 - xOff >= -128 && i * 64 - xOff <= gc.getWidth() +128) && (j * 64 - yOff >= -128 && j * 64 - yOff <= gc.getHeight() +128) && layer2[i][j] != null) {
                     layer2[i][j].draw(g, i * 64 - xOff, j * 64 - yOff);
                 }
             }
@@ -91,15 +93,7 @@ public class World extends BasicGameScreen {
         layer2 = new Block[y][x]; layer1 = new Block[y][x]; layer0 = new Block[y][x];
         for (int i = 0; i < layer1.length; i++) {
             for (int j = 0; j < layer1[i].length; j++) {
-                if ((j % 2 == 0) && (i % 2 == 0)) {
-                    layer1[i][j] = Blocks.getBlock("plastic_smooth_blue");
-                } else if ((j % 2 == 0) && !(i % 2 == 0)) {
-                    layer1[i][j] = Blocks.getBlock("plastic_red");
-                } else if (!(j % 2 == 0) && !(i % 2 == 0)) {
-                    layer1[i][j] = Blocks.getBlock("plastic_smooth_purple");
-                }else {
-                    layer1[i][j] = Blocks.getBlock("plastic_green");
-                }
+                layer1[i][j] = Blocks.dirt;
             }
         }
         for (int i = 0; i < layer2.length; i++) {
