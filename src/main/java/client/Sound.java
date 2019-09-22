@@ -1,12 +1,6 @@
 package client;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import utils.FileUtils;
-
-import javax.sound.sampled.*;
 import java.io.*;
-import java.net.URL;
 
 public class Sound {
     private File audioFile;
@@ -22,18 +16,6 @@ public class Sound {
     }
 
     public void play(){
-        try {
-            InputStream in = new FileInputStream(audioFile);
-
-            AudioStream audioStream = new AudioStream(in);
-
-            AudioPlayer.player.start(audioStream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public String getName() {
