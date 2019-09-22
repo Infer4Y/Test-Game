@@ -2,7 +2,6 @@ package client.renderables;
 
 import java.awt.Graphics;
 
-public interface Drawable
-{
-    public void draw (Graphics g);
+public interface Drawable {
+    void draw(Graphics g);
 }

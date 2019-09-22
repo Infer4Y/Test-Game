@@ -1,16 +1,10 @@
 package client.renderables;
 
 import client.Game;
-import client.Sounds;
 import common.block.Block;
-import common.item.ItemBlock;
-import common.registries.Blocks;
-import common.registries.Items;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class BlockRender implements Entity, Drawable {
     private BufferedImage texture;

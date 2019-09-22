@@ -24,7 +24,7 @@ import java.util.List;
 
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener {
+public class Game extends Canvas implements Runnable, KeyListener{
 
     public static boolean f3;
     public static boolean f11;
@@ -47,8 +47,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     private static Renderer rendererThread;
 
-    public static HeadsUpDisplay headsUpDisplay;
-
     public static final List<Entity> entities = new ArrayList<>();
     public static final List<Drawable> drawables = new ArrayList<>();
 
@@ -57,7 +55,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 
     public static World world;
-    private Background background;
 
 
     private static final String TITLE   = "Game";
@@ -93,39 +90,18 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         Items.init();
         Recipes.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
-        headsUpDisplay = new HeadsUpDisplay();
-
         addKeyListener(this);
         world = new World("test", 256,256);
-        background = new Background(world);
         long i = System.currentTimeMillis() + 1500;
 
         while (System.currentTimeMillis() < i) {
             splashScreen();
         }
 
-
-        entities.add(background);
-        drawables.add(background);
-
-        this.addMouseListener(this);
-
-        for (EntityRenderer e: world.getEntities().values()) {
-            entities.add(e);
-            drawables.add(e);
-        }
-
-
-
-
         thread = new Thread(this);
         rendererThread = new Renderer("client");
         thread.start();
         rendererThread.start();
-        entities.add(headsUpDisplay);
-        drawables.add(headsUpDisplay);
-        addKeyListener(headsUpDisplay);
-        addMouseWheelListener(headsUpDisplay);
 
         entities.add(fpsViewer);
         drawables.add(fpsViewer);
@@ -157,14 +133,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         for (Entity e : entities) {
             e.tick();
         }
-        world.update();
     }
 
     private void updatePerSecond() {
         for (Entity e : entities) {
             e.second();
         }
-        world.updatePerSecond();
     }
 
     private void splashScreen(){
@@ -209,7 +183,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         world.draw(g);
 
         fpsViewer.draw(g);
-        headsUpDisplay.draw(g);
 
         count++;
 
@@ -233,7 +206,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
             world.draw(g);
 
             fpsViewer.draw(g);
-            headsUpDisplay.draw(g);
 
             g.dispose ();
 
@@ -291,7 +263,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
                 saveCanvas();
                 break;
             case KeyEvent.VK_ESCAPE:
-                world.closeCraftingUI();
                 break;
             default:
                 break;
@@ -315,53 +286,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
                 break;
             default:
                 break;
-        }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        int x1 = (int) Math.floor((e.getX() - world.getEntities().get(world.player).offX) / 64) + (int) Math.floor((world.camX) / 64);
-        int y1 = (int) Math.floor((e.getY() - world.getEntities().get(world.player).offY) / 64) + (int) Math.floor((world.camY) / 64);
-        System.out.println("x " + x1 + " y " + y1);
-        if (!world.isCraftingUIOpen()) {
-            world.getMapR()[y1][x1].onClicked(e); //(x <= e.getX()+Game.world.camX && x+width>= e.getX()+Game.world.camX) && (y <= e.getY()+Game.world.camY && y+height>= e.getY()+Game.world.camY)
-        } else {
-            world.getCraftingUI().handleMouseClick(e);
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        if (world.isCraftingUIOpen()) {
-            System.out.println(e.getLocationOnScreen());
-            world.getCraftingUI().handleMouseMove(e);
-        }
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        if (world.isCraftingUIOpen()) {
-            System.out.println(e.getLocationOnScreen());
-            world.getCraftingUI().handleMouseMove(e);
         }
     }
 

@@ -1,6 +1,6 @@
 package common.containers;
 
 public interface IInventory {
-    ISlot getSlot();
+    ISlot getSlot(int slot);
     void setSlot(ISlot slot);
 }

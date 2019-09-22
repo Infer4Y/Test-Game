@@ -1,7 +1,7 @@
 package common.block;
 
 import client.renderables.BlockRender;
-import client.renderables.EntityRenderer;
+import common.entities.Entity;
 import common.world.World;
 
 public class BlockWoodProducer extends Block {
@@ -10,7 +10,7 @@ public class BlockWoodProducer extends Block {
     }
 
     @Override
-    public void onBlockRightClick(World world, EntityRenderer entity, BlockRender block) {
+    public void onBlockRightClick(World world, Entity entity, BlockRender block) {
         super.onBlockRightClick(world, entity, block);
     }
 

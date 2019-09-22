@@ -1,7 +1,7 @@
 package common.block;
 
 import client.renderables.BlockRender;
-import client.renderables.EntityRenderer;
+import common.entities.Entity;
 import common.item.Item;
 import common.registries.Items;
 import common.world.World;
@@ -20,9 +20,9 @@ public class Block {
         setSolid(b);
     }
 
-    public void onBlockRightClick(World world, EntityRenderer entity, BlockRender block){ }
+    public void onBlockRightClick(World world, Entity entity, BlockRender block){ }
 
-    public void onBlockCollision(World world, EntityRenderer entity, BlockRender block){ }
+    public void onBlockCollision(World world, Entity entity, BlockRender block){ }
 
     public void onTick(World world, int x, int y){ }
 
