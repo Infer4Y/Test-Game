@@ -22,6 +22,6 @@ public class Inventory implements IInventory{
 
     @Override
     public void setSlot(ISlot slot) {
-        // TODO: Add a way to chek if slot has the item or if no slot has item go to first air item found.
+        // TODO: Add a way to check if slot has the item or if no slot has item go to first air item found.
     }
 }

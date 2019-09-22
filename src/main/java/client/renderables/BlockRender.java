@@ -30,12 +30,12 @@ public class BlockRender implements Entity, Drawable {
         if (block != lastBlock){
             this.texture = Game.textures.getTexture4(block.getName());
         }
-        g.drawImage(texture, x, y, null);
+        g.drawImage(texture, x, y, Game.instance);
+        lastBlock = block;
     }
 
     @Override
-    public void tick() {
-        block.onTick(Game.world, (int) Math.floor(y / 64),(int) Math.floor(x / 64));
+    public void tick(){
     }
 
     @Override
@@ -56,5 +56,9 @@ public class BlockRender implements Entity, Drawable {
     public void setCoords(int i, int i1) {
         this.x = i;
         this.y = i1;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
     }
 }

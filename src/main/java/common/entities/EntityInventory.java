@@ -5,10 +5,16 @@ import common.containers.Inventory;
 import common.world.Direction;
 
 public class EntityInventory extends Entity implements IEntityInventory {
-    private Inventory inventory = new Inventory();
+    private Inventory inventory;
+
+    public EntityInventory(String name, int health, int maxHealth, int size) {
+        super(name, health, maxHealth);
+        inventory = new Inventory(size);
+    }
 
     public EntityInventory(String name, int health, int maxHealth) {
         super(name, health, maxHealth);
+        inventory = new Inventory();
     }
 
     @Override

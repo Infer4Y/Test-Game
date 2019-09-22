@@ -10,7 +10,6 @@ public class Window extends JFrame{
         game.setPreferredSize(new Dimension (width, height));
         game.setMaximumSize(new Dimension (width, height));
         game.setMinimumSize(new Dimension (width, height));
-        addKeyListener(game);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);

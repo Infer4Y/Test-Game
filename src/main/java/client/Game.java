@@ -1,30 +1,27 @@
 package client;
 
-import client.handlers.BlockHandler;
 import client.renderables.*;
+import common.block.Block;
 import common.registries.Blocks;
 import common.registries.Items;
 import common.registries.Recipes;
 import common.world.World;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable, KeyListener{
+public class Game extends Canvas implements Runnable{
 
     public static boolean f3;
     public static boolean f11;
@@ -40,8 +37,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
     private double deltaTime;
     private long secondTimer = System.currentTimeMillis();
 
-    private BlockHandler blocktest;
-
     public static Game instance;
     public static Textures textures = new Textures();
 
@@ -54,8 +49,13 @@ public class Game extends Canvas implements Runnable, KeyListener{
     public static final int HEIGHT     = 640;
 
 
-    public static World world;
+    BlockRender r = new BlockRender(Blocks.ore_gold, 0,0);
 
+    Block[] blocks;
+    int blockCurrent = 0;
+
+
+    public static World world;
 
     private static final String TITLE   = "Game";
 
@@ -63,6 +63,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
     public static boolean up, down, left, right;
     private int count;
     public static Window window;
+    private int count1;
 
     public static void main(String[] args) {
         instance = new Game();
@@ -90,8 +91,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
         Items.init();
         Recipes.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
-        addKeyListener(this);
         world = new World("test", 256,256);
+        blocks = Blocks.BLOCK_MAP.values().toArray(new Block[Blocks.BLOCK_MAP.values().size()]);
         long i = System.currentTimeMillis() + 1500;
 
         while (System.currentTimeMillis() < i) {
@@ -103,6 +104,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
         thread.start();
         rendererThread.start();
 
+        entities.add(r);
+        drawables.add(r);
         entities.add(fpsViewer);
         drawables.add(fpsViewer);
 
@@ -186,11 +189,22 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
         count++;
 
+        if (count1 == 6000) {
+            if (blockCurrent < blocks.length - 1) {
+                blockCurrent++;
+            } else {
+                blockCurrent = 0;
+            }
+            count1 = 0;
+        } else {
+            count1++;
+        }
+
+        r.setBlock(blocks[blockCurrent]);
         g.dispose ();
         bufferstrategy.show();
     }
 
-    @SuppressWarnings("")
     public void saveCanvas() {
         try {
             BufferedImage image=new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
@@ -231,61 +245,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                up = true;
-                break;
-            case KeyEvent.VK_A:
-                left = true;
-                break;
-            case KeyEvent.VK_S:
-                down=true;
-                break;
-            case KeyEvent.VK_D:
-                right=true;
-                break;
-            case KeyEvent.VK_F3:
-                f3 = !f3;
-                break;
-            case KeyEvent.VK_F11:
-                fullscreen();
-                break;
-            case KeyEvent.VK_F2:
-                saveCanvas();
-                break;
-            case KeyEvent.VK_ESCAPE:
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                up = false;
-                break;
-            case KeyEvent.VK_A:
-                left = false;
-                break;
-            case KeyEvent.VK_S:
-                down=false;
-                break;
-            case KeyEvent.VK_D:
-                right=false;
-                break;
-            default:
-                break;
         }
     }
 
