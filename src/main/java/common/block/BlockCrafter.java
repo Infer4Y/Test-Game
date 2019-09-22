@@ -16,7 +16,6 @@ public class BlockCrafter extends Block {
     @Override
     public void onBlockRightClick(World world, EntityRenderer entity, BlockRender block) {
         super.onBlockRightClick(world, entity, block);
-        Game.world.openCraftingUI();
     }
 
     @Override
