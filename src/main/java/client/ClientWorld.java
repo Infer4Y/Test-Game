@@ -9,7 +9,6 @@ public class ClientWorld extends World {
         super(name, x, y);
     }
 
-    @Override
     public void draw(Graphics g) {
 
     }
