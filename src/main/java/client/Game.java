@@ -89,7 +89,7 @@ public class Game extends Canvas implements Runnable{
         Items.init();
         Recipes.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
-        world = new World("test", 256,256);
+        world = new ClientWorld("test", 256,256);
         blocks = Blocks.BLOCK_MAP.values().toArray(new Block[Blocks.BLOCK_MAP.values().size()]);
         long i = System.currentTimeMillis() + 1500;
 
