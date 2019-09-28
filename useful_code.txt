@@ -26,3 +26,71 @@ for (BlockRender[] r: mapR) {
     }
 }
 g.translate(camX, camY);
+
+TODO: Should be movd to a general renderer. Also, you should maybe organize STATES for your game.
+     States = Screens. MenuState, SplashState, etc. And call their render methods.
+private void splashScreen(){
+    BufferStrategy bufferstrategy = getBufferStrategy ();
+
+    if (bufferstrategy == null) {
+        createBufferStrategy(4);
+        return;
+    }
+
+    Graphics2D g = (Graphics2D) bufferstrategy.getDrawGraphics();
+
+    try {
+        g.drawImage(ImageIO.read(this.getClass().getClassLoader().getResource("tex/loading.png")), 0, 0, null);
+        g.setColor(new Color(0xFFFFFF));
+        g.setFont(new Font(null, Font.BOLD, 42));
+        g.drawString("World is loading.",640-160,320);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    g.dispose ();
+    bufferstrategy.show();
+}
+
+// Should also be moved to a rendering manager.
+public void saveCanvas() {
+    try {
+        BufferedImage image=new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+
+        g.setColor (Color.BLACK);
+        g.fillRect (0, 0, getWidth(), getHeight());
+
+        for (Drawable d : drawables) {
+            d.draw(g);
+        }
+
+        world.draw(g);
+
+        fpsViewer.draw(g);
+
+        g.dispose ();
+
+        File screenshotFolder = new File(".", "screenshots");
+
+        if (screenshotFolder.exists()) {
+            File out = new File(screenshotFolder,"Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".png");
+            if (!out.exists()) {
+                out.createNewFile();
+                ImageIO.write(image, "png", out);
+            } else {
+                ImageIO.write(image, "png", out);
+            }
+        } else {
+            screenshotFolder.mkdir();
+            File out = new File(screenshotFolder,  "Screenshot-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss")) + ".png");
+            if (!out.exists()) {
+                out.createNewFile();
+                ImageIO.write(image, "png", out);
+            } else {
+                ImageIO.write(image, "png", out);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}

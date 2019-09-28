@@ -1,6 +1,6 @@
 package client;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.JFrame;
 
@@ -18,4 +18,21 @@ public class Window extends JFrame{
         pack();
         setLocationRelativeTo(null);
     }
+
+    /**
+     * TODO :
+    private void fullscreen(){
+        if (!f11) {
+            window.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+            window.getGraphicsConfiguration().getDevice().setFullScreenWindow(window);
+            window.setVisible(true);
+            f11 = true;
+        } else {
+            window.getGraphicsConfiguration().getDevice().setFullScreenWindow(null);
+            window.setSize(new Dimension (WIDTH, HEIGHT));
+            window.setVisible(true);
+            f11=false;
+        }
+    }
+    **/
 }
