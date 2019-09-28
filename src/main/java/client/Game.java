@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable{
     public static final int WIDTH      = 640*2;
     public static final int HEIGHT     = 640;
 
-    public static World world;
+    public static ClientWorld world;
 
     private static final String TITLE   = "Game";
 
