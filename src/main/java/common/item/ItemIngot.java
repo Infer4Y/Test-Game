@@ -2,11 +2,7 @@ package common.item;
 
 import java.awt.*;
 
-/** This can be made more abstract. Why not an interface for making an Item colorable? and implement it here?
- * Or at the very least, an abstract class ItemColorable?
- * **/
-@Deprecated
-public class ItemIngot extends Item {
+public class ItemIngot extends ItemColored {
     private int color;
 
     public ItemIngot(String name, int color) {
@@ -18,6 +14,9 @@ public class ItemIngot extends Item {
         super(name);
         this.color = 0xFFF;
     }
+
+    @Override
+    public void onItemUse() { }
 
     public Color getColor() {
         return  new Color(color);

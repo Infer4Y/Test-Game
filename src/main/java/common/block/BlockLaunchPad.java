@@ -1,16 +1,24 @@
 package common.block;
 
-import client.renderables.BlockRender;
-import common.entities.Entity;
 import common.world.World;
 
 public class BlockLaunchPad extends Block{
     public BlockLaunchPad(String name) {
-        super(name, true);
+        super(name);
     }
 
     @Override
-    public void onBlockCollision(World world, Entity entity, BlockRender block) {
-        super.onBlockCollision(world, entity, block);
+    public void onBlockRightClick() { }
+
+    @Override
+    public void onBlockCollision() { }
+
+    @Override
+    public void onTick(World world, int x, int y) { }
+
+    @Override
+    public String getName() {
+        return name;
     }
+
 }

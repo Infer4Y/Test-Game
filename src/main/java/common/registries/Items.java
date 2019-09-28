@@ -2,7 +2,6 @@ package common.registries;
 
 import common.block.Block;
 import common.block.BlockOre;
-import common.item.IItem;
 import common.item.Item;
 import common.item.ItemBlock;
 import common.item.ItemIngot;

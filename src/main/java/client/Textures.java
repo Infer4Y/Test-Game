@@ -2,7 +2,6 @@ package client;
 
 import common.block.Block;
 import common.block.BlockOre;
-import common.item.IItem;
 import common.item.Item;
 import common.item.ItemBlock;
 import common.item.ItemIngot;
@@ -12,7 +11,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class Textures {
     private final HashMap<String, BufferedImage> textures4 = new HashMap<>();

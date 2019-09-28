@@ -1,16 +1,23 @@
 package common.block;
 
-import common.item.Item;
-import common.registries.Blocks;
-import common.registries.Items;
+import common.world.World;
 
 public class BlockLeaf extends Block {
     public BlockLeaf(String name) {
-        super(name,false);
+        super(name);
     }
 
     @Override
-    public Item getBlockDrop() {
-        return Items.getItem(Blocks.sapling.getName());
+    public void onBlockRightClick() { }
+
+    @Override
+    public void onBlockCollision() { }
+
+    @Override
+    public void onTick(World world, int x, int y) { }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

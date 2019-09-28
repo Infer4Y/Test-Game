@@ -1,9 +1,9 @@
-package common.block;
-
-public abstract class BlockColored extends Block{
+package common.item;
 
 
-    public BlockColored(String name) {
+// TODO : Have meta types for items.
+public abstract class ItemColored extends Item {
+    public ItemColored(String name) {
         super(name);
     }
 

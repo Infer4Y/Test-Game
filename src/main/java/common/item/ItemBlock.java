@@ -6,8 +6,8 @@ public class ItemBlock extends Item{
     private Block block;
 
     public ItemBlock(Block block){
+        super(block.getName());
         this.block = block;
-        this.setName(this.block.getName());
     }
 
     @Override
@@ -18,4 +18,5 @@ public class ItemBlock extends Item{
     public Block getBlock() {
         return block;
     }
+
 }
