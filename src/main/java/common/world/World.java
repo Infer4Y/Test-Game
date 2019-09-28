@@ -1,12 +1,14 @@
 package common.world;
 
+import talaria.common.entity.NetworkEntity;
+
 import java.awt.*;
-public class World {
+abstract public class World extends NetworkEntity {
 
-    public World (String name, int x, int y){
-    }
+    public World (String name, int x, int y) {}
 
-    public void draw(Graphics g){
-    }
+    public abstract  void draw(Graphics g);
+
+    public abstract void update();
 
 }
