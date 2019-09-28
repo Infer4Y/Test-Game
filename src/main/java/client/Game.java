@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable{
     public Game () {
         this.requestFocus();
         window =  new Window (WIDTH, HEIGHT, TITLE, this);
-        Sounds.init();
+        //Sounds.init();
         Blocks.init();
         Items.init();
         //Recipes.init();
