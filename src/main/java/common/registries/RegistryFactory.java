@@ -2,7 +2,7 @@ package common.registries;
 
 import java.util.HashMap;
 
-public class RegistryFactory<T> {
+public abstract class RegistryFactory<T> {
     public HashMap<String, T> MAP = new HashMap<>();
 
     public void init(){}

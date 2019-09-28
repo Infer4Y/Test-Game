@@ -18,6 +18,9 @@ public class EntityInventory extends Entity implements IEntityInventory {
     }
 
     @Override
+    public void update() { }
+
+    @Override
     public ISlot getSlot(int slot) {
         return inventory.getSlot(slot);
     }
