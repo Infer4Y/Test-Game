@@ -6,6 +6,8 @@ import common.registries.Blocks;
 import common.registries.Items;
 import common.registries.Recipes;
 import common.world.World;
+import talaria.common.Talaria;
+import talaria.common.TalariaManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -64,10 +66,6 @@ public class Game extends Canvas implements Runnable{
     private int count;
     public static Window window;
     private int count1;
-
-    public static void main(String[] args) {
-        instance = new Game();
-    }
 
     private void fullscreen(){
         if (!f11) {
@@ -132,9 +130,10 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
-    private void update() {
+    public void update() {
         for (Entity e : entities) {
             e.tick();
+            Talaria.INSTANCE.getClient().sendEntityToServer(e);
         }
     }
 

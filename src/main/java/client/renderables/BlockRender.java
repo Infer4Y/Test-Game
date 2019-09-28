@@ -6,7 +6,7 @@ import common.block.Block;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class BlockRender implements Entity, Drawable {
+public class BlockRender extends Entity implements Drawable {
     private BufferedImage texture;
     private Block block;
     private Block lastBlock;

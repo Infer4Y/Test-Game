@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class EntityRenderer implements Entity, Drawable {
+public class EntityRenderer  extends Entity implements Drawable {
     public int offX, offY;
     private BufferedImage texture;
     private common.entities.Entity entity;

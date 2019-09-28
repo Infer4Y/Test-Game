@@ -6,7 +6,7 @@ import client.renderables.Entity;
 
 import java.awt.*;
 
-public class FPSViewer implements Drawable, Entity {
+public class FPSViewer extends Entity implements Drawable {
     private int ticks;
     private int frames;
 
