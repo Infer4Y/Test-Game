@@ -1,6 +1,6 @@
 package common.world;
 
 public interface ICluster {
-    IChunk getChunck(int ID);
+    IChunk getChunk(int ID);
     int getID();
 }
