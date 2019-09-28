@@ -1,7 +1,6 @@
 package client;
 
 import client.renderables.*;
-import common.block.Block;
 import common.registries.Blocks;
 import common.registries.Items;
 import common.registries.Recipes;
@@ -12,7 +11,6 @@ import talaria.common.TalariaManager;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -43,8 +41,6 @@ public class Game extends Canvas implements Runnable{
     public static Game instance;
     public static Textures textures = new Textures();
 
-    private static Renderer rendererThread;
-
     /**
      * These two do not belong here. Also, entities should really be a hashmap, since you want to ID entities.
      */
@@ -56,21 +52,11 @@ public class Game extends Canvas implements Runnable{
     public static final int WIDTH      = 640*2;
     public static final int HEIGHT     = 640;
 
-    /** Should be moved into a renderer handler **/
-    @Deprecated
-    BlockRender r = new BlockRender(Blocks.ore_gold, 0,0);
-
-    Block[] blocks;
-    int blockCurrent = 0;
-
-
-    public static ClientWorld world;
+    public static World world;
 
     private static final String TITLE   = "Game";
 
     private final FPSViewer fpsViewer = new FPSViewer();
-    public static boolean up, down, left, right;
-    private int count;
     public static Window window;
     private int count1;
 
@@ -96,8 +82,6 @@ public class Game extends Canvas implements Runnable{
         Items.init();
         Recipes.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
-        world = new ClientWorld("test", 256,256);
-        blocks = Blocks.BLOCK_MAP.values().toArray(new Block[Blocks.BLOCK_MAP.values().size()]);
         long i = System.currentTimeMillis() + 1500;
 
         while (System.currentTimeMillis() < i) {
@@ -105,12 +89,7 @@ public class Game extends Canvas implements Runnable{
         }
 
         thread = new Thread(this);
-        rendererThread = new Renderer("client");
         thread.start();
-        rendererThread.start();
-
-        entities.add(r);
-        drawables.add(r);
         entities.add(fpsViewer);
         drawables.add(fpsViewer);
 
@@ -196,21 +175,6 @@ public class Game extends Canvas implements Runnable{
         world.draw(g);
 
         fpsViewer.draw(g);
-
-        count++;
-
-        if (count1 == 6000) {
-            if (blockCurrent < blocks.length - 1) {
-                blockCurrent++;
-            } else {
-                blockCurrent = 0;
-            }
-            count1 = 0;
-        } else {
-            count1++;
-        }
-
-        r.setBlock(blocks[blockCurrent]);
         g.dispose ();
         bufferstrategy.show();
     }
