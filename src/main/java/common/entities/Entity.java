@@ -1,44 +1,41 @@
 package common.entities;
 
-import client.renderables.Drawable;
 import common.world.Direction;
+import talaria.common.entity.AdaptiveNetworkEntity;
 
-import java.awt.*;
 
-public class Entity implements IEntity {
-    private String name;
-    private int health, maxHealth;
+public class Entity extends AdaptiveNetworkEntity implements IEntity {
     private Direction facing;
 
     public Entity(String name, int health, int maxHealth) {
-        this.name = name;
-        this.health = health;
-        this.maxHealth = maxHealth;
+        this.putAttribute("name", name);
+        this.putAttribute("health", health);
+        this.putAttribute("maxHealth", maxHealth);
         this.facing = Direction.LEFT;
     }
 
     public String getName() {
-        return name;
+        return this.<String>getAttribute("name").get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.putAttribute("name", name);
     }
 
     public int getHealth() {
-        return health;
+        return this.<Integer>getAttribute("health").get();
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        this.putAttribute("health", health);
     }
 
     public int getMaxHealth() {
-        return maxHealth;
+        return this.<Integer>getAttribute("maxHealth").get();
     }
 
     public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
+        this.putAttribute("maxHealth", maxHealth);
     }
 
     @Override
@@ -52,5 +49,6 @@ public class Entity implements IEntity {
     public void setFacing(Direction facing) {
         this.facing = facing;
     }
+
 
 }
