@@ -4,9 +4,7 @@ import client.renderables.*;
 import common.registries.Blocks;
 import common.registries.Items;
 import common.registries.Recipes;
-import common.world.World;
 import talaria.common.Talaria;
-import talaria.common.TalariaManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -118,10 +116,7 @@ public class Game extends Canvas implements Runnable{
 
     // TODO: The entities should be updated in ClientWorld, not directly here.
     public void update() {
-        for (Entity e : entities) {
-            e.tick();
-            Talaria.INSTANCE.getClient().sendEntityToServer(e);
-        }
+        world.update();
     }
 
     // TODO: Where is this useful? It's only referenced here in this file.

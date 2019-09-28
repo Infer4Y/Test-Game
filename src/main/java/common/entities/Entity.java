@@ -4,7 +4,7 @@ import common.world.Direction;
 import talaria.common.entity.AdaptiveNetworkEntity;
 
 
-public class Entity extends AdaptiveNetworkEntity implements IEntity {
+public abstract class Entity extends AdaptiveNetworkEntity implements IEntity {
     private Direction facing;
 
     public Entity(String name, int health, int maxHealth) {
@@ -50,5 +50,5 @@ public class Entity extends AdaptiveNetworkEntity implements IEntity {
         this.facing = facing;
     }
 
-
+    public abstract void update();
 }
