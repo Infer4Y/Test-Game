@@ -20,14 +20,6 @@ public class Items {
         register(coal);
         register(pickaxe);
         register(diamond);
-        for (Block b: Blocks.BLOCK_MAP.values()) {
-            register(new ItemBlock(b));
-            if (b instanceof BlockOre){
-                if (b.getName().equals(b.getBlockDrop().getName())){
-                    register(new ItemIngot(b.getName().replace("ore", "ingot"), ((BlockOre) b).getColor().getRGB()));
-                }
-            }
-        }
     }
 
     public static Item getItem(String air) {

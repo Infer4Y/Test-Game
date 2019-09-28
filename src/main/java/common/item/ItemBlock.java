@@ -18,5 +18,4 @@ public class ItemBlock extends Item{
     public Block getBlock() {
         return block;
     }
-
 }
