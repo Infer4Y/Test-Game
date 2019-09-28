@@ -1,8 +1,8 @@
 package common.item;
 
-import common.registries.Blocks;
 import common.registries.Items;
 
+// TODO: This class should have a limit of sorts as a static variable.
 public class ItemStack {
     private Item item;
     private int amount;

@@ -10,6 +10,7 @@ import talaria.common.Talaria;
 import talaria.common.TalariaManager;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -44,20 +45,26 @@ public class Game extends Canvas implements Runnable{
 
     private static Renderer rendererThread;
 
+    /**
+     * These two do not belong here. Also, entities should really be a hashmap, since you want to ID entities.
+     */
+    @Deprecated
     public static final List<Entity> entities = new ArrayList<>();
+    @Deprecated
     public static final List<Drawable> drawables = new ArrayList<>();
 
     public static final int WIDTH      = 640*2;
     public static final int HEIGHT     = 640;
 
-
+    /** Should be moved into a renderer handler **/
+    @Deprecated
     BlockRender r = new BlockRender(Blocks.ore_gold, 0,0);
 
     Block[] blocks;
     int blockCurrent = 0;
 
 
-    public static World world;
+    public static ClientWorld world;
 
     private static final String TITLE   = "Game";
 
@@ -130,6 +137,7 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
+    // TODO: The entities should be updated in ClientWorld, not directly here.
     public void update() {
         for (Entity e : entities) {
             e.tick();
@@ -137,12 +145,15 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
+    // TODO: Where is this useful? It's only referenced here in this file.
     private void updatePerSecond() {
         for (Entity e : entities) {
             e.second();
         }
     }
 
+    // TODO: Should be moved to a general renderer. Also, you should maybe organize STATES for your game.
+    // States = Screens. MenuState, SplashState, etc. And call their render methods.
     private void splashScreen(){
         BufferStrategy bufferstrategy = getBufferStrategy ();
 
@@ -204,6 +215,7 @@ public class Game extends Canvas implements Runnable{
         bufferstrategy.show();
     }
 
+    // Should also be moved to a rendering manager.
     public void saveCanvas() {
         try {
             BufferedImage image=new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
@@ -247,6 +259,7 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
+    // Move this out of this class, it's importance warrants its own file.
     private class Renderer extends Thread{
 
         public Renderer(String name) {

@@ -15,13 +15,24 @@ public class Block {
         this.name = name;
     }
 
+    /** You should use a builder method for your properties. Makes it so you can avoid long chains of parameters,
+     * AND, also allows you to set parameters (like the boolean below) on the fly.
+     * **/
+    @Deprecated
     public Block(String name, boolean b) {
         this.name = name;
         setSolid(b);
     }
 
+    /** These two functions will CRASH the server because they will be calling client code server side, when that
+     * Client code won't exist server side!
+     *
+     * Additionally, they need to pass the actual block with the actual positions.
+     * **/
+    @Deprecated
     public void onBlockRightClick(World world, Entity entity, BlockRender block){ }
 
+    @Deprecated
     public void onBlockCollision(World world, Entity entity, BlockRender block){ }
 
     public void onTick(World world, int x, int y){ }
