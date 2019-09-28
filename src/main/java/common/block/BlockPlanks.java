@@ -2,8 +2,8 @@ package common.block;
 
 import common.world.World;
 
-public class BlockSapling extends Block {
-    public BlockSapling(String name) {
+public class BlockPlanks extends Block {
+    public BlockPlanks(String name) {
         super(name);
     }
 

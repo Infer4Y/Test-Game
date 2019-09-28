@@ -15,9 +15,4 @@ public class BlockWoodProducer extends Block {
 
     @Override
     public void onTick(World world, int x, int y) { }
-
-    @Override
-    public String getName() {
-        return name;
-    }
 }

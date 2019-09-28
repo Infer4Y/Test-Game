@@ -20,4 +20,7 @@ public class EntityStack extends Entity{
             this.stack = stack;
         }
     }
+
+    @Override
+    public void update() { }
 }

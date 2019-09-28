@@ -39,11 +39,6 @@ public class BlockOre extends BlockColored {
     @Override
     public void onTick(World world, int x, int y) { }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
     public Item getBlockDrop() {
         if (drop == null){
             return this.drop =Items.getItem(this.getName());

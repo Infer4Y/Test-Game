@@ -6,15 +6,15 @@ import java.util.HashMap;
 
 public class Blocks {
     public static final HashMap<String, Block> BLOCK_MAP = new HashMap<String, Block>();
-    public static Block grass = new Block("grass_sides");
-    public static Block dirt = new Block("dirt");
-    public static Block stone = new Block("stone");
     public static BlockAir air = new BlockAir("air");
-    public static BlockLaunchPad launcher = new BlockLaunchPad("launcher");
+    public static Block grass = new BlockGrass("grass_sides");
+    public static Block dirt = new BlockDirt("dirt");
+    public static Block stone = new BlockStone("stone");
     public static BlockLog log = new BlockLog("log");
     public static BlockLeaf leaf = new BlockLeaf("leaves");
-    public static Block planks = new Block("planks");
+    public static Block planks = new BlockPlanks("planks");
     public static Block sapling = new BlockSapling("sapling");
+    public static BlockLaunchPad launcher = new BlockLaunchPad("launcher");
     public static BlockWoodProducer wood_producer = new BlockWoodProducer("wood_producer");
     public static BlockCrafter crafter = new BlockCrafter("crafter");
     public static BlockOre ore_iron = new BlockOre("ore_iron", 0xA09090);

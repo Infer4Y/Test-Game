@@ -24,5 +24,7 @@ public abstract class Block {
 
     public abstract void onTick(World world, int x, int y);
 
-    public abstract String getName();
+    public String getName(){
+        return name;
+    }
 }
