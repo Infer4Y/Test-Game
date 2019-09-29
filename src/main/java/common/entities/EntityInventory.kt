@@ -2,8 +2,8 @@ package common.entities
 
 import common.containers.ISlot
 import common.containers.Inventory
-import common.world.Direction
 
+@Deprecated("This severely limits the way you can subclass entities.")
 open class EntityInventory : Entity, IEntityInventory {
     private var inventory: Inventory? = null
 
@@ -17,11 +17,11 @@ open class EntityInventory : Entity, IEntityInventory {
 
     override fun update() {}
 
-    override fun getSlot(slot: Int): ISlot? {
+    fun getSlot(slot: Int): ISlot? {
         return inventory?.getSlot(slot)
     }
 
-    override fun setSlot(slot: ISlot) {
+    fun setSlot(slot: ISlot) {
         inventory?.setSlot(slot)
     }
 

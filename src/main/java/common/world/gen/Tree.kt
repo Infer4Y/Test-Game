@@ -2,8 +2,7 @@ package common.world.gen
 
 import common.block.Block
 import common.registries.BlockRegistry
-
-import java.util.Random
+import java.util.*
 
 class Tree {
     private val blocks = arrayOf(BlockRegistry.air, BlockRegistry.leaf, BlockRegistry.log)
@@ -13,8 +12,8 @@ class Tree {
         val structBlock = Array<Array<Block?>>(5) { arrayOfNulls(5) }
         val r = Random()
         val c = r.nextInt(struct.size - 1)
-        for (i in 0 until struct[c].size) {
-            for (j in 0 until struct[c][i].size) {
+        for (i in struct[c].indices) {
+            for (j in struct[c][i].indices) {
                 print(struct[c][j][i].toString() + " ")
                 structBlock[j][i] = blocks[struct[c][j][i]]
             }

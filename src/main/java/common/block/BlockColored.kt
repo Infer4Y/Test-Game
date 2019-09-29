@@ -2,7 +2,7 @@ package common.block
 
 abstract class BlockColored(name: String) : Block(name) {
 
-    internal enum class Colors private constructor(var _name: String, var color: Int) {
+    enum class Colors constructor(var _name: String, var color: Int) {
         RED("red", 0xF00),
         BLUE("blue", 0x00F),
         GREEN("green", 0x0F0),

@@ -14,7 +14,7 @@ class Window(width: Int, height: Int, title: String, game: Game) : JFrame(title)
         isResizable = false
         isVisible = true
         requestFocus()
-        //add(game)
+        //add(game) // TODO
         pack()
         setLocationRelativeTo(null)
     }

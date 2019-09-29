@@ -12,7 +12,7 @@ import java.util.*
 abstract class World(name: String, x: Int, y: Int) : NetworkEntity() {
 
     val entities: List<Entity> = ArrayList()
-    val worldSettings = WorldSettings()
+    private val worldSettings = WorldSettings()
 
     open fun update() {
         for (e in entities) {

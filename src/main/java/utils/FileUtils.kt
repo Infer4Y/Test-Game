@@ -10,7 +10,7 @@ import java.net.URL
 import java.util.*
 
 object FileUtils {
-    internal var r = Random()
+    private var r = Random()
 
     @JvmStatic
     fun getFileFromResources(fileName: String): File? {

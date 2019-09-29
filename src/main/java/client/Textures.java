@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 
+// TODO: This class needs a massive rewrite.
 public class Textures {
     private final HashMap<String, BufferedImage> textures4 = new HashMap<>();
     private final HashMap<String, BufferedImage> textures3 = new HashMap<>();

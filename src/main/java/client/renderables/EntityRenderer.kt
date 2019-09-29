@@ -8,7 +8,7 @@ import java.awt.*
 import java.awt.image.BufferedImage
 import java.io.IOException
 
-class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int) : Entity(), Drawable {
+class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int) : RenderedEntity(), Drawable {
     var offX: Int = 0
     var offY: Int = 0
     private var texture: BufferedImage? = null

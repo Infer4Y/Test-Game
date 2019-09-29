@@ -14,16 +14,12 @@ abstract class Block(name: String): RegistryNameable(name) {
         this.name = name
     }
 
-    /** These two functions will CRASH the server because they will be calling client code server side, when that
-     * Client code won't exist server side!
-     *
-     * Additionally, they need to pass the actual block with the actual positions.
-     */
-    @Deprecated("")
-    abstract fun onBlockRightClick()
+    //TODO: Make this function work. Pass in the world, block state, and the player (only players can right click)
+    open fun onBlockRightClick() {}
 
-    @Deprecated("")
-    abstract fun onBlockCollision()
+    //TODO: Make this function work. Pass in the world, block state, and the ENTITY (not player, because other entities can collide)
+    open fun onBlockCollision() {}
 
-    abstract fun onTick(world: World, x: Int, y: Int)
+    @Deprecated("All blocks should NOT tick!!! This will lag your game immensely.")
+    open fun onTick(world: World, x: Int, y: Int) {}
 }

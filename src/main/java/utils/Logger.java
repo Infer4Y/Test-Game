@@ -1,5 +1,6 @@
 package utils;
 
+@Deprecated
 public class Logger {
     public static void log(Type t, String message){
         System.out.println(t.getName() + " : " + message);

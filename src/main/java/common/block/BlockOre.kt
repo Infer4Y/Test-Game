@@ -2,9 +2,7 @@ package common.block
 
 import common.item.Item
 import common.registries.ItemRegistry
-import common.world.World
-
-import java.awt.*
+import java.awt.Color
 
 class BlockOre : BlockColored {
     private var drop: Item? = null
@@ -29,12 +27,6 @@ class BlockOre : BlockColored {
     }
 
     constructor(name: String) : super(name) {}
-
-    override fun onBlockRightClick() {}
-
-    override fun onBlockCollision() {}
-
-    override fun onTick(world: World, x: Int, y: Int) {}
 
     fun getColor(): Color {
         return Color(color)

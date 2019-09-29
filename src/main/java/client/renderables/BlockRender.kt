@@ -1,11 +1,12 @@
 package client.renderables
 
 import common.block.Block
-
-import java.awt.*
+import java.awt.Graphics
 import java.awt.image.BufferedImage
 
-class BlockRender(var block: Block?, var x: Int, var y: Int) : Entity(), Drawable {
+/* TODO: You don't need a render object per block at every position. Use one renderer and draw the same block at varying
+ positions. */
+class BlockRender(var block: Block?, var x: Int, var y: Int) : RenderedEntity(), Drawable {
 
     private var texture: BufferedImage? = null
     private var lastBlock: Block? = null

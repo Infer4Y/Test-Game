@@ -4,7 +4,8 @@ import java.awt.Color
 import java.awt.Font
 import java.awt.Graphics
 
-class FPSViewer : Entity(), Drawable {
+//TODO: This shouldn't be an entity.
+class FPSViewer : RenderedEntity(), Drawable {
     private var ticks: Int = 0
     private var frames: Int = 0
 
