@@ -5,10 +5,11 @@ import talaria.common.Talaria
 import talaria.common.TalariaManager
 import talaria.common.entity.NetworkEntity
 import talaria.common.side.Side
-
-import java.util.ArrayList
+import java.util.*
 
 abstract class World(name: String, x: Int, y: Int) : NetworkEntity() {
+
+    val entities: List<Entity> = ArrayList()
 
     open fun update() {
         for (e in entities) {
@@ -19,10 +20,4 @@ abstract class World(name: String, x: Int, y: Int) : NetworkEntity() {
             }
         }
     }
-
-    companion object {
-
-        val entities: List<Entity> = ArrayList()
-    }
-
 }
