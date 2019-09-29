@@ -19,7 +19,7 @@ object ServerLaunch {
 
         ServerGame.instance = ServerGame()
 
-        serverManager.entityHandler.registerEntity(World::class.java)
+        serverManager.entityHandler.registerEntity(ServerWorld::class.java)
 
         serverManager.whileRunning = {
             currentTime = System.nanoTime()
