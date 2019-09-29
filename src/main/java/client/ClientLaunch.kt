@@ -1,5 +1,6 @@
 package client
 
+import common.world.World
 import server.ServerLaunch
 import talaria.client.TalariaClientManager
 
@@ -16,6 +17,8 @@ object ClientLaunch {
         ServerLaunch.launchServer()
 
         val clientManager = TalariaClientManager(TalariaClientManager.Properties())
+
+        clientManager.entityHandler.registerEntity(ClientWorld::class.java)
 
         ClientGame.instance = ClientGame()
         clientManager.whileRunning = {
