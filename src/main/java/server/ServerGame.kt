@@ -10,7 +10,7 @@ class ServerGame : Game() {
     /**
      * Updates the world.
      */
-    fun update() {
+    override fun update() {
         world.update()
         // This will sync the clients to the server.
         Talaria.server?.sendEntityToAll(world)

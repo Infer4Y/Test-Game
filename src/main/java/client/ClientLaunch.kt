@@ -17,14 +17,14 @@ object ClientLaunch {
 
         val clientManager = TalariaClientManager(TalariaClientManager.Properties())
 
-        Game.instance = Game()
+        ClientGame.instance = ClientGame()
         clientManager.whileRunning = {
             currentTime = System.nanoTime()
             deltaTime += (currentTime - lastLoopTime) / common.Game.OPTIMAL_TIME
             lastLoopTime = currentTime
 
             while (ServerLaunch.deltaTime >= 1) {
-                Game.instance.update()
+                ClientGame.instance.update()
                 deltaTime--
             }
         }

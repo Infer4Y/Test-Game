@@ -1,6 +1,6 @@
 package client.handlers
 
-import client.Game
+import client.ClientGame
 import client.renderables.Drawable
 
 import java.awt.*
@@ -34,12 +34,12 @@ class Camera : KeyListener, Drawable {
     }
 
     override fun draw(g: Graphics) {
-        val offsetMaxX = Game.window.width
-        val offsetMaxY = Game.window.height
+        val offsetMaxX = ClientGame.window.width
+        val offsetMaxY = ClientGame.window.height
         val offsetMinX = 0
         val offsetMinY = 0
-        camX = Game.window.width / 2 // TODO: <users player>.getX() -  Game.window.getWidth() / 2;
-        camY = Game.window.height / 2 // TODO: <users player>.getY() -  Game.window.getHeight() / 2;
+        camX = ClientGame.window.width / 2 // TODO: <users player>.getX() -  Game.window.getWidth() / 2;
+        camY = ClientGame.window.height / 2 // TODO: <users player>.getY() -  Game.window.getHeight() / 2;
 
         if (camX > offsetMaxX) {
             camX = offsetMaxX

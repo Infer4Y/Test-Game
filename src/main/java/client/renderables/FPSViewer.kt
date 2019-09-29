@@ -1,6 +1,5 @@
 package client.renderables
 
-import client.Game
 import java.awt.Color
 import java.awt.Font
 import java.awt.Graphics
@@ -14,7 +13,7 @@ class FPSViewer : Entity(), Drawable {
 
     override fun draw(g: Graphics) {
         frames++
-        if (Game.f3) {
+        if (true) {
             g.color = Color.GREEN
             g.font = Font(null, 0, 24)
             g.drawString("FPS: $averageFrames Ticks: $averageTicks", 1280 - 14 * (5 + 2 + 6 + 2), 24)

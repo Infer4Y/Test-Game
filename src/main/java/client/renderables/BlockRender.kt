@@ -1,6 +1,5 @@
 package client.renderables
 
-import client.Game
 import common.block.Block
 
 import java.awt.*
@@ -14,7 +13,7 @@ class BlockRender(var block: Block?, var x: Int, var y: Int) : Entity(), Drawabl
     var height = 64
 
     init {
-        this.texture = Game.textures.getTexture4(block?.name)
+        //this.texture = Game.textures.getTexture4(block?.name)
         this.lastBlock = block
         this.height = 64
         this.width = 64
@@ -22,9 +21,9 @@ class BlockRender(var block: Block?, var x: Int, var y: Int) : Entity(), Drawabl
 
     override fun draw(g: Graphics) {
         if (block !== lastBlock) {
-            this.texture = Game.textures.getTexture4(block?.name)
+            //this.texture = Game.textures.getTexture4(block?.name)
         }
-        g.drawImage(texture, x, y, Game.instance)
+        //g.drawImage(texture, x, y, Game.instance)
         lastBlock = block
     }
 
