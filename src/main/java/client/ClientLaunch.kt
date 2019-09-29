@@ -1,5 +1,6 @@
 package client
 
+import common.Game
 import server.ServerLaunch
 import talaria.client.TalariaClientManager
 
@@ -22,7 +23,7 @@ object ClientLaunch {
         ClientGame.instance = ClientGame()
         clientManager.whileRunning = {
             currentTime = System.nanoTime()
-            deltaTime += (currentTime - lastLoopTime) / common.Game.OPTIMAL_TIME
+            deltaTime += (currentTime - lastLoopTime) / Game.OPTIMAL_TIME
             lastLoopTime = currentTime
 
             while (ServerLaunch.deltaTime >= 1) {

@@ -1,8 +1,6 @@
 package client.threaded;
 
-import java.awt.*;
-import java.awt.image.BufferStrategy;
-
+//TODO: This should be associated with ClientGame and do the drawing.
 public class ThreadRenderer extends Thread {
 
     private void render() {
