@@ -12,8 +12,8 @@ class BlockOre : BlockColored {
 
     val blockDrop: Item
         get() = if (drop == null) {
-            this.drop = Items.getItem(this.name)
-        } else drop
+            Items.getItem(this.name)!!
+        } else this.drop!!
 
     constructor(name: String, drop: Item, color: Int) : super(name) {
         this.drop = drop

@@ -17,7 +17,7 @@ open class EntityInventory : Entity, IEntityInventory {
 
     override fun update() {}
 
-    override fun getSlot(slot: Int): ISlot {
+    override fun getSlot(slot: Int): ISlot? {
         return inventory!!.getSlot(slot)
     }
 

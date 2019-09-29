@@ -1,7 +1,7 @@
 package common.containers
 
 class Inventory : IInventory {
-    private var slots: Array<ISlot>? = null
+    private var slots: Array<ISlot?>
 
     constructor() {
         slots = arrayOfNulls(10)

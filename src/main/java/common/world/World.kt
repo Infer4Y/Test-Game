@@ -4,6 +4,7 @@ import common.entities.Entity
 import talaria.common.Talaria
 import talaria.common.TalariaManager
 import talaria.common.entity.NetworkEntity
+import talaria.common.side.Side
 
 import java.util.ArrayList
 
