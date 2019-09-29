@@ -1,4 +1,4 @@
-package common.world
+package common.world.chunk
 
 interface ICluster {
     val id: Int
