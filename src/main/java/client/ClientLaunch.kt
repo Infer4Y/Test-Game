@@ -1,6 +1,5 @@
 package client
 
-import common.world.World
 import server.ServerLaunch
 import talaria.client.TalariaClientManager
 

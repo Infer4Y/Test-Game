@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <!--
+            Log levels (in order):
+                off
+                fatal
+                error
+                warn
+                info
+                debug
+                trace
+                all
+        -->
+        <!-- Log level for console -->
+        <Property name="logLevelConsole">all</Property>
+        <!-- Log level for file -->
+        <Property name="logLevelFile">all</Property>
+
+        <!-- The of where log files will be created -->
+        <Property name="logPath">logs</Property>
+        <!-- The name of log files -->
+        <Property name="logFileName">game</Property>
+        <!-- The suffix to the file name when an old log file is renamed -->
+        <Property name="rollingFileSuffix">%d{yyyy-MM-dd_HH-mm-ss}</Property>
+        <!-- The log pattern -->
+        <Property name="logPattern">[%d{HH:mm:ss.SSS}] [%t/%-level] [%c{1}] %msg%n</Property>
+
+        <!-- Log level colors -->
+        <Property name="levelFatal">dark red</Property>
+        <Property name="levelError">red</Property>
+        <Property name="levelWarn">yellow</Property>
+        <Property name="levelInfo">black</Property>
+        <Property name="levelDebug">blue</Property>
+        <Property name="levelTrace">bright magenta</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{${logPattern}}{FATAL=${levelFatal}, ERROR=${levelError}, WARN=${levelWarn}, INFO=${levelInfo}, DEBUG=${levelDebug}, TRACE=${levelTrace}}" disableAnsi="false"/>
+        </Console>
+        <!-- File appender -->
+        <RollingFile name="File" fileName="${logPath}/${logFileName}.log" filePattern="${logPath}/${logFileName}_${rollingFileSuffix}.log.gz" immediateFlush="false">
+            <PatternLayout pattern="${logPattern}"/>
+            <Policies>
+                <!-- Will only create a new log file on application start -->
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="File" level="${logLevelFile}"/>
+            <AppenderRef ref="Console" level="${logLevelConsole}"/>
+        </Root>
+    </Loggers>
+</Configuration>
