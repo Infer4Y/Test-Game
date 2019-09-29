@@ -6,7 +6,7 @@ import talaria.client.TalariaClientManager
 object ClientLaunch {
     var lastLoopTime = System.nanoTime()
     var currentTime: Long = 0
-    var deltaTime: Double = 0.toDouble()
+    var deltaTime: Double = 0.0
 
     @JvmStatic
     fun main(args: Array<String>) {

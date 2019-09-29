@@ -1,13 +1,12 @@
 package server
 
 import common.Game
-import common.world.World
 import talaria.server.TalariaServerManager
 
 object ServerLaunch {
     var lastLoopTime = System.nanoTime()
     var currentTime: Long = 0
-    var deltaTime: Double = 0.toDouble()
+    var deltaTime: Double = 0.0
 
     @JvmStatic
     fun main(args: Array<String>) {
