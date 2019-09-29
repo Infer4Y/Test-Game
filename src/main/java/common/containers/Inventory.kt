@@ -12,7 +12,7 @@ class Inventory : IInventory {
     }
 
     override fun getSlot(slot: Int): ISlot? {
-        return if (slots!!.size < slot || slot < 0) null else slots!![slot]
+        return if (slots.size < slot || slot < 0) null else slots[slot]
     }
 
     override fun setSlot(slot: ISlot) {

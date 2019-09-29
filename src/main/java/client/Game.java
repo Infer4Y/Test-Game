@@ -56,6 +56,8 @@ public class Game extends Canvas implements Runnable{
         //Recipes.init();
         textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
 
+        world = new ClientWorld("foo", 120, 50);
+
         thread = new Thread(this);
         thread.start();
         entities.add(fpsViewer);

@@ -18,11 +18,11 @@ open class EntityInventory : Entity, IEntityInventory {
     override fun update() {}
 
     override fun getSlot(slot: Int): ISlot? {
-        return inventory!!.getSlot(slot)
+        return inventory?.getSlot(slot)
     }
 
     override fun setSlot(slot: ISlot) {
-        inventory!!.setSlot(slot)
+        inventory?.setSlot(slot)
     }
 
 }
