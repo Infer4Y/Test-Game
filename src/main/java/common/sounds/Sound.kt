@@ -1,8 +1,9 @@
-package client
+package common.sounds
 
-import java.io.*
+import common.registries.RegistryNameable
+import java.io.File
 
-class Sound(val name: String) {
+class Sound(val name: String): RegistryNameable(name) {
     private var audioFile: File? = null
 
     init {

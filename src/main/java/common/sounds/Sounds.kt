@@ -1,4 +1,4 @@
-package client
+package common.sounds
 
 import java.util.HashMap
 
