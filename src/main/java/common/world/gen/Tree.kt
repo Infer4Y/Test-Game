@@ -1,11 +1,12 @@
 package common.world.gen
 
 import common.block.Block
+import common.registries.BlockRegistry
 
 import java.util.Random
 
 class Tree {
-    private val blocks = arrayOf(Blocks.air, Blocks.leaf, Blocks.log)
+    private val blocks = arrayOf(BlockRegistry.air, BlockRegistry.leaf, BlockRegistry.log)
     private val struct = arrayOf(arrayOf(intArrayOf(0, 1, 1, 1, 0), intArrayOf(1, 1, 1, 1, 1), intArrayOf(1, 1, 1, 1, 1), intArrayOf(0, 0, 2, 0, 0), intArrayOf(0, 0, 2, 0, 0)), arrayOf(intArrayOf(0, 0, 1, 0, 0), intArrayOf(0, 1, 1, 1, 0), intArrayOf(0, 1, 1, 1, 0), intArrayOf(0, 0, 2, 0, 0), intArrayOf(0, 0, 2, 0, 0)), arrayOf(intArrayOf(0, 0, 1, 0, 0), intArrayOf(0, 1, 1, 1, 0), intArrayOf(1, 1, 1, 1, 1), intArrayOf(0, 0, 2, 0, 0), intArrayOf(0, 0, 2, 0, 0)), arrayOf(intArrayOf(0, 0, 0, 0, 0), intArrayOf(0, 0, 0, 0, 0), intArrayOf(0, 0, 0, 0, 0), intArrayOf(0, 0, 0, 0, 0), intArrayOf(0, 0, 2, 0, 0)))
 
     fun getStruct(): Array<Array<Block?>> {

@@ -16,14 +16,14 @@ public class Recipes {
     public static Recipe ore_processor;
     public static BlockOre[] ores =
             {
-                    Blocks.ore_coal,
-                    Blocks.ore_copper,
-                    Blocks.ore_diamond,
-                    Blocks.ore_iron,
-                    Blocks.ore_gold,
-                    Blocks.ore_tin,
-                    Blocks.ore_silver,
-                    Blocks.ore_ruby
+                    BlockRegistry.ore_coal,
+                    BlockRegistry.ore_copper,
+                    BlockRegistry.ore_diamond,
+                    BlockRegistry.ore_iron,
+                    BlockRegistry.ore_gold,
+                    BlockRegistry.ore_tin,
+                    BlockRegistry.ore_silver,
+                    BlockRegistry.ore_ruby
             };
     public static Recipe[] ore;
 
