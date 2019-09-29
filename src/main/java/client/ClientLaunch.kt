@@ -4,6 +4,9 @@ import server.ServerLaunch
 import talaria.client.TalariaClientManager
 
 object ClientLaunch {
+    var lastLoopTime = System.nanoTime()
+    var currentTime: Long = 0
+    var deltaTime: Double = 0.toDouble()
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -16,7 +19,14 @@ object ClientLaunch {
 
         Game.instance = Game()
         clientManager.whileRunning = {
-            Game.instance.update()
+            currentTime = System.nanoTime()
+            deltaTime += (currentTime - lastLoopTime) / common.Game.OPTIMAL_TIME
+            lastLoopTime = currentTime
+
+            while (ServerLaunch.deltaTime >= 1) {
+                Game.instance.update()
+                deltaTime--
+            }
         }
 
         clientManager.start()

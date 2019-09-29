@@ -1,9 +1,13 @@
 package server
 
+import common.Game
 import common.world.World
 import talaria.server.TalariaServerManager
 
 object ServerLaunch {
+    var lastLoopTime = System.nanoTime()
+    var currentTime: Long = 0
+    var deltaTime: Double = 0.toDouble()
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -18,7 +22,14 @@ object ServerLaunch {
         serverManager.entityHandler.registerEntity(World::class.java)
 
         serverManager.whileRunning = {
-            ServerGame.instance.update()
+            currentTime = System.nanoTime()
+            deltaTime += (currentTime - lastLoopTime) / Game.OPTIMAL_TIME
+            lastLoopTime = currentTime
+
+            while (deltaTime >= 1) {
+                ServerGame.instance.update()
+                deltaTime--
+            }
         }
 
         serverManager.start()

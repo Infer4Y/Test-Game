@@ -50,11 +50,6 @@ public class Game extends Canvas implements Runnable{
     public Game () {
         this.requestFocus();
         window =  new Window (WIDTH, HEIGHT, TITLE, this);
-        //Sounds.init();
-        BlockRegistry.init();
-        Items.init();
-        //Recipes.init();
-        textures.init(Items.ITEM_MAP, BlockRegistry.BLOCK_MAP);
 
         world = new ClientWorld("foo", 120, 50);
 

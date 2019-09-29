@@ -49,7 +49,6 @@ object BlockRegistry {
     @JvmField
     var stone_producer = BlockStoneProducer("stone_producer")
 
-    @JvmStatic
     fun init() {
         register(grass,
                 dirt,
