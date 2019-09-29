@@ -1,9 +1,9 @@
-package client.threaded;
+package client.threaded
 
 //TODO: This should be associated with ClientGame and do the drawing.
-public class ThreadRenderer extends Thread {
+class ThreadRenderer : Thread() {
 
-    private void render() {
+    private fun render() {
         /*BufferStrategy bufferstrategy = Game.instance.getBufferStrategy ();
 
         if (bufferstrategy == null) {
@@ -20,13 +20,12 @@ public class ThreadRenderer extends Thread {
          */
     }
 
-    @Override
-    public synchronized void start() {
-        super.start();
+    @Synchronized
+    override fun start() {
+        super.start()
     }
 
-    @Override
-    public void run() {
+    override fun run() {
         //while (Game.isRunning) {
         //    render();
         //}
