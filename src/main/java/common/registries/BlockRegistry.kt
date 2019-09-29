@@ -1,8 +1,9 @@
 package common.registries
 
 import common.block.*
-import java.util.HashMap
+import java.util.*
 
+@Deprecated("Completely unnecessary.")
 class BlockRegistry {
 
     fun init() {

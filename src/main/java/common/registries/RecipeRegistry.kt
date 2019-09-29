@@ -4,6 +4,7 @@ import common.item.ItemStack
 import common.recipes.Recipe
 import java.util.*
 
+@Deprecated("Completely unnecessary.")
 class RecipeRegistry {
 
 

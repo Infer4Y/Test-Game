@@ -1,8 +1,9 @@
 package common.block
 
+import common.registries.RegistryNameable
 import common.world.World
 
-abstract class Block(name: String) {
+abstract class Block(name: String): RegistryNameable(name) {
     var name: String
         protected set
     private val hardness: Float = 0.toFloat()

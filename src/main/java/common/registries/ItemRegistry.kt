@@ -1,8 +1,9 @@
 package common.registries
 
 import common.item.Item
-import java.util.HashMap
+import java.util.*
 
+@Deprecated("Completely unnecessary.")
 class ItemRegistry {
 
     fun init() {

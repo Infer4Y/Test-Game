@@ -1,6 +1,8 @@
 package common.item
 
-open class Item(name: String) {
+import common.registries.RegistryNameable
+
+open class Item(name: String): RegistryNameable(name) {
     var name: String
         protected set
 
