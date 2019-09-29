@@ -1,9 +1,9 @@
 package client;
 
 import client.renderables.*;
-import common.registries.Blocks;
+import common.registries.BlockRegistry;
 import common.registries.Items;
-import common.registries.Recipes;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +51,10 @@ public class Game extends Canvas implements Runnable{
         this.requestFocus();
         window =  new Window (WIDTH, HEIGHT, TITLE, this);
         //Sounds.init();
-        Blocks.init();
+        BlockRegistry.init();
         Items.init();
         //Recipes.init();
-        textures.init(Items.ITEM_MAP, Blocks.BLOCK_MAP);
+        textures.init(Items.ITEM_MAP, BlockRegistry.BLOCK_MAP);
 
         world = new ClientWorld("foo", 120, 50);
 
