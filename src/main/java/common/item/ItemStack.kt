@@ -1,6 +1,6 @@
 package common.item
 
-import common.registries.Items
+import common.registries.ItemRegistry
 
 // TODO: This class should have a limit of sorts as a static variable.
 class ItemStack(var item: Item, private var amount: Int) {
@@ -12,7 +12,7 @@ class ItemStack(var item: Item, private var amount: Int) {
     fun setAmount(amount: Int) {
         this.amount = amount
         if (this.amount == 0) {
-            item = Items.getItem("air")
+            item = ItemRegistry.getItem("air")
             this.amount = -1
         }
     }

@@ -1,7 +1,7 @@
 package common.block
 
 import common.item.Item
-import common.registries.Items
+import common.registries.ItemRegistry
 import common.world.World
 
 import java.awt.*
@@ -13,7 +13,7 @@ class BlockOre : BlockColored {
     val blockDrop: Item
         get() = if (drop != null) {
             this.drop!!
-        } else Items.getItem(this.name)
+        } else ItemRegistry.getItem(this.name)
 
     constructor(name: String, drop: Item, color: Int) : super(name) {
         this.drop = drop

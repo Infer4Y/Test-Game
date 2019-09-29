@@ -15,7 +15,7 @@ open class Game {
         @JvmStatic
         var NANOSECOND: Long = 1000000000
         @JvmStatic
-        var OPTIMAL_TICKS = 50.0
+        var OPTIMAL_TICKS = 10.0
         @JvmStatic
         val OPTIMAL_TIME = NANOSECOND / OPTIMAL_TICKS
         @JvmStatic

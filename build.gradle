@@ -9,7 +9,7 @@ group 'xavier'
 version getDate() + '-SNAPSHOT'
 
 sourceSets {
-    //main.java.srcDir += 'src/main/java'
+    main.java.srcDir += 'src/main/java'
     main.kotlin.srcDirs += 'src/main/kotlin'
 }
 
