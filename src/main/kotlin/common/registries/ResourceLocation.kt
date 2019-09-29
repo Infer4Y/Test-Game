@@ -1,5 +1,6 @@
 package common.registries
 
+import common.Game
 import org.apache.commons.lang3.builder.EqualsBuilder
 import java.io.InputStream
 
@@ -36,7 +37,7 @@ class ResourceLocation {
             this.domain = resourceLocationRaw[0]
             this.location = resourceLocationRaw[1]
         } else {
-            this.domain = "" // TODO: The game's domain should be here.
+            this.domain = Game.NAME // Domain of the Game
             this.location = location
         }
     }

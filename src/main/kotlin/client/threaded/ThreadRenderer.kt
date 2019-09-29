@@ -1,6 +1,7 @@
 package client.threaded
 
 //TODO: This should be associated with ClientGame and do the drawing.
+// Can be turned into the RenderManager if one is not in use.
 class ThreadRenderer : Thread() {
 
     private fun render() {

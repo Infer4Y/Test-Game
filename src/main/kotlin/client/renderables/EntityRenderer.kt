@@ -8,7 +8,7 @@ import java.awt.*
 import java.awt.image.BufferedImage
 import java.io.IOException
 
-class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int) : RenderedEntity(), Drawable {
+class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int) : Tickable(), Drawable {
     var offX: Int = 0
     var offY: Int = 0
     private var texture: BufferedImage? = null
@@ -50,7 +50,7 @@ class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int)
         g.drawImage(texture, x, y - 64, 64, 128, null)
     }
 
-    override fun tick() {}
+    override fun onTick() {}
 
     override fun second() {}
 }

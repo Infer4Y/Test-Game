@@ -21,5 +21,10 @@ abstract class Block(name: String): RegistryNameable(name) {
     open fun onBlockCollision() {}
 
     @Deprecated("All blocks should NOT tick!!! This will lag your game immensely.")
+    // Add tick flag to enable.  Or ha
     open fun onTick(world: World, x: Int, y: Int) {}
+
+    open fun isSolid(): Boolean{
+        return solid
+    }
 }

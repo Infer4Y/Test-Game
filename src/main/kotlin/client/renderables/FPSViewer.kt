@@ -5,7 +5,7 @@ import java.awt.Font
 import java.awt.Graphics
 
 //TODO: This shouldn't be an entity.
-class FPSViewer : RenderedEntity(), Drawable {
+class FPSViewer : Tickable(), Drawable {
     private var ticks: Int = 0
     private var frames: Int = 0
 
@@ -21,7 +21,7 @@ class FPSViewer : RenderedEntity(), Drawable {
         }
     }
 
-    override fun tick() {
+    override fun onTick() {
         ticks++
     }
 

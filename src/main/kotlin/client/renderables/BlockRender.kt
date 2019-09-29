@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage
 
 /* TODO: You don't need a render object per block at every position. Use one renderer and draw the same block at varying
  positions. */
-class BlockRender(var block: Block?, var x: Int, var y: Int) : RenderedEntity(), Drawable {
+class BlockRender(var block: Block?, var x: Int, var y: Int) : Tickable(), Drawable {
 
     private var texture: BufferedImage? = null
     private var lastBlock: Block? = null
@@ -28,7 +28,7 @@ class BlockRender(var block: Block?, var x: Int, var y: Int) : RenderedEntity(),
         lastBlock = block
     }
 
-    override fun tick() {}
+    override fun onTick() {}
 
     override fun second() {}
 
