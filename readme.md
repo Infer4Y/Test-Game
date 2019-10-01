@@ -5,7 +5,7 @@ Test-Game is a current project of mine. A 2D game with no current story/object o
 ## What are the plan for future?
 ### High priority plans are.
 * World generation
-* Exploration and not limiting the player to the 20 by 10 block area.
+* ~Exploration and not limiting the player to the 20 by 10 block area.~
 * Many fixes to the player.
 ### Lower priotiy plans are.
 * Main Menu/ Game launcher.
