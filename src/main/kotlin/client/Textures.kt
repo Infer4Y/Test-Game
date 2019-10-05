@@ -27,7 +27,7 @@ class Textures {
 
     fun init(items: HashMap<String, Item>, blocks: HashMap<String, Block>) {
         try {
-            ImageIO.read(this.javaClass.classLoader.getResource("tex/placeholder.png"))?.let {
+            ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/placeholder.png"))?.let {
                 // TODO: Make sure that these aren't cascading and messing up scaling.
                 placeholder4 = it.scale(4.0)
                 placeholder3 = it.scale(3.0)
@@ -39,7 +39,7 @@ class Textures {
         }
 
         try {
-            slot = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/slot.png")!!), 1.0)
+            slot = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/slot.png")!!), 1.0)
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -78,10 +78,10 @@ class Textures {
         try {
             if (block is BlockOre) {
                 textures4[block.name] = FileUtils.scale1(FileUtils.joinBufferedImage(ImageIO.read(
-                        this.javaClass.classLoader.getResource("tex/blocks/stone.png")!!), FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/ore_overlay.png")!!), block.getColor())), 4.0
+                        this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/stone.png")!!), FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/ore_overlay.png")!!), block.getColor())), 4.0
                 )
             } else {
-                textures4[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/" + block.name + ".png")!!), 4.0)
+                textures4[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/" + block.name + ".png")!!), 4.0)
             }
         } catch (e: NullPointerException) {
             e.printStackTrace()
@@ -100,12 +100,12 @@ class Textures {
     private fun register3(block: Block) {
         try {
             if (block is BlockOre) {
-                val overlay = ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/ore_overlay.png"))
-                ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/stone.png"))?.let {
+                val overlay = ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/ore_overlay.png"))
+                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/stone.png"))?.let {
                     textures3[block.name] = it.joinWith(overlay).scale(3.0)
                 }
             } else {
-                ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/" + block.name + ".png"))?.let {
+                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/" + block.name + ".png"))?.let {
                     textures3[block.name] = it.scale(3.0)
                 }
             }
@@ -124,12 +124,12 @@ class Textures {
     private fun register2(block: Block) {
         try {
             if (block is BlockOre) {
-                val overlay = ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/ore_overlay.png"))
-                ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/stone.png"))?.let {
+                val overlay = ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/ore_overlay.png"))
+                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/stone.png"))?.let {
                     textures2[block.name] = it.joinWith(overlay).scale(2.0)
                 }
             } else {
-                ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/" + block.name + ".png"))?.let {
+                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/" + block.name + ".png"))?.let {
                     textures2[block.name] = it.scale(2.0)
                 }
             }
@@ -147,12 +147,12 @@ class Textures {
     private fun register1(block: Block) {
         try {
             if (block is BlockOre) {
-                val overlay = ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/ore_overlay.png"))
-                ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/stone.png"))?.let {
+                val overlay = ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/ore_overlay.png"))
+                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/stone.png"))?.let {
                     textures1[block.name] = it.joinWith(overlay).scale(1.0)
                 }
             } else {
-                ImageIO.read(this.javaClass.classLoader.getResource("tex/blocks/" + block.name + ".png"))?.let {
+                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/blocks/" + block.name + ".png"))?.let {
                     textures1[block.name] = it.scale(1.0)
                 }
             }
@@ -174,12 +174,12 @@ class Textures {
             } else if (block is ItemIngot) {
                 textures4[block.name] = FileUtils.scale1(
                         FileUtils.joinBufferedImage(
-                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot.png")!!), block.getColor()),
-                                ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot_1.png")!!)
+                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot.png")!!), block.getColor()),
+                                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot_1.png")!!)
                         ), 4.0
                 )
             } else {
-                textures4[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/" + block.name + ".png")!!), 4.0)
+                textures4[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/" + block.name + ".png")!!), 4.0)
             }
         } catch (e: NullPointerException) {
             e.printStackTrace()
@@ -205,12 +205,12 @@ class Textures {
             } else if (block is ItemIngot) {
                 textures3[block.name] = FileUtils.scale1(
                         FileUtils.joinBufferedImage(
-                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot.png")!!), block.getColor()),
-                                ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot_1.png")!!)
+                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot.png")!!), block.getColor()),
+                                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot_1.png")!!)
                         ), 3.0
                 )
             } else {
-                textures3[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/" + block.name + ".png")!!), 3.0)
+                textures3[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/" + block.name + ".png")!!), 3.0)
             }
         } catch (e: NullPointerException) {
             e.printStackTrace()
@@ -236,12 +236,12 @@ class Textures {
             } else if (block is ItemIngot) {
                 textures2[block.name] = FileUtils.scale1(
                         FileUtils.joinBufferedImage(
-                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot.png")!!), block.getColor()),
-                                ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot_1.png")!!)
+                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot.png")!!), block.getColor()),
+                                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot_1.png")!!)
                         ), 2.0
                 )
             } else {
-                textures2[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/" + block.name + ".png")!!), 2.0)
+                textures2[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/" + block.name + ".png")!!), 2.0)
             }
         } catch (e: NullPointerException) {
             e.printStackTrace()
@@ -264,12 +264,12 @@ class Textures {
             } else if (block is ItemIngot) {
                 textures1[block.name] = FileUtils.scale1(
                         FileUtils.joinBufferedImage(
-                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot.png")!!), block.getColor()),
-                                ImageIO.read(this.javaClass.classLoader.getResource("tex/items/ingot_1.png")!!)
+                                FileUtils.dye(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot.png")!!), block.getColor()),
+                                ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/ingot_1.png")!!)
                         ), 1.0
                 )
             } else {
-                textures1[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/items/" + block.name + ".png")!!), 1.0)
+                textures1[block.name] = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/items/" + block.name + ".png")!!), 1.0)
             }
         } catch (e: NullPointerException) {
             e.printStackTrace()
