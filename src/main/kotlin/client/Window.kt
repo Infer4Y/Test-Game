@@ -5,7 +5,7 @@ import java.awt.Dimension
 
 import javax.swing.JFrame
 
-class Window(width: Int, height: Int, title: String, game: Game) : JFrame(title) {
+class Window(width: Int, height: Int, title: String) : JFrame(title) {
     init {
         this.preferredSize = Dimension(width, height)
         this.maximumSize = Dimension(width, height)
