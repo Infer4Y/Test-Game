@@ -17,8 +17,10 @@ public class Button implements Drawable {
         this.action = action;
     }
 
-    public void onClick() {
-        action.action();
+    public void onClick(int x, int y) {
+        if ((x >= this.x && x <= (this.x+this.xBound))&&(y >= this.y && x <= (this.y+this.yBound))) {
+            action.action();
+        }
     }
 
     @Override

@@ -1,24 +1,28 @@
 package client
 
-import client.scenes.Scene
+import client.scenes.*
 import common.Game
 
 
 class ClientGame : Game() {
     var world: ClientWorld = ClientWorld("foo", 0, 0)
 
-    var scene : Scene = Scene()
+    var scene : Scene = SceneMenu()
 
     val WIDTH = 1280
     val HEIGHT = 640
 
     init {
         window =  Window(WIDTH, HEIGHT, NAME)
+        window.add(scene)
+        window.addMouseListener(scene)
     }
 
     fun createWindow(){
         if (window == null) {
             window = Window(WIDTH, HEIGHT, NAME)
+            window.add(scene)
+            window.addMouseListener(scene)
         } else if (!window.isVisible) {
             window.isVisible = true
         } else {
@@ -28,8 +32,10 @@ class ClientGame : Game() {
 
     fun changeScene(target: Scene){
         window.remove(scene)
+        window.removeMouseListener(scene)
         scene = target
         window.add(scene)
+        window.addMouseListener(scene)
     }
 
     /**

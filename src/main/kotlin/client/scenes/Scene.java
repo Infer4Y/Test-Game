@@ -13,6 +13,8 @@ public class Scene extends Canvas implements MouseListener {
 
     }
 
+    public void draw(Graphics g){}
+
     @Override
     public void mouseClicked(MouseEvent e) {
 

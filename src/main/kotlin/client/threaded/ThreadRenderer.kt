@@ -1,23 +1,31 @@
 package client.threaded
 
+import client.ClientGame
+import java.awt.Color
+import java.awt.Graphics2D
+import java.awt.image.BufferStrategy
+
 //TODO: This should be associated with ClientGame and do the drawing.
 class ThreadRenderer : Thread() {
 
     private fun render() {
-        /*BufferStrategy bufferstrategy = Game.instance.getBufferStrategy ();
+        var bufferstrategy : BufferStrategy? = ClientGame.window.getBufferStrategy()
 
         if (bufferstrategy == null) {
-            Game.instance.createBufferStrategy(4);
-            return;
+            ClientGame.window.createBufferStrategy(4)
+            return
         }
 
-        Graphics2D g = (Graphics2D) bufferstrategy.getDrawGraphics();
+        var g : Graphics2D = bufferstrategy.getDrawGraphics() as Graphics2D
 
-        g.setColor (Color.BLACK);
-        g.fillRect (0, 0, Game.instance.getWidth(), Game.instance.getHeight());
-        g.dispose ();
-        bufferstrategy.show();
-         */
+        g.setColor (Color.BLACK)
+        g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
+
+        ClientGame.instance.scene.draw(g)
+
+        g.dispose ()
+        bufferstrategy.show()
+
     }
 
     @Synchronized
@@ -26,8 +34,8 @@ class ThreadRenderer : Thread() {
     }
 
     override fun run() {
-        //while (Game.isRunning) {
-        //    render();
-        //}
+        while (true) {
+            render()
+        }
     }
 }

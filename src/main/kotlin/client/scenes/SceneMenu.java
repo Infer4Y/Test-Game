@@ -9,24 +9,25 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class SceneMenu extends Scene {
-    private Button start = new Button( 64, 1112, 64, 256, ( ) -> { }) {
+    private Button start = new Button( 64, 1112, 64, 64, ( ) -> { }) {
         @Override
         public void draw(Graphics g){
             g.setColor(Color.green);
-            g.drawRect(this.x, this.y, this.xBound, this.yBound);
+            g.fillRect(this.x, this.y, this.xBound, this.yBound);
             g.setColor(Color.white);
-            g.drawString("Start!", x + (1112+g.getFont().getSize())/2, y+16);
+            g.drawString("Start!", x + (this.xBound-128+g.getFont().getSize())/2, y+16);
         }
     };
-    private Button exit = new Button( 64, 1112, 64, 256, ( ) -> {
+    private Button exit = new Button( 64, 1112, 256, 64, ( ) -> {
         ClientGame.getInstance().dispose();
+        System.exit(0);
     }) {
         @Override
         public void draw(Graphics g){
             g.setColor(Color.RED);
-            g.drawRect(this.x, this.y, this.xBound, this.yBound);
+            g.fillRect(this.x, this.y, this.xBound, this.yBound);
             g.setColor(Color.white);
-            g.drawString("Exit", x + (1112+g.getFont().getSize())/2, y+16);
+            g.drawString("Exit", x + (this.xBound-128+g.getFont().getSize())/2, y+16);
         }
     };
 
@@ -36,27 +37,15 @@ public class SceneMenu extends Scene {
     }
 
     @Override
+    public void draw(Graphics g){
+        start.draw(g);
+        exit.draw(g);
+    }
+
+    @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        super.mouseReleased(e);
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        super.mouseEntered(e);
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        super.mouseExited(e);
+        start.onClick(e.getX(), e.getY());
+        exit.onClick(e.getX(), e.getY());
     }
 }
