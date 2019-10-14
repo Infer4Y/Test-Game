@@ -16,9 +16,9 @@ class ThreadRenderer : Thread() {
             return
         }
 
-        var g : Graphics2D = bufferstrategy.getDrawGraphics() as Graphics2D
+        var g : Graphics2D = bufferstrategy.drawGraphics as Graphics2D
 
-        g.setColor (Color.BLACK)
+        g.color = Color.BLACK
         g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
 
         ClientGame.instance.scene.draw(g)

@@ -16,6 +16,7 @@ class ClientGame : Game() {
         window =  Window(WIDTH, HEIGHT, NAME)
         window.add(scene)
         window.addMouseListener(scene)
+        window.requestFocus()
     }
 
     fun createWindow(){
@@ -36,6 +37,7 @@ class ClientGame : Game() {
         scene = target
         window.add(scene)
         window.addMouseListener(scene)
+        window.requestFocus()
     }
 
     /**

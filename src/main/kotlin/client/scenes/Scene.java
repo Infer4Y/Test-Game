@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 public class Scene extends Canvas implements MouseListener {
 
     public Scene() {
+        this.addMouseListener(this);
     }
 
     public void update() {

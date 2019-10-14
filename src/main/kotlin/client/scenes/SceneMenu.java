@@ -44,7 +44,6 @@ public class SceneMenu extends Scene {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e);
         start.onClick(e.getX(), e.getY());
         exit.onClick(e.getX(), e.getY());
     }
