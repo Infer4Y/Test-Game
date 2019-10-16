@@ -1,7 +1,9 @@
 package common.entities
 
+import com.github.simplenet.packet.Packet
 import common.containers.ISlot
 import common.containers.Inventory
+import java.nio.ByteBuffer
 
 @Deprecated("This severely limits the way you can subclass entities.")
 open class EntityInventory : Entity, IEntityInventory {
@@ -23,6 +25,16 @@ open class EntityInventory : Entity, IEntityInventory {
 
     fun setSlot(slot: ISlot) {
         inventory?.setSlot(slot)
+    }
+
+
+    override fun read(buffer: ByteBuffer) {
+        TODO("not implemented")
+    }
+
+    override fun write(packet: Packet): Packet {
+        TODO("not implemented")
+        return packet
     }
 
 }

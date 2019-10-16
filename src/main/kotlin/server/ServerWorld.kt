@@ -2,7 +2,7 @@ package server
 
 import common.entities.Entity
 import common.world.World
-import talaria.common.Talaria
+import bvanseg.talaria.common.Talaria
 
 class ServerWorld(name: String, x: Int, y: Int) : World(name, x, y) {
 

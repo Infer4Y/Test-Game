@@ -1,7 +1,7 @@
 package common.entities
 
 import common.world.Direction
-import talaria.common.entity.AdaptiveNetworkEntity
+import bvanseg.talaria.common.entity.AdaptiveNetworkEntity
 
 abstract class Entity(name: String, health: Int, maxHealth: Int) : AdaptiveNetworkEntity(), IEntity {
     override var facing: Direction = Direction.LEFT

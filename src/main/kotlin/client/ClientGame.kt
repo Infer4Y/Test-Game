@@ -1,6 +1,7 @@
 package client
 
-import client.scenes.*
+import client.scenes.SceneMenu
+import client.scenes.Scene
 import common.Game
 
 
@@ -16,6 +17,7 @@ class ClientGame : Game() {
         window =  Window(WIDTH, HEIGHT, NAME)
         window.add(scene)
         window.addMouseListener(scene)
+        scene.isVisible = true
         window.requestFocus()
     }
 
@@ -35,6 +37,7 @@ class ClientGame : Game() {
         window.remove(scene)
         window.removeMouseListener(scene)
         scene = target
+        scene.isVisible = true
         window.add(scene)
         window.addMouseListener(scene)
         window.requestFocus()

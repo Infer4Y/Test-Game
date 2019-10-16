@@ -1,9 +1,10 @@
 package client
 
+import bvanseg.talaria.client.ClientProperties
+import bvanseg.talaria.client.TalariaClientManager
 import client.threaded.ThreadRenderer
 import common.Game
 import server.ServerLaunch
-import talaria.client.TalariaClientManager
 
 object ClientLaunch {
     var lastLoopTime = System.nanoTime()
@@ -15,9 +16,9 @@ object ClientLaunch {
 
         // This will act as the internal server for the client.
         // When the client wants to host, this server will unbind and rebind to another address and port.
-        ServerLaunch.launchServer()
+        ServerLaunch.launchServer(true)
 
-        val clientManager = TalariaClientManager(TalariaClientManager.Properties())
+        val clientManager = TalariaClientManager(ClientProperties())
         val renderer = ThreadRenderer()
 
         clientManager.entityHandler.registerEntity(ClientWorld::class.java)

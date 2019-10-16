@@ -1,8 +1,8 @@
 package common.world
 
+import bvanseg.kcommons.buffers.getBoolean
 import com.github.simplenet.packet.Packet
-import talaria.common.entity.NetworkEntity
-import talaria.common.utils.getBoolean
+import bvanseg.talaria.common.entity.NetworkEntity
 import java.nio.ByteBuffer
 
 class WorldSettings: NetworkEntity() {
@@ -13,12 +13,11 @@ class WorldSettings: NetworkEntity() {
     override fun write(packet: Packet): Packet {
         packet.putInt(time)
         packet.putBoolean(isWeatherActive)
-        return super.write(packet)
+        return packet
     }
 
     override fun read(buffer: ByteBuffer) {
         time = buffer.int
         isWeatherActive = buffer.getBoolean()
-        super.read(buffer)
     }
 }

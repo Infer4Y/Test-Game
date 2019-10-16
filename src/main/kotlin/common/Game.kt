@@ -1,6 +1,6 @@
 package common
 
-import talaria.common.utils.Version
+import bvanseg.kcommons.projects.Version
 
 abstract class Game {
     // TODO: Base game stuff that is shared between the client and the server should be shared here.

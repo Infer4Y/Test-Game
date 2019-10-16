@@ -1,7 +1,7 @@
 package server
 
 import common.Game
-import talaria.common.Talaria
+import bvanseg.talaria.common.Talaria
 
 class ServerGame : Game() {
 
