@@ -1,5 +1,6 @@
 package client
 
+import client.threaded.ThreadRenderer
 import common.Game
 import server.ServerLaunch
 import talaria.client.TalariaClientManager
@@ -17,10 +18,13 @@ object ClientLaunch {
         ServerLaunch.launchServer()
 
         val clientManager = TalariaClientManager(TalariaClientManager.Properties())
+        val renderer = ThreadRenderer()
 
         clientManager.entityHandler.registerEntity(ClientWorld::class.java)
 
         ClientGame.instance = ClientGame()
+        ClientGame.instance.createWindow()
+
         clientManager.whileRunning = {
             currentTime = System.nanoTime()
             deltaTime += (currentTime - lastLoopTime) / Game.OPTIMAL_TIME
@@ -32,6 +36,9 @@ object ClientLaunch {
             }
         }
 
+        renderer.start()
+
         clientManager.start()
+
     }
 }

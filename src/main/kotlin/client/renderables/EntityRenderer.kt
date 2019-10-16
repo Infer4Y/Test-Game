@@ -18,11 +18,11 @@ class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int)
 
     init {
         try {
-            this.texture = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/entities/" + entity.name + ".png")!!), 4.0)
+            this.texture = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/entities/" + entity.name + ".png")!!), 4.0)
             println(entity.name)
         } catch (e: IOException) {
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/placeholder.png")!!), 4.0)
+                this.texture = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/placeholder.png")!!), 4.0)
             } catch (ex: IOException) {
                 texture = BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)
                 ex.printStackTrace()
@@ -31,7 +31,7 @@ class EntityRenderer(val entity: common.entities.Entity, val x: Int, val y: Int)
             e.printStackTrace()
         } catch (e: NullPointerException) {
             try {
-                this.texture = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("tex/placeholder.png")!!), 4.0)
+                this.texture = FileUtils.scale1(ImageIO.read(this.javaClass.classLoader.getResource("assets/iodine/tex/placeholder.png")!!), 4.0)
             } catch (ex: IOException) {
                 texture = BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)
                 ex.printStackTrace()

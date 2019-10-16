@@ -17,11 +17,10 @@ abstract class Game {
         @JvmStatic
         val OPTIMAL_TIME = NANOSECOND / OPTIMAL_TICKS
         @JvmStatic
-        val NAME: String = "Iodine"
-        @JvmStatic
-        val DOMAIN: String = "iodine"
+        val NAME: String = "iodine"
         @JvmStatic
         val VERSION: Version = Version("0.0.0.PA")
+        val DOMAIN: String = "iodine"
     }
 
 }
