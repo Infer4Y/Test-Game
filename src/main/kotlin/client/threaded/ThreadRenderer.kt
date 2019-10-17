@@ -10,7 +10,7 @@ import java.awt.image.BufferStrategy
 class ThreadRenderer : Thread() {
 
     private fun render() {
-        var bufferstrategy : BufferStrategy? = ClientGame.window.getBufferStrategy()
+        var bufferstrategy : BufferStrategy? = ClientGame.window.bufferStrategy
 
         if (bufferstrategy == null) {
             ClientGame.window.createBufferStrategy(4)
@@ -19,13 +19,16 @@ class ThreadRenderer : Thread() {
 
         var g : Graphics2D = bufferstrategy.drawGraphics as Graphics2D
 
-        g.color = Color.BLACK
-        g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
+        bufferstrategy.run {
 
-        ClientGame.instance.scene.draw(g)
+            g.color = Color.BLACK
+            g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
 
-        g.dispose ()
-        bufferstrategy.show()
+            ClientGame.window.draw(g)
+
+            g.dispose ()
+            show()
+        }
 
     }
 
@@ -35,8 +38,25 @@ class ThreadRenderer : Thread() {
     }
 
     override fun run() {
-        while (true) {
-            render()
+        var bufferstrategy : BufferStrategy? = ClientGame.window.bufferStrategy
+
+        if (bufferstrategy == null) {
+            ClientGame.window.createBufferStrategy(4)
+            return
         }
+
+        var g : Graphics2D = bufferstrategy.drawGraphics as Graphics2D
+
+        bufferstrategy.run {
+
+            g.color = Color.BLACK
+            g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
+
+            ClientGame.window.draw(g)
+
+            g.dispose ()
+            show()
+        }
+
     }
 }

@@ -28,13 +28,13 @@ object ServerLaunch {
         launchServer(false)
     }
 
-    fun launchServer(noGUI : Boolean) {
+    fun launchServer(noGUI : Boolean = true) {
         if (!noGUI) {
             val bytes = object : ByteArrayOutputStream() {
                 @Synchronized
                 @Throws(IOException::class)
                 override fun flush() {
-                    textArea.setText(toString())
+                    textArea.text = toString()
                 }
             }
 
@@ -48,6 +48,7 @@ object ServerLaunch {
             frame.isVisible = true
             frame.title = "Iodine server"
             frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+            frame.setSize(400,400)
         }
 
 

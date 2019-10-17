@@ -16,7 +16,7 @@ object ClientLaunch {
 
         // This will act as the internal server for the client.
         // When the client wants to host, this server will unbind and rebind to another address and port.
-        ServerLaunch.launchServer(true)
+        ServerLaunch.launchServer()
 
         val clientManager = TalariaClientManager(ClientProperties())
         val renderer = ThreadRenderer()
@@ -25,7 +25,7 @@ object ClientLaunch {
 
         ClientGame.instance = ClientGame()
         ClientGame.instance.createWindow()
-
+        renderer.start()
         clientManager.whileRunning = {
             currentTime = System.nanoTime()
             deltaTime += (currentTime - lastLoopTime) / Game.OPTIMAL_TIME
@@ -36,9 +36,6 @@ object ClientLaunch {
                 deltaTime--
             }
         }
-
-        renderer.start()
-
         clientManager.start()
 
     }
