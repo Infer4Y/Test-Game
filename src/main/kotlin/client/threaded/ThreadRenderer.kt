@@ -19,16 +19,13 @@ class ThreadRenderer : Thread() {
 
         var g : Graphics2D = bufferstrategy.drawGraphics as Graphics2D
 
-        bufferstrategy.run {
+        g.color = Color.BLACK
+        g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
 
-            g.color = Color.BLACK
-            g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
+        ClientGame.window.draw(g)
 
-            ClientGame.window.draw(g)
-
-            g.dispose ()
-            show()
-        }
+        g.dispose ()
+        bufferstrategy.show()
 
     }
 
@@ -38,25 +35,8 @@ class ThreadRenderer : Thread() {
     }
 
     override fun run() {
-        var bufferstrategy : BufferStrategy? = ClientGame.window.bufferStrategy
-
-        if (bufferstrategy == null) {
-            ClientGame.window.createBufferStrategy(4)
-            return
+        while (true) {
+            render()
         }
-
-        var g : Graphics2D = bufferstrategy.drawGraphics as Graphics2D
-
-        bufferstrategy.run {
-
-            g.color = Color.BLACK
-            g.fillRect (0, 0, ClientGame.instance.WIDTH, ClientGame.instance.HEIGHT)
-
-            ClientGame.window.draw(g)
-
-            g.dispose ()
-            show()
-        }
-
     }
 }

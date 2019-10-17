@@ -3,7 +3,9 @@ package client
 import client.scenes.Scene
 import client.scenes.SceneMenu
 import common.Game
+import java.awt.Color
 import java.awt.Dimension
+import java.awt.Graphics
 import java.awt.Graphics2D
 
 import javax.swing.JFrame
@@ -45,4 +47,6 @@ class Window(width: Int, height: Int, title: String) : JFrame(title) {
     fun draw(g: Graphics2D) {
         scene.draw(g);
     }
+
+    override fun paint(g: Graphics?) {}
 }

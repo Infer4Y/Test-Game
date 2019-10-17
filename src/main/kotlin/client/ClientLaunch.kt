@@ -24,8 +24,8 @@ object ClientLaunch {
         clientManager.entityHandler.registerEntity(ClientWorld::class.java)
 
         ClientGame.instance = ClientGame()
-        ClientGame.instance.createWindow()
         renderer.start()
+        ClientGame.instance.createWindow()
         clientManager.whileRunning = {
             currentTime = System.nanoTime()
             deltaTime += (currentTime - lastLoopTime) / Game.OPTIMAL_TIME
