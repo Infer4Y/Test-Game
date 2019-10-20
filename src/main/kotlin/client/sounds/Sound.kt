@@ -1,4 +1,4 @@
-package common.sounds
+package client.sounds
 
 import common.registries.RegistryNameable
 import java.io.File

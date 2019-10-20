@@ -5,6 +5,10 @@ import common.item.ItemStack
 import java.nio.ByteBuffer
 
 class EntityStack(stack: ItemStack) : Entity(stack.item.name, 1, 1) {
+    override fun onCollision() {
+        TODO("not implemented")
+    }
+
     override fun read(buffer: ByteBuffer) {
         TODO("not implemented")
     }

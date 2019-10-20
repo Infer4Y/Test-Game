@@ -1,7 +1,8 @@
 package common.block
 
 import common.item.Item
-import common.registries.ItemRegistry
+import common.item.ItemBlock
+import common.registries.Registries
 import java.awt.Color
 
 class BlockOre : BlockColored {
@@ -11,7 +12,7 @@ class BlockOre : BlockColored {
     val blockDrop: Item
         get() = if (drop != null) {
             this.drop!!
-        } else ItemRegistry.getItem(this.name)
+        } else ItemBlock(BlockAir("air"))
 
     constructor(name: String, drop: Item, color: Int) : super(name) {
         this.drop = drop

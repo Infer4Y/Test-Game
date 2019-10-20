@@ -1,7 +1,6 @@
 package common.world.gen
 
 import common.block.Block
-import common.registries.BlockRegistry
 import java.util.*
 
 class Tree {
