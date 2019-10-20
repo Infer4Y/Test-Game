@@ -1,11 +1,12 @@
+import org.gradle.internal.os.OperatingSystem
 plugins {
     id 'java'
     id "org.jetbrains.kotlin.jvm" version "1.3.50"
 }
 
 project.ext.lwjglVersion = "3.2.3"
+project.ext.jomlVersion = "1.9.19"
 
-import org.gradle.internal.os.OperatingSystem
 
 switch (OperatingSystem.current()) {
     case OperatingSystem.LINUX:
