@@ -1,0 +1,63 @@
+package inferno.common.tiles;
+
+import inferno.common.entities.Entity;
+import inferno.common.item.Item;
+import inferno.common.registries.Items;
+import inferno.common.world.World;
+
+public class Tile {
+    private String name;
+    private float hardness = 1.0f,  blastResistance = 1.0f;
+    private boolean solid;
+
+    public Tile(String name){
+        this.name = name;
+        solid = true;
+    }
+
+    public void onBlockRightClick(World world, Entity entity){ }
+
+    public void onBlockCollision(World world, Entity entity){ }
+
+    public void onTick(World world, int x, int y){ }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getHardness() {
+        return hardness;
+    }
+
+    public float getBlastResistance() {
+        return blastResistance;
+    }
+
+    public Item getBlockDrop(){
+        return Items.getItem(this.getName());
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHardness(float hardness) {
+        this.hardness = hardness;
+    }
+
+    public void setBlastResistance(float blastResistance) {
+        this.blastResistance = blastResistance;
+    }
+
+    public void setSolid(boolean solid) {
+        this.solid = solid;
+    }
+
+    public boolean isSolid(){
+        return solid;
+    }
+
+    public boolean isAir() {
+        return  false;
+    }
+}

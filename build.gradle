@@ -7,7 +7,7 @@ plugins {
 
 sourceCompatibility = 1.8
 
-group 'xavier'
+group 'infer4you'
 version getDate() + '-SNAPSHOT'
 
 jar {
@@ -32,8 +32,15 @@ compileJava {
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
+project.ext.jomlVersion = "1.9.24"
+
 dependencies {
+    compile "org.joml:joml:${jomlVersion}"
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
