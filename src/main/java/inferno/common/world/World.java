@@ -24,6 +24,18 @@ public class World {
     }
 
     public void update() {
+        for (Entity entity: entities) {
+            entity.update();
+        }
+        for (Chunk chunk : chunks) {
+        }
+    }
+
+    public void addEntity(Entity entity){
+        entities.add(entity);
+    }
+
+    public ArrayList<Player> getPlayers(){
         players.clear();
 
         for (Entity entity: entities) {
@@ -32,22 +44,6 @@ public class World {
             }
         }
 
-        for (Entity entity: entities) {
-            for (Player player: players) {
-                if (player.equals(entity)) {break;}
-                if (entity.getLocation().distance(player.getLocation()) < 40) {
-                    entity.update();
-                    break;
-                }
-            }
-        }
-
-        for (Player player: players) {
-            player.update();
-        }
-    }
-
-    public void addEntity(Entity entity){
-        entities.add(entity);
+        return players;
     }
 }
