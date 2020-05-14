@@ -1,5 +1,6 @@
 package inferno.common.recipes;
 
+import inferno.common.containers.Inventory;
 import inferno.common.item.ItemStack;
 
 import java.util.List;
@@ -27,7 +28,8 @@ public class Recipe {
         return name;
     }
 
-    public boolean isCraftable(){
+    public boolean isCraftable(Inventory inventory){
+
         return false;
     }
 

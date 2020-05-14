@@ -9,4 +9,10 @@ public class Game {
         world = new World("world_one");
 
     }
+
+    public void update(){
+        world.update();
+    }
+
+
 }

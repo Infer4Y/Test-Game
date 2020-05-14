@@ -6,11 +6,11 @@ import inferno.common.world.World;
 import org.joml.Vector2d;
 import org.joml.Vector2f;
 
-public abstract class Entity {
+public class Entity {
     private String name;
     private int health, maxHealth;
     private Direction facing;
-    private Vector2f location, force;
+    private Vector2f location = new Vector2f(), force = new Vector2f();
 
     public Entity(String name, int health, int maxHealth) {
         this.name = name;
@@ -51,5 +51,18 @@ public abstract class Entity {
 
     public void setFacing(Direction facing) {
         this.facing = facing;
+    }
+
+    public Vector2f getLocation() {
+        return location;
+    }
+
+    public void setLocation(Vector2f location) {
+        this.location = location;
+    }
+
+    public void update() {
+        location  = location.add(force);
+        force = force.mul(.9f);
     }
 }

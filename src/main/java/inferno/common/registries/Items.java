@@ -28,8 +28,8 @@ public class Items {
         }
     }
 
-    public static Item getItem(String air) {
-        return ITEM_MAP.getOrDefault(air, null);
+    public static Item getItem(String name) {
+        return ITEM_MAP.getOrDefault(name, null);
     }
 
     private static void register(Item item){
