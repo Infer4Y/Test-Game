@@ -1,6 +1,7 @@
 package inferno.common.world.chunks;
 
 import inferno.common.tiles.Tile;
+import inferno.common.world.World;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
@@ -23,5 +24,22 @@ public class Chunk {
 
     public void setOffset(Vector2f offset) {
         this.offset = offset;
+    }
+
+    public void update(World world) {
+        for (int y = 0; y < Referance.CHUNKHEIGHT; y++) {
+            for (int x = 0; x < Referance.CHUNKWIDTH; x++) {
+                if (getTile(x, y).isTickable()) {
+                    getTile(x, y).onTick(world, x, y);
+                }
+            }
+        }
+    }
+
+    public boolean isPosIn(Vector2f pos) {
+        return ((pos.x > offset.x*Referance.CHUNKWIDTH) &&
+                (pos.x < offset.x*Referance.CHUNKWIDTH+Referance.CHUNKWIDTH) &&
+                (pos.y > offset.y*Referance.CHUNKHEIGHT) &&
+                (pos.y < offset.y*Referance.CHUNKHEIGHT+Referance.CHUNKHEIGHT));
     }
 }

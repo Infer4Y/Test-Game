@@ -1,8 +1,10 @@
 package inferno.common.world;
 
 import inferno.common.entities.Entity;
+import inferno.common.entities.EntityStack;
 import inferno.common.entities.Player;
 import inferno.common.world.chunks.Chunk;
+import org.joml.Vector2f;
 
 import java.util.ArrayList;
 
@@ -25,9 +27,10 @@ public class World {
 
     public void update() {
         for (Entity entity: entities) {
-            entity.update();
+            entity.update(this);
         }
         for (Chunk chunk : chunks) {
+            chunk.update(this);
         }
     }
 
@@ -45,5 +48,23 @@ public class World {
         }
 
         return players;
+    }
+
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+    }
+
+    public Chunk getChunkFromPos(Vector2f pos){
+        for (Chunk chunk : chunks) {
+            if ( chunk.isPosIn(pos)) {
+                return chunk;
+            }
+        }
+
+        return null;
+    }
+
+    public void requestGeneration(Vector2f location) {
+        // ToDo : implement world generation.
     }
 }

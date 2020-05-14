@@ -8,7 +8,7 @@ import inferno.common.world.World;
 public class Tile {
     private String name;
     private float hardness = 1.0f,  blastResistance = 1.0f;
-    private boolean solid;
+    private boolean solid, tickable;
 
     public Tile(String name){
         this.name = name;
@@ -16,6 +16,8 @@ public class Tile {
     }
 
     public void onBlockRightClick(World world, Entity entity){ }
+
+    public void onNeighborChange(World world, Tile neighbor){ }
 
     public void onBlockCollision(World world, Entity entity){ }
 
@@ -59,5 +61,13 @@ public class Tile {
 
     public boolean isAir() {
         return  false;
+    }
+
+    public boolean isTickable() {
+        return tickable;
+    }
+
+    public void setTickable(boolean tickable) {
+        this.tickable = tickable;
     }
 }
