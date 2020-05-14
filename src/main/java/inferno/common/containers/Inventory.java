@@ -23,6 +23,12 @@ public class Inventory {
         }
     }
 
+    public void addStack(ItemStack stack){
+        if (stack.getItem() == Items.getItem("air")) return;
+        slots.get(getSlotsIDFromItem(Items.getItem("air"))[0]).setStack(stack);
+        merge(stack.getItem());
+    }
+
     public void sort(){
 
     }
@@ -64,5 +70,9 @@ public class Inventory {
 
     public int getSize() {
         return size;
+    }
+
+    public boolean hasSpace(Item item) {
+        return getSlotsIDFromItem(item).length > 0 || getSlotsIDFromItem(Items.getItem("air")).length > 0;
     }
 }
