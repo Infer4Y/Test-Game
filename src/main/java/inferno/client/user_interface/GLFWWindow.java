@@ -1,17 +1,16 @@
 package inferno.client.user_interface;
 
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.MemoryUtil;
 
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -21,10 +20,6 @@ public abstract class GLFWWindow {
 
     public GLFWWindow(int width, int height, String title) {
         init(width, height, title);
-
-        loop();
-
-        dispose();
     }
 
     private void init(int width, int height, String title) {
@@ -78,27 +73,10 @@ public abstract class GLFWWindow {
 
         // Make the window visible
         glfwShowWindow(window);
-    }
 
-    public void loop(){
         GL.createCapabilities();
 
-        // Set the clear color
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
-
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
-        while ( !glfwWindowShouldClose(window) ) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-            render();
-
-            glfwSwapBuffers(window); // swap the color buffers
-
-            // Poll for window events. The key callback above will only be
-            // invoked during this call.
-            glfwPollEvents();
-        }
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
     protected abstract void render();
@@ -114,5 +92,23 @@ public abstract class GLFWWindow {
 
     public long getWindowId() {
         return window;
+    }
+
+    public void update() {
+        if (!glfwWindowShouldClose(window)){
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+
+
+            render();
+
+            glfwSwapBuffers(window); // swap the color buffers
+
+            // Poll for window events. The key callback above will only be
+            // invoked during this call.
+            glfwPollEvents();
+        } else {
+            dispose();
+        }
     }
 }

@@ -24,4 +24,9 @@ public class ClientGame extends Game {
     public void render(){
         manager.render(world);
     }
+
+    public void requestShutdown() {
+
+        setRunning(false);
+    }
 }
