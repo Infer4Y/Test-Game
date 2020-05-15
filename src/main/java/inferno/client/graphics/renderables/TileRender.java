@@ -20,9 +20,7 @@ public class TileRender implements Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.drawImage(texture, x, y, null);
-    }
+    public void draw() { }
 
     public int getX() {
         return x;

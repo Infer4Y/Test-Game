@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     private final FPSViewer fpsViewer = new FPSViewer();
     public static boolean up, down, left, right;
     private int count;
-    public static Window window;
+    public static GLFWWindow window;
 
     public static void main(String[] args) {
         instance = new Game();
@@ -84,7 +84,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
     public Game () {
         this.requestFocus();
-        window =  new Window (WIDTH, HEIGHT, TITLE, this);
+        window =  new GLFWWindow (WIDTH, HEIGHT, TITLE, this);
         Sounds.init();
         Tiles.init();
         Items.init();

@@ -17,10 +17,7 @@ public class Background implements UpdateableObject, Drawable {
     public void second() {
     }
 
-    private  void drawCycle(Graphics g){
-    }
-
     @Override
-    public void draw(Graphics g) {
+    public void draw() {
     }
 }

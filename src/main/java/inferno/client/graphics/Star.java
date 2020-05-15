@@ -21,9 +21,7 @@ public class Star implements Drawable, UpdateableObject {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.fillOval(x,y,size,size);
+    public void draw() {
     }
 
     @Override

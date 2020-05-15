@@ -10,9 +10,6 @@ public class EntityRenderer implements Drawable {
     public EntityRenderer() {
     }
 
-    @Override
-    public void draw(Graphics g) {
-    }
 
     public int getY() {
         return y;
@@ -21,4 +18,7 @@ public class EntityRenderer implements Drawable {
     public int getX() {
         return x;
     }
+
+    @Override
+    public void draw() { }
 }
