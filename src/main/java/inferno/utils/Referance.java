@@ -17,4 +17,5 @@ public class Referance {
     public static final double TICKS = 50;
     public static final int HEIGHT = 640;
     public static final int WIDTH = 640*2;
+    public static final float TEXTURE_UNIT = 64f;
 }
