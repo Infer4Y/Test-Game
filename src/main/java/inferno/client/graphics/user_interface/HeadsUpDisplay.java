@@ -7,6 +7,6 @@ public class HeadsUpDisplay implements Drawable {
     public HeadsUpDisplay() {}
 
     @Override
-    public void draw() {
+    public void draw(float x, float y) {
     }
 }

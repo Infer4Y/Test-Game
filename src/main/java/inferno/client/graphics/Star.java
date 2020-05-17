@@ -4,7 +4,7 @@ import inferno.client.graphics.renderables.Drawable;
 
 import java.awt.*;
 
-public class Star implements Drawable, UpdateableObject {
+public class Star implements UpdateableObject {
     private int x, y, size, speed, count;
 
     public Star(int x, int y, int size, int speed) {
@@ -18,10 +18,6 @@ public class Star implements Drawable, UpdateableObject {
         }else {
             this.speed = 0;
         }
-    }
-
-    @Override
-    public void draw() {
     }
 
     @Override

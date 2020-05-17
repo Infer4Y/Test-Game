@@ -20,5 +20,5 @@ public class EntityRenderer implements Drawable {
     }
 
     @Override
-    public void draw() { }
+    public void draw(float x, float y) { }
 }

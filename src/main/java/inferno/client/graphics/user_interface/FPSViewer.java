@@ -12,7 +12,7 @@ public class FPSViewer implements Drawable, UpdateableObject {
     private int averageTicks;
     private int averageFrames;
 
-    public void draw () {
+    public void draw (float x, float y) {
         frames++;
         //if (Game.f3) {
         //    g.setColor(Color.GREEN);
