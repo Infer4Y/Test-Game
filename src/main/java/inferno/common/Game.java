@@ -48,6 +48,13 @@ public class Game {
         }
 
         world.addChunk(temp);
+
+        Chunk temp1 = new Chunk();
+        temp1.setTiles(temp.getTiles());
+
+        temp1.setOffset(new Vector2f(1,0));
+
+        world.addChunk(temp1);
     }
 
     public void update(){
@@ -61,5 +68,9 @@ public class Game {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

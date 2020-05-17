@@ -74,7 +74,11 @@ public abstract class GLFWWindow {
         // Make the window visible
         glfwShowWindow(window);
 
+        glfwSetWindowAttrib(window, GLFW_RESIZABLE, GLFW_FALSE);
+
         GL.createCapabilities();
+
+        glDisable(GL_DEPTH_TEST);
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -82,7 +86,7 @@ public abstract class GLFWWindow {
 
         glMatrixMode(GL_MODELVIEW);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0.0f, 0.0f, 0.5f, 1.0f);
     }
 
     protected abstract void render();

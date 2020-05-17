@@ -5,7 +5,7 @@ import inferno.common.tiles.*;
 import java.util.HashMap;
 
 public class Tiles {
-    public static final HashMap<String, Tile> BLOCK_MAP = new HashMap<String, Tile>();
+    public static final HashMap<String, Tile> TILE_MAP = new HashMap<String, Tile>();
     public static Tile grass = new Tile("grass_sides");
     public static Tile dirt = new Tile("dirt");
     public static Tile stone = new Tile("stone");
@@ -53,13 +53,13 @@ public class Tiles {
     }
 
     private static void register(Tile tile){
-        BLOCK_MAP.put(tile.getName(), tile);
+        TILE_MAP.put(tile.getName(), tile);
         System.out.println(tile.getName());
     }
 
     private static void register(Tile... tile){
         for (Tile b : tile) {
-            BLOCK_MAP.put(b.getName(), b);
+            TILE_MAP.put(b.getName(), b);
             System.out.println(b.getName());
         }
     }

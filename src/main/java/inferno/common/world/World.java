@@ -15,7 +15,9 @@ public class World {
     private String name;
     private int x, y;
 
-    public World (String name){}
+    public World (String name){
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -70,5 +72,9 @@ public class World {
 
     public void addChunk(Chunk temp) {
         chunks.add(temp);
+    }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
     }
 }

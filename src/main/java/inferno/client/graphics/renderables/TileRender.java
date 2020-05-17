@@ -1,13 +1,9 @@
 package inferno.client.graphics.renderables;
 
-import inferno.client.ClientGame;
+import inferno.client.states.ClientGame;
 import inferno.client.resources.textures.Texture;
-import inferno.client.resources.textures.Textures;
 import inferno.common.tiles.Tile;
 import inferno.utils.Referance;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class TileRender implements Drawable {
     private Texture texture;
@@ -19,7 +15,11 @@ public class TileRender implements Drawable {
     public void draw(float x, float y) {
         if (tile != null) {
             texture = ClientGame.textures.getTexture(tile.getName());
-            TextureHelper.draw(texture, x, y, Referance.TEXTURE_UNIT, Referance.TEXTURE_UNIT);
+            if (tile.isAir()) {
+                TextureHelper.draw(texture, x, y, Referance.TEXTURE_UNIT, Referance.TEXTURE_UNIT, 0.1f);
+            } else {
+                TextureHelper.draw(texture, x, y, Referance.TEXTURE_UNIT, Referance.TEXTURE_UNIT);
+            }
         }
         tile = null;
     }

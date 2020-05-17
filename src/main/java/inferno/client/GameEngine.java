@@ -1,11 +1,21 @@
 package inferno.client;
 
+import inferno.client.states.ClientGame;
+import inferno.client.states.MenuState;
+import inferno.client.states.State;
 import inferno.client.user_interface.GLFWWindow;
+import inferno.client.user_interface.KeyboardInput;
+import inferno.client.user_interface.MouseInput;
+import inferno.common.entities.Entity;
+import inferno.common.entities.Player;
+import inferno.common.registries.Entities;
+import inferno.common.registries.Items;
+import inferno.common.registries.Tiles;
 import inferno.utils.Referance;
+import org.joml.Vector2f;
 
-import static org.lwjgl.glfw.GLFW.glfwGetTime;
+import static inferno.client.states.ClientGame.textures;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
-import static org.lwjgl.opengl.GL11.*;
 
 public class GameEngine {
 
@@ -13,6 +23,13 @@ public class GameEngine {
 
     private GLFWWindow window;
     private ClientGame clientGame;
+    public static Player userInstance;
+    private KeyboardInput keyboardInput;
+    private MouseInput mouseInput;
+
+    private State currentState;
+    private MenuState menuState;
+    private boolean running;
 
     public GameEngine() {
         this.timer = new Timer();
@@ -22,29 +39,77 @@ public class GameEngine {
         window = new GLFWWindow(Referance.WIDTH, Referance.HEIGHT, Referance.NAME+" | "+Referance.VERSION) {
             @Override
             protected void render() {
-                clientGame.render();
+                if (currentState != null) {
+                    currentState.render();
+                }
             }
         };
 
+
+        Tiles.init();
+        Items.init();
+        Entities.init();
+
+        textures.init();
+
+        userInstance = Entities.cloneEntity(Entities.player);
+        userInstance.setDisplayName("Test Player!");
+        userInstance.setLocation(new Vector2f(7,0.1f));
+
+
+        this.keyboardInput = new KeyboardInput(window.getWindowId());
+        this.mouseInput = new MouseInput(window.getWindowId());
+
+        this.menuState = new MenuState();
         this.clientGame = new ClientGame();
+
+        this.currentState = menuState;
+
+        // ToDo : add this line once I can get this not null
+        this.clientGame.getWorld().addEntity(userInstance);
+
+        setRunning(true);
 
         loop();
     }
 
     private void loop(){
-        while (clientGame.isRunning()) {
+        while (this.isRunning()) {
             float delta = timer.getDelta();
 
-            update();
+            if (currentState != null) {
+                currentState.update();
+            }
 
             window.update();
+
             if (glfwWindowShouldClose(window.getWindowId())) {
-                clientGame.requestShutdown();
+                setRunning(currentState.requestShutdown());
             }
         }
     }
 
     private void update(){
         clientGame.update();
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public KeyboardInput getKeyboardInput() {
+        return keyboardInput;
+    }
+
+    public MouseInput getMouseInput() {
+        return mouseInput;
+    }
+
+    public void startGame() {
+        currentState = clientGame;
     }
 }

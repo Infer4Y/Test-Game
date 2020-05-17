@@ -1,7 +1,9 @@
 package inferno.common.entities;
 
+import inferno.common.tiles.Tile;
 import inferno.common.world.Direction;
 import inferno.common.world.World;
+import inferno.utils.Bounds;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
@@ -10,6 +12,7 @@ public class Entity {
     private int health, maxHealth;
     private Direction facing;
     private Vector2f location = new Vector2f(), force = new Vector2f();
+    private Bounds bounds = new Bounds(location, new Vector2f(1,1));
     private boolean isKillable;
     private boolean isGravity = true;
 
@@ -18,6 +21,7 @@ public class Entity {
         this.health = health;
         this.maxHealth = maxHealth;
         this.facing = Direction.LEFT;
+        this.setSize(1f, 1f);
     }
 
     public String getName() {
@@ -67,12 +71,15 @@ public class Entity {
         if (!isGrounded(world) && isGravity){
             location = location.add(Referance.GRAVITY);
         }
+
         force = force.mul(.9f);
         if ( force.x > 0) {
             facing = Direction.RIGHT;
         } else if (force. x < 0) {
             facing = Direction.LEFT;
         }
+        bounds.x = location.x;
+        bounds.y = location.y;
         if  (isKillable && health < 0) {
             onDeath(world);
             world.removeEntity(this);
@@ -87,7 +94,15 @@ public class Entity {
             return true;
         }
 
-        return world.getChunkFromPos(location).getTile((int) Math.ceil(location.x), Math.round(location.y)-1).isSolid() || world.getChunkFromPos(location).getTile((int) Math.floor(location.x), Math.round(location.y)-1).isSolid();
+        Tile temp = world.getChunkFromPos(location).getTile((int) Math.floor(location.x), (int)Math.floor(location.y));
+        Tile temp1 = world.getChunkFromPos(location).getTile((int) Math.ceil(location.x), (int)Math.floor(location.y));
+
+        return temp.isSolid() && !temp.isAir() || temp1.isSolid() && !temp1.isAir();
+    }
+
+    public void setSize(float width, float height){
+        bounds.width = width;
+        bounds.height = height;
     }
 
     public boolean isKillable() {
@@ -96,5 +111,9 @@ public class Entity {
 
     public void setKillable(boolean killable) {
         isKillable = killable;
+    }
+
+    public Bounds getBounds() {
+        return bounds;
     }
 }

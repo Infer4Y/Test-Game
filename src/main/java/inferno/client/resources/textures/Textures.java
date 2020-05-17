@@ -1,9 +1,13 @@
 package inferno.client.resources.textures;
 
 import inferno.client.resources.ResourceLocation;
+import inferno.common.entities.Entity;
 import inferno.common.item.Item;
 import inferno.common.item.ItemBlock;
 import inferno.common.item.ItemIngot;
+import inferno.common.registries.Entities;
+import inferno.common.registries.Items;
+import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
 import inferno.common.tiles.TileOre;
 import inferno.utils.FileUtils;
@@ -19,22 +23,33 @@ public class Textures {
     private Texture placeholder;
 
     public static Texture slot;
+    public static Texture loading;
+    public static Texture background;
 
 
-
-    public void init(HashMap<String, Item> items, HashMap<String, Tile> tiles){
+    public void init(){
         placeholder = new Texture(new ResourceLocation("tex/placeholder.png"));
         slot = new Texture(new ResourceLocation("tex/slot.png"));
-        for (Item i: items.values()) {
+        loading = new Texture(new ResourceLocation("tex/loading.png"));
+        background = new Texture(new ResourceLocation("tex/background.png"));
+
+        for (Item i: Items.ITEM_MAP.values()) {
             register(i);
         }
-        for (Tile i: tiles.values()) {
+        for (Tile i: Tiles.TILE_MAP.values()) {
             register(i);
+        }
+        for (Entity e : Entities.ENTITY_MAP.values()) {
+            register(e);
         }
     }
 
     public Texture getTexture(String name){
         return textures.getOrDefault(name, placeholder);
+    }
+
+    private void register(Entity entity){
+        textures.put(entity.getName(), new Texture(new ResourceLocation("tex/entities/" + entity.getName() + ".png")));
     }
 
     private void register(Tile block){

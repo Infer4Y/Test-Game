@@ -18,7 +18,7 @@ public class Items {
         register(coal);
         register(pickaxe);
         register(diamond);
-        for (Tile b: Tiles.BLOCK_MAP.values()) {
+        for (Tile b: Tiles.TILE_MAP.values()) {
             register(new ItemBlock(b));
             if (b instanceof TileOre){
                 if (b.getName().equals(b.getBlockDrop().getName())){

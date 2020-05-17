@@ -42,4 +42,12 @@ public class Chunk {
                 (pos.y >= offset.y*Referance.CHUNKHEIGHT) &&
                 (pos.y <= offset.y*Referance.CHUNKHEIGHT+Referance.CHUNKHEIGHT));
     }
+
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(Tile[] tiles) {
+        this.tiles = tiles;
+    }
 }
