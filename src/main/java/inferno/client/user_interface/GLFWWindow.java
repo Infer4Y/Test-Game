@@ -76,6 +76,12 @@ public abstract class GLFWWindow {
 
         GL.createCapabilities();
 
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+
+        glMatrixMode(GL_MODELVIEW);
+
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     }
 

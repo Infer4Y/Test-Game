@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Texture {
     private static final int BYTES_PER_PIXEL = 4;
-    private final int textureID;
+    private int textureID;
 
     public Texture(ResourceLocation loc){
         this.textureID = loadTexture(loc);
@@ -67,5 +67,10 @@ public class Texture {
 
     public void unbind(){
         glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    public void dispose() {
+        glDeleteTextures(textureID);
+        textureID = 0;
     }
 }

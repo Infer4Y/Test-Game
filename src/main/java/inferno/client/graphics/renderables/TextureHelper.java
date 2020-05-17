@@ -10,6 +10,8 @@ public class TextureHelper {
         glLoadIdentity();
         glEnable(GL_TEXTURE_2D); //likely redundant; will be removed upon migration to "modern GL"
 
+        if ( texture == null) { return; }
+
         //bind the texture before rendering it
         texture.bind();
 

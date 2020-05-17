@@ -14,6 +14,7 @@ public class RenderingManager {
 
     public void render(World world) {
         Chunk render = world.getChunkFromPos(new Vector2f(0,0));
+        if (render == null) {return;}
 
         for (int y = 0; y < Referance.CHUNKHEIGHT; y++){
             for (int x = 0; x < Referance.CHUNKWIDTH; x++) {

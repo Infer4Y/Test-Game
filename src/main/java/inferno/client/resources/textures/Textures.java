@@ -66,4 +66,10 @@ public class Textures {
 
     }
 
+    public void dispose(){
+        for (Texture texture: textures.values()) {
+            texture.dispose();
+        }
+    }
+
 }

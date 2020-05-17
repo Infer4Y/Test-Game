@@ -18,7 +18,7 @@ public class TileRender implements Drawable {
     @Override
     public void draw(float x, float y) {
         if (tile != null) {
-            ClientGame.textures.getTexture(tile.getName());
+            texture = ClientGame.textures.getTexture(tile.getName());
             TextureHelper.draw(texture, x, y, Referance.TEXTURE_UNIT, Referance.TEXTURE_UNIT);
         }
         tile = null;

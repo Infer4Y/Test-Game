@@ -22,10 +22,13 @@ public class ClientGame extends Game {
     }
 
     public void render(){
-        manager.render(world);
+        if (world != null) {
+            manager.render(world);
+        }
     }
 
     public void requestShutdown() {
+        textures.dispose();
 
         setRunning(false);
     }

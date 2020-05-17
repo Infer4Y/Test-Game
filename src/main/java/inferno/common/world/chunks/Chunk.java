@@ -37,9 +37,9 @@ public class Chunk {
     }
 
     public boolean isPosIn(Vector2f pos) {
-        return ((pos.x > offset.x*Referance.CHUNKWIDTH) &&
-                (pos.x < offset.x*Referance.CHUNKWIDTH+Referance.CHUNKWIDTH) &&
-                (pos.y > offset.y*Referance.CHUNKHEIGHT) &&
-                (pos.y < offset.y*Referance.CHUNKHEIGHT+Referance.CHUNKHEIGHT));
+        return ((pos.x >= offset.x*Referance.CHUNKWIDTH) &&
+                (pos.x <= offset.x*Referance.CHUNKWIDTH+Referance.CHUNKWIDTH) &&
+                (pos.y >= offset.y*Referance.CHUNKHEIGHT) &&
+                (pos.y <= offset.y*Referance.CHUNKHEIGHT+Referance.CHUNKHEIGHT));
     }
 }

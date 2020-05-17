@@ -67,4 +67,8 @@ public class World {
     public void requestGeneration(Vector2f location) {
         // ToDo : implement world generation.
     }
+
+    public void addChunk(Chunk temp) {
+        chunks.add(temp);
+    }
 }
