@@ -22,7 +22,7 @@ public class ChunkUtils {
         for (int tempMeshY = 0; tempMeshY < Referance.CHUNKHEIGHT; tempMeshY++) {
             for (int temMeshX = 0; temMeshX < Referance.CHUNKWIDTH; temMeshX++) {
                 try {
-                    tempMesh[tempMeshY][temMeshX] = tempChunk0.getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY][temMeshX] = tempChunk2.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(pos.add(-16, 0));
                     tempMesh[tempMeshY][temMeshX] = Tiles.air;
@@ -36,7 +36,7 @@ public class ChunkUtils {
                 }
 
                 try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk2.getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk0.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(pos.add(Referance.CHUNKWIDTH, 0));
                     tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
