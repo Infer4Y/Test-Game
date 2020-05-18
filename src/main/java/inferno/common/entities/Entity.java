@@ -84,7 +84,7 @@ public class Entity {
             facing = Direction.LEFT;
         }
 
-        //force.mul(.1f);
+        force.mul(.1f);
 
         bounds.x = location.x;
         bounds.y = location.y;
@@ -99,6 +99,8 @@ public class Entity {
 
     public boolean isGrounded(World world){
         Vector2f actualLocation = new Vector2f(location.x, location.y);
+        Vector2f actualLocation2 = new Vector2f(location.x, location.y).add(-Referance.CHUNKWIDTH, 0);
+
         Vector2f tempOffset = null;
 
         if (world.getChunkFromPos(location) == null){
@@ -107,11 +109,24 @@ public class Entity {
         }
 
         Tile[][] tempMesh = ChunkUtils.returnTileArrayPos(world, actualLocation);
+        Chunk tempChunk123 = world.getChunkFromPos(actualLocation2);
+        if (tempChunk123 == null){
+            world.requestGeneration(actualLocation2);
+            return true;
+        }
+
+        actualLocation2 = tempChunk123.getOffset();
+
+
 
         System.out.println(location.x + " " + location.y);
 
-        Tile temp = tempMesh[(int) (Math.floor(location.y / Referance.CHUNKHEIGHT))][(int) (Math.floor(location.x / Referance.CHUNKWIDTH))];
-        Tile temp1 = tempMesh[(int) (Math.floor(location.y / Referance.CHUNKHEIGHT))][(int) (Math.ceil(location.x / Referance.CHUNKWIDTH))];
+        System.out.println( (Math.floor(location.x/ Referance.CHUNKWIDTH) - actualLocation2.x ) + " " + (Math.floor(location.y/ Referance.CHUNKHEIGHT) - actualLocation2.y));
+
+        Tile temp = tempMesh[(int) (Math.floor(location.y-actualLocation2.y) / Referance.CHUNKHEIGHT)][(int) (Math.floor(location.x - actualLocation2.x) / Referance.CHUNKWIDTH)];
+        Tile temp1 = tempMesh[(int) (Math.floor(location.y-actualLocation2.y) / Referance.CHUNKHEIGHT)][(int) (Math.ceil(location.x - actualLocation2.x) / Referance.CHUNKWIDTH)];
+
+        System.out.println("Tile 1 : " + temp.getName() +", Tile 2 :"+ temp1.getName());
 
         return temp.isSolid() && !temp.isAir() || temp1.isSolid() && !temp1.isAir();
     }

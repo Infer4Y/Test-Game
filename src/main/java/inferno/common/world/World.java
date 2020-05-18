@@ -75,11 +75,12 @@ public class World {
 
     public void requestGeneration(Vector2f location) {
         Chunk temp = new Chunk();
-        temp.setOffset(new Vector2f(round (location.x / Referance.CHUNKWIDTH, 16), round (location.y / Referance.CHUNKHEIGHT, 16)));
+
+        temp.setOffset(new Vector2f(new Float(Math.floor (location.x / Referance.CHUNKWIDTH)), new Float(Math.floor (location.y / Referance.CHUNKHEIGHT))));
         // ToDo : implement world generation.
         for (int y = 0; y < Referance.CHUNKHEIGHT; y++) {
             for (int x = 0; x < Referance.CHUNKWIDTH; x++) {
-                temp.setTile(Tiles.air, x, y);
+                temp.setTile(Tiles.dirt, x, y);
             }
         }
 

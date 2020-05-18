@@ -8,6 +8,17 @@ import org.joml.Vector2f;
 
 public class ChunkUtils {
 
+    private static Tile getTileWithGeneration(World world, Vector2f pos, Chunk tempChunk, int tileX, int tileY)
+    {
+        Tile t = Tiles.air;
+        try {
+            t = tempChunk.getTile(tileX, tileY);
+        } catch (NullPointerException e) {
+            world.requestGeneration(pos);
+        }
+        return  t;
+    }
+
 
     public static Tile[][] returnTileArrayPos(World world, Vector2f pos) {
         Tile[][] tempMesh = new Tile[32][48];
@@ -21,50 +32,17 @@ public class ChunkUtils {
 
         for (int tempMeshY = 0; tempMeshY < Referance.CHUNKHEIGHT; tempMeshY++) {
             for (int temMeshX = 0; temMeshX < Referance.CHUNKWIDTH; temMeshX++) {
-                try {
-                    tempMesh[tempMeshY][temMeshX] = tempChunk2.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(pos.add(-16, 0));
-                    tempMesh[tempMeshY][temMeshX] = Tiles.air;
-                }
-
-                try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = tempChunk1.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(pos.add(0, 0));
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = Tiles.air;
-                }
-
-                try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk0.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(pos.add(Referance.CHUNKWIDTH, 0));
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
-                }
-
-                try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = tempChunk3.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(pos.add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = Tiles.air;
-                }
-
-                try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = tempChunk4.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(pos.add(0, Referance.CHUNKHEIGHT));
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = Tiles.air;
-                }
-
-                try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk5.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(pos.add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
-                }
+                tempMesh[tempMeshY][temMeshX] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(-Referance.CHUNKWIDTH, 0), tempChunk2, temMeshX, tempMeshY);
+                tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] =  getTileWithGeneration(world, pos, tempChunk1, temMeshX, tempMeshY);
+                tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, 0), tempChunk0, temMeshX, tempMeshY);
+                tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT), tempChunk3, temMeshX, tempMeshY);
+                tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(0, Referance.CHUNKHEIGHT), tempChunk4, temMeshX, tempMeshY);
+                tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT), tempChunk5, temMeshX, tempMeshY);
             }
         }
 
         return tempMesh;
     }
+
+
 }
