@@ -97,6 +97,7 @@ public class Entity {
     public void onDeath(World world){ }
 
     public boolean isGrounded(World world){
+        Vector2f actualLocation = new Vector2f(location.x, location.y);
         Vector2f tempOffset = null;
 
         if (world.getChunkFromPos(location) == null){
@@ -106,56 +107,70 @@ public class Entity {
 
         Tile[][] tempMesh = new Tile[Referance.CHUNKHEIGHT*2][Referance.CHUNKWIDTH*3];
 
-        for (int intY = 0; intY < Referance.CHUNKHEIGHT*2; intY++) {
-            for (int intX = 0; intX < Referance.CHUNKWIDTH*3; intX++) {
-                tempMesh[intY][intX] = null;
-            }
-        }
+        Chunk tempChunk0 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(Referance.CHUNKWIDTH, 0));
+        Chunk tempChunk1 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y));
+        Chunk tempChunk2 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(-Referance.CHUNKWIDTH, 0));
+        Chunk tempChunk3 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
+        Chunk tempChunk4 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(0, Referance.CHUNKHEIGHT));
+        Chunk tempChunk5 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
 
         for (int tempMeshY = 0; tempMeshY < Referance.CHUNKHEIGHT; tempMeshY++) {
             for (int temMeshX = 0; temMeshX < Referance.CHUNKWIDTH; temMeshX++) {
                 try {
-                    tempMesh[tempMeshY][temMeshX] = world.getChunkFromPos(new Vector2f(getLocation()).add(Referance.CHUNKWIDTH, 0)).getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY][temMeshX] = tempChunk0.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(location.add(-Referance.CHUNKWIDTH, 0));
                     tempMesh[tempMeshY][temMeshX] = Tiles.air;
                 }
+
+                System.out.println(location.x + " " + location.y);
                 try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = world.getChunkFromPos(new Vector2f(getLocation())).getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = tempChunk1.getTile(temMeshX, tempMeshY);
                     tempOffset = world.getChunkFromPos(new Vector2f(getLocation())).getOffset();
                 } catch (NullPointerException e) {
                     world.requestGeneration(location.add(0, 0));
                     tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = Tiles.air;
                 }
+
+                System.out.println(location.x + " " + location.y);
                 try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = world.getChunkFromPos(new Vector2f(getLocation()).add(-Referance.CHUNKWIDTH, 0)).getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk2.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(location.add(Referance.CHUNKWIDTH, 0));
                     tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
                 }
 
+                System.out.println(location.x + " " + location.y);
                 try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = world.getChunkFromPos(new Vector2f(getLocation()).add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT)).getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = tempChunk3.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(location.add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
                     tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = Tiles.air;
                 }
+                System.out.println(location.x + " " + location.y);
                 try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = world.getChunkFromPos(new Vector2f(getLocation()).add(0, Referance.CHUNKHEIGHT)).getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = tempChunk4.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(location.add(0, Referance.CHUNKHEIGHT));
                     tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = Tiles.air;
                 }
+                System.out.println(location.x + " " + location.y);
                 try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = world.getChunkFromPos(new Vector2f(getLocation()).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT)).getTile(temMeshX, tempMeshY);
+                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk5.getTile(temMeshX, tempMeshY);
                 } catch (NullPointerException e) {
                     world.requestGeneration(location.add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
                     tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
                 }
+                System.out.println(location.x + " " + location.y);
             }
         }
 
 
+        System.out.println(location.x + " " + location.y);
+
+        location = actualLocation;
+
+        System.out.println(location.x + " " + location.y);
 
         Tile temp = tempMesh[(int) (Math.floor(location.y) - tempOffset.y * Referance.CHUNKHEIGHT)][(int) (Math.floor(location.x) - tempOffset.x * Referance.CHUNKWIDTH)];
         Tile temp1 = tempMesh[(int) (Math.floor(location.y) - tempOffset.y * Referance.CHUNKHEIGHT)][(int) (Math.ceil(location.x) - tempOffset.x * Referance.CHUNKWIDTH)];
