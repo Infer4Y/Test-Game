@@ -7,6 +7,7 @@ import inferno.common.world.Direction;
 import inferno.common.world.World;
 import inferno.common.world.chunks.Chunk;
 import inferno.utils.Bounds;
+import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
@@ -105,78 +106,13 @@ public class Entity {
             return true;
         }
 
-        Tile[][] tempMesh = new Tile[Referance.CHUNKHEIGHT*2][Referance.CHUNKWIDTH*3];
-
-        Chunk tempChunk0 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(Referance.CHUNKWIDTH, 0));
-        Chunk tempChunk1 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y));
-        Chunk tempChunk2 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(-Referance.CHUNKWIDTH, 0));
-        Chunk tempChunk3 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-        Chunk tempChunk4 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(0, Referance.CHUNKHEIGHT));
-        Chunk tempChunk5 = world.getChunkFromPos(new Vector2f(getLocation().x, getLocation().y).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-
-        for (int tempMeshY = 0; tempMeshY < Referance.CHUNKHEIGHT; tempMeshY++) {
-            for (int temMeshX = 0; temMeshX < Referance.CHUNKWIDTH; temMeshX++) {
-                try {
-                    tempMesh[tempMeshY][temMeshX] = tempChunk0.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(location.add(-Referance.CHUNKWIDTH, 0));
-                    tempMesh[tempMeshY][temMeshX] = Tiles.air;
-                }
-
-                System.out.println(location.x + " " + location.y);
-                try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = tempChunk1.getTile(temMeshX, tempMeshY);
-                    tempOffset = world.getChunkFromPos(new Vector2f(getLocation())).getOffset();
-                } catch (NullPointerException e) {
-                    world.requestGeneration(location.add(0, 0));
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] = Tiles.air;
-                }
-
-                System.out.println(location.x + " " + location.y);
-                try {
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk2.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(location.add(Referance.CHUNKWIDTH, 0));
-                    tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
-                }
-
-                System.out.println(location.x + " " + location.y);
-                try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = tempChunk3.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(location.add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = Tiles.air;
-                }
-                System.out.println(location.x + " " + location.y);
-                try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = tempChunk4.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(location.add(0, Referance.CHUNKHEIGHT));
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = Tiles.air;
-                }
-                System.out.println(location.x + " " + location.y);
-                try {
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = tempChunk5.getTile(temMeshX, tempMeshY);
-                } catch (NullPointerException e) {
-                    world.requestGeneration(location.add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-                    tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = Tiles.air;
-                }
-                System.out.println(location.x + " " + location.y);
-            }
-        }
-
+        Tile[][] tempMesh = ChunkUtils.returnTileArrayPos(world, actualLocation);
 
         System.out.println(location.x + " " + location.y);
 
-        location = actualLocation;
+        Tile temp = tempMesh[(int) (Math.floor(location.y / Referance.CHUNKHEIGHT))][(int) (Math.floor(location.x / Referance.CHUNKWIDTH))];
+        Tile temp1 = tempMesh[(int) (Math.floor(location.y / Referance.CHUNKHEIGHT))][(int) (Math.ceil(location.x / Referance.CHUNKWIDTH))];
 
-        System.out.println(location.x + " " + location.y);
-
-        Tile temp = tempMesh[(int) (Math.floor(location.y) - tempOffset.y * Referance.CHUNKHEIGHT)][(int) (Math.floor(location.x) - tempOffset.x * Referance.CHUNKWIDTH)];
-        Tile temp1 = tempMesh[(int) (Math.floor(location.y) - tempOffset.y * Referance.CHUNKHEIGHT)][(int) (Math.ceil(location.x) - tempOffset.x * Referance.CHUNKWIDTH)];
-        if (temp == null || temp1 == null) {
-            return true;
-        }
         return temp.isSolid() && !temp.isAir() || temp1.isSolid() && !temp1.isAir();
     }
 
