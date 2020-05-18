@@ -20,15 +20,26 @@ public class RenderingManager {
     public TileRender tileRender = new TileRender();
     public EntityRenderer entityRender = new EntityRenderer();
 
-    public Camera camera = new Camera(new Vector2f(0,0), new Bounds(0,0, Referance.WIDTH, Referance.HEIGHT));
+    public Camera camera = new Camera(new Vector2f(7,-4), new Bounds(0,0, 20, 10));
 
 
     public void render(World world) {
+        camera.centerOnEntity(GameEngine.userInstance);
+
         ArrayList<Chunk> chunksToRender = new ArrayList<>();
-        chunksToRender.add(world.getChunkFromPos(new Vector2f(7,1)));
-        chunksToRender.add(world.getChunkFromPos(new Vector2f(15+7,1)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation()));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(Referance.CHUNKWIDTH, 0)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(-Referance.CHUNKWIDTH, 0)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(0, Referance.CHUNKHEIGHT)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(0, -Referance.CHUNKHEIGHT)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(Referance.CHUNKWIDTH, -Referance.CHUNKHEIGHT)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(-Referance.CHUNKWIDTH, -Referance.CHUNKHEIGHT)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT)));
+        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT)));
 
         TextureHelper.draw(ClientGame.textures.background, 0,0, Referance.WIDTH, Referance.HEIGHT);
+
+        camera.translate();
 
         for ( Chunk chunkToRender : chunksToRender) {
             if (chunkToRender != null) {
@@ -48,6 +59,8 @@ public class RenderingManager {
             entityRender.setEntity(entity);
             entityRender.draw(entity.getLocation().x* Referance.TEXTURE_UNIT, entity.getLocation().y* Referance.TEXTURE_UNIT);
         }
+
+        camera.unTranslate();
     }
 
     private void debugChunkLines(Chunk chunkToRender){

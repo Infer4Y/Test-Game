@@ -23,7 +23,7 @@ public class TextureHelper {
     }
 
     public static void draw(Texture texture, float x, float y, float width, float height, float alpha){
-        glLoadIdentity();
+        //glLoadIdentity();
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D); //likely redundant; will be removed upon migration to "modern GL"
@@ -60,7 +60,7 @@ public class TextureHelper {
     }
 
     public static void drawFlippedX(Texture texture, float x, float y, float width, float height, float alpha){
-        glLoadIdentity();
+        //glLoadIdentity();
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D); //likely redundant; will be removed upon migration to "modern GL"
@@ -97,7 +97,7 @@ public class TextureHelper {
     }
 
     public static void drawFlippedY(Texture texture, float x, float y, float width, float height, float alpha){
-        glLoadIdentity();
+        //glLoadIdentity();
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D); //likely redundant; will be removed upon migration to "modern GL"
@@ -134,7 +134,7 @@ public class TextureHelper {
     }
 
     public static void drawFlipped(Texture texture, float x, float y, float width, float height, float alpha){
-        glLoadIdentity();
+        //glLoadIdentity();
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D); //likely redundant; will be removed upon migration to "modern GL"

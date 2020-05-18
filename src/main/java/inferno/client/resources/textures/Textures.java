@@ -10,11 +10,7 @@ import inferno.common.registries.Items;
 import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
 import inferno.common.tiles.TileOre;
-import inferno.utils.FileUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class Textures {

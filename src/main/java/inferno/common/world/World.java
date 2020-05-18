@@ -3,10 +3,15 @@ package inferno.common.world;
 import inferno.common.entities.Entity;
 import inferno.common.entities.EntityStack;
 import inferno.common.entities.Player;
+import inferno.common.registries.Tiles;
+import inferno.common.tiles.Tile;
 import inferno.common.world.chunks.Chunk;
+import inferno.utils.Referance;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
+
+import static inferno.utils.MathUtils.round;
 
 public class World {
     private ArrayList<Chunk> chunks = new ArrayList<>();
@@ -66,8 +71,19 @@ public class World {
         return null;
     }
 
+
+
     public void requestGeneration(Vector2f location) {
+        Chunk temp = new Chunk();
+        temp.setOffset(new Vector2f(round (location.x / Referance.CHUNKWIDTH, 16), round (location.y / Referance.CHUNKHEIGHT, 16)));
         // ToDo : implement world generation.
+        for (int y = 0; y < Referance.CHUNKHEIGHT; y++) {
+            for (int x = 0; x < Referance.CHUNKWIDTH; x++) {
+                temp.setTile(Tiles.air, x, y);
+            }
+        }
+
+        chunks.add(temp);
     }
 
     public void addChunk(Chunk temp) {

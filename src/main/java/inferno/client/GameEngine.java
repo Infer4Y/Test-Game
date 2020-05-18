@@ -54,7 +54,7 @@ public class GameEngine {
 
         userInstance = Entities.cloneEntity(Entities.player);
         userInstance.setDisplayName("Test Player!");
-        userInstance.setLocation(new Vector2f(7,0.1f));
+        userInstance.setLocation(new Vector2f(7,0f));
 
 
         this.keyboardInput = new KeyboardInput(window.getWindowId());
@@ -65,7 +65,6 @@ public class GameEngine {
 
         this.currentState = menuState;
 
-        // ToDo : add this line once I can get this not null
         this.clientGame.getWorld().addEntity(userInstance);
 
         setRunning(true);
