@@ -76,11 +76,11 @@ public class GameEngine {
         while (this.isRunning()) {
             float delta = timer.getDelta();
 
+            window.update();
+
             if (currentState != null) {
                 currentState.update();
             }
-
-            window.update();
 
             if (glfwWindowShouldClose(window.getWindowId())) {
                 setRunning(currentState.requestShutdown());

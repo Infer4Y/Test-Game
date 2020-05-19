@@ -5,6 +5,7 @@ import inferno.common.tiles.Tile;
 import inferno.common.world.World;
 import inferno.common.world.chunks.Chunk;
 import org.joml.Vector2f;
+import org.lwjgl.opengl.GL11;
 
 public class ChunkUtils {
 
@@ -21,32 +22,25 @@ public class ChunkUtils {
 
     public static Tile getTileBelowPos(World world, Vector2f pos){
 
-        return getTileWithGeneration(world, pos, world.getChunkFromPos(new Vector2f(pos.x, pos.y)), (int) (pos.x/Referance.CHUNKWIDTH), (int) (pos.y/Referance.CHUNKHEIGHT));
+        return getTileWithGeneration(world, pos, world.getChunkFromPos(new Vector2f(pos.x, pos.y)), (int) Math.abs(pos.x/Referance.CHUNKWIDTH), (int) Math.abs(pos.y/Referance.CHUNKHEIGHT));
     }
 
-    public static Tile[][] returnTileArrayPos(World world, Vector2f pos) {
-        Tile[][] tempMesh = new Tile[32][48];
+    public static Tile[] returnTileArrayPos(World world, Vector2f pos) {
+        Tile[] tempMesh = new Tile[3];
 
-        Chunk tempChunk0 = world.getChunkFromPos(new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, 0));
-        Chunk tempChunk1 = world.getChunkFromPos(new Vector2f(pos.x, pos.y));
-        Chunk tempChunk2 = world.getChunkFromPos(new Vector2f(pos.x, pos.y).add(-Referance.CHUNKWIDTH, 0));
-        Chunk tempChunk3 = world.getChunkFromPos(new Vector2f(pos.x, pos.y).add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-        Chunk tempChunk4 = world.getChunkFromPos(new Vector2f(pos.x, pos.y).add(0, Referance.CHUNKHEIGHT));
-        Chunk tempChunk5 = world.getChunkFromPos(new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT));
-
-        for (int tempMeshY = 0; tempMeshY < Referance.CHUNKHEIGHT; tempMeshY++) {
-            for (int temMeshX = 0; temMeshX < Referance.CHUNKWIDTH; temMeshX++) {
-                tempMesh[tempMeshY][temMeshX] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(-Referance.CHUNKWIDTH, 0), tempChunk2, temMeshX, tempMeshY);
-                tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH] =  getTileWithGeneration(world, pos, tempChunk1, temMeshX, tempMeshY);
-                tempMesh[tempMeshY][temMeshX + Referance.CHUNKWIDTH * 2] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, 0), tempChunk0, temMeshX, tempMeshY);
-                tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT), tempChunk3, temMeshX, tempMeshY);
-                tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(0, Referance.CHUNKHEIGHT), tempChunk4, temMeshX, tempMeshY);
-                tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT), tempChunk5, temMeshX, tempMeshY);
-            }
-            System.out.println(pos.x + " " + pos.y);
-        }
+        tempMesh[0]  = getTileBelowPos(world, new Vector2f(pos.x-1, pos.y));
+        tempMesh[1]  = getTileBelowPos(world, new Vector2f(pos.x, pos.y));
+        tempMesh[2]  = getTileBelowPos(world, new Vector2f(pos.x+1, pos.y));
 
         return tempMesh;
+    }
+
+    private static void glDraw(float x, float y){
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glColor3f(1,x/16f,y/16f);
+        GL11.glLineWidth(4f);
+
+        GL11.glRectf(x*Referance.TEXTURE_UNIT,y*Referance.TEXTURE_UNIT, Referance.TEXTURE_UNIT, Referance.TEXTURE_UNIT);
     }
 
 

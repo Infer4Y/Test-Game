@@ -68,6 +68,14 @@ public class World {
             }
         }
 
+        requestGeneration(pos);
+
+        for (Chunk chunk : chunks) {
+            if ( chunk.isPosIn(pos)) {
+                return chunk;
+            }
+        }
+
         return null;
     }
 

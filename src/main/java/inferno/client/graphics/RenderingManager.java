@@ -63,9 +63,34 @@ public class RenderingManager {
         for (Entity entity : world.getEntities()){
             entityRender.setEntity(entity);
             entityRender.draw(entity.getLocation().x* Referance.TEXTURE_UNIT, entity.getLocation().y* Referance.TEXTURE_UNIT);
+            if (TestGame.isDebug()){
+                debugEntity(entity);
+            }
         }
 
         camera.unTranslate();
+    }
+
+    private void debugEntity(Entity entity){
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glColor3f(1,entity.getLocation().x/16f,0);
+        GL11.glLineWidth(4f);
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, entity.getLocation().y*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glEnd();
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glEnd();
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glEnd();
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT);
+        GL11.glEnd();
     }
 
     private void debugChunkLines(Chunk chunkToRender){
