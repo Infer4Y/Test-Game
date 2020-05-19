@@ -33,7 +33,7 @@ public class RenderingManager {
 
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
-                vectors.add(playerPos.add(-Referance.CHUNKWIDTH-Referance.CHUNKWIDTH+ (x*Referance.CHUNKWIDTH),-Referance.CHUNKHEIGHT-Referance.CHUNKHEIGHT+ (y*Referance.CHUNKHEIGHT)));
+                vectors.add(new Vector2f(playerPos.x, playerPos.y).add(-Referance.CHUNKWIDTH-Referance.CHUNKWIDTH+ (x*Referance.CHUNKWIDTH),-Referance.CHUNKHEIGHT-Referance.CHUNKHEIGHT+ (y*Referance.CHUNKHEIGHT)));
             }
         }
 
