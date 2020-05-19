@@ -19,6 +19,10 @@ public class ChunkUtils {
         return  t;
     }
 
+    public static Tile getTileBelowPos(World world, Vector2f pos){
+
+        return getTileWithGeneration(world, pos, world.getChunkFromPos(new Vector2f(pos.x, pos.y)), (int) (pos.x/Referance.CHUNKWIDTH), (int) (pos.y/Referance.CHUNKHEIGHT));
+    }
 
     public static Tile[][] returnTileArrayPos(World world, Vector2f pos) {
         Tile[][] tempMesh = new Tile[32][48];
