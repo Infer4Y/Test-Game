@@ -82,13 +82,32 @@ public class World {
 
 
     public void requestGeneration(Vector2f location) {
+        Tile[] tiles = new Tile[]{
+                Tiles.air,    // 0
+                Tiles.air,    // 1
+                Tiles.air,    // 2
+                Tiles.air,    // 3
+                Tiles.air,    // 4
+                Tiles.grass,  // 5
+                Tiles.dirt,   // 6
+                Tiles.dirt,   // 7
+                Tiles.dirt,   // 8
+                Tiles.stone,  // 9
+                Tiles.stone,  //10
+                Tiles.stone,  //11
+                Tiles.stone,  //12
+                Tiles.stone,  //13
+                Tiles.stone,  //14
+                Tiles.stone   //15
+        };
+
         Chunk temp = new Chunk();
 
         temp.setOffset(new Vector2f(new Float(Math.floor (location.x / Referance.CHUNKWIDTH)), new Float(Math.floor (location.y / Referance.CHUNKHEIGHT))));
         // ToDo : implement world generation.
-        for (int y = 0; y < Referance.CHUNKHEIGHT; y++) {
-            for (int x = 0; x < Referance.CHUNKWIDTH; x++) {
-                temp.setTile(Tiles.dirt, x, y);
+        for (int yTile = 0; yTile < Referance.CHUNKHEIGHT; yTile++) {
+            for (int xTile = 0; xTile < Referance.CHUNKWIDTH; xTile++) {
+                temp.setTile(tiles[yTile], xTile, yTile);
             }
         }
 
