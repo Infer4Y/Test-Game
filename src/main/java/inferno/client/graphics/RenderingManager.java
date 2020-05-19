@@ -70,7 +70,7 @@ public class RenderingManager {
 
     private void debugChunkLines(Chunk chunkToRender){
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor3f(1,chunkToRender.getOffset().x/256f,0);
+        GL11.glColor3f(1,chunkToRender.getOffset().x/16f,0);
         GL11.glLineWidth(4f);
         GL11.glBegin(GL11.GL_LINES);
         GL11.glVertex2f(chunkToRender.getOffset().x*Referance.CHUNKWIDTH*Referance.TEXTURE_UNIT, chunkToRender.getOffset().y*Referance.CHUNKWIDTH*Referance.TEXTURE_UNIT);
@@ -82,7 +82,7 @@ public class RenderingManager {
         GL11.glEnd();
         GL11.glBegin(GL11.GL_LINES);
         GL11.glVertex2f(chunkToRender.getOffset().x*Referance.CHUNKWIDTH*Referance.TEXTURE_UNIT, (chunkToRender.getOffset().y*Referance.CHUNKWIDTH + Referance.CHUNKHEIGHT)*Referance.TEXTURE_UNIT);
-        GL11.glVertex2f((chunkToRender.getOffset().x*Referance.CHUNKWIDTH+ Referance.CHUNKWIDTH)*Referance.TEXTURE_UNIT, (chunkToRender.getOffset().y*Referance.CHUNKWIDTH + Referance.CHUNKHEIGHT)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f((chunkToRender.getOffset().x*Referance.CHUNKWIDTH + Referance.CHUNKWIDTH)*Referance.TEXTURE_UNIT, (chunkToRender.getOffset().y*Referance.CHUNKWIDTH + Referance.CHUNKHEIGHT)*Referance.TEXTURE_UNIT);
         GL11.glEnd();
         GL11.glBegin(GL11.GL_LINES);
         GL11.glVertex2f((chunkToRender.getOffset().x*Referance.CHUNKWIDTH)*Referance.TEXTURE_UNIT, chunkToRender.getOffset().y*Referance.TEXTURE_UNIT);
