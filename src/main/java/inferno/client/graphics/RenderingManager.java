@@ -15,6 +15,7 @@ import org.joml.Vector2f;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RenderingManager {
     public TileRender tileRender = new TileRender();
@@ -26,16 +27,20 @@ public class RenderingManager {
     public void render(World world) {
         camera.centerOnEntity(GameEngine.userInstance);
 
+        Vector2f playerPos = new Vector2f(GameEngine.userInstance.getLocation().x, GameEngine.userInstance.getLocation().y);
+
+        ArrayList<Vector2f> vectors = new ArrayList<>();
+
+        for (int y = 0; y < 5; y++) {
+            for (int x = 0; x < 5; x++) {
+                vectors.add(playerPos.add(-Referance.CHUNKWIDTH-Referance.CHUNKWIDTH+ (x*Referance.CHUNKWIDTH),-Referance.CHUNKHEIGHT-Referance.CHUNKHEIGHT+ (y*Referance.CHUNKHEIGHT)));
+            }
+        }
+
         ArrayList<Chunk> chunksToRender = new ArrayList<>();
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation()));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(Referance.CHUNKWIDTH, 0)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(-Referance.CHUNKWIDTH, 0)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(0, Referance.CHUNKHEIGHT)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(0, -Referance.CHUNKHEIGHT)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(Referance.CHUNKWIDTH, -Referance.CHUNKHEIGHT)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(-Referance.CHUNKWIDTH, -Referance.CHUNKHEIGHT)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(-Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT)));
-        chunksToRender.add(world.getChunkFromPos(GameEngine.userInstance.getLocation().add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT)));
+        for (Vector2f pos : vectors){
+            chunksToRender.add(world.getChunkFromPos(pos));
+        }
 
         TextureHelper.draw(ClientGame.textures.background, 0,0, Referance.WIDTH, Referance.HEIGHT);
 

@@ -39,6 +39,7 @@ public class ChunkUtils {
                 tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(0, Referance.CHUNKHEIGHT), tempChunk4, temMeshX, tempMeshY);
                 tempMesh[tempMeshY + Referance.CHUNKHEIGHT][temMeshX + Referance.CHUNKWIDTH * 2] = getTileWithGeneration(world, new Vector2f(pos.x, pos.y).add(Referance.CHUNKWIDTH, Referance.CHUNKHEIGHT), tempChunk5, temMeshX, tempMeshY);
             }
+            System.out.println(pos.x + " " + pos.y);
         }
 
         return tempMesh;

@@ -117,11 +117,10 @@ public class Entity {
 
         actualLocation2 = tempChunk123.getOffset();
 
-
-
         System.out.println(location.x + " " + location.y);
 
-        System.out.println( (Math.floor(location.x/ Referance.CHUNKWIDTH) - actualLocation2.x ) + " " + (Math.floor(location.y/ Referance.CHUNKHEIGHT) - actualLocation2.y));
+        System.out.println( (Math.floor(location.x - actualLocation2.x) / Referance.CHUNKWIDTH) + " " + (Math.floor(location.y-actualLocation2.y)));
+        System.out.println( (Math.ceil(location.x - actualLocation2.x) / Referance.CHUNKWIDTH) + " " + (Math.floor(location.y-actualLocation2.y)));
 
         Tile temp = tempMesh[(int) (Math.floor(location.y-actualLocation2.y) / Referance.CHUNKHEIGHT)][(int) (Math.floor(location.x - actualLocation2.x) / Referance.CHUNKWIDTH)];
         Tile temp1 = tempMesh[(int) (Math.floor(location.y-actualLocation2.y) / Referance.CHUNKHEIGHT)][(int) (Math.ceil(location.x - actualLocation2.x) / Referance.CHUNKWIDTH)];
