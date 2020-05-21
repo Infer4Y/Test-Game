@@ -2,6 +2,7 @@ package inferno.client.graphics;
 
 import inferno.client.GameEngine;
 import inferno.client.TestGame;
+import inferno.client.graphics.renderables.Drawable;
 import inferno.client.graphics.renderables.EntityRenderer;
 import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.graphics.renderables.TileRender;
@@ -22,6 +23,8 @@ public class RenderingManager {
     public EntityRenderer entityRender = new EntityRenderer();
 
     public Camera camera = new Camera(new Vector2f(7,-4), new Bounds(0,0, 20, 10));
+
+    public ArrayList<Drawable> drawables = new ArrayList<>();
 
 
     public void render(World world) {
@@ -68,6 +71,12 @@ public class RenderingManager {
             }
         }
 
+        for (Drawable draw : drawables) {
+            draw.draw(0,0);
+        }
+
+        drawables.clear();
+
         camera.unTranslate();
     }
 
@@ -76,20 +85,20 @@ public class RenderingManager {
         GL11.glColor3f(1,entity.getLocation().x/16f,0);
         GL11.glLineWidth(4f);
         GL11.glBegin(GL11.GL_LINES);
-        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, entity.getLocation().y*Referance.TEXTURE_UNIT);
-        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, entity.getLocation().y*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
         GL11.glEnd();
         GL11.glBegin(GL11.GL_LINES);
-        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT);
-        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
         GL11.glEnd();
         GL11.glBegin(GL11.GL_LINES);
-        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
-        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y + entity.getBounds().height)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
         GL11.glEnd();
         GL11.glBegin(GL11.GL_LINES);
-        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT);
-        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT);
+        GL11.glVertex2f((entity.getLocation().x+ entity.getBounds().width)*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
+        GL11.glVertex2f(entity.getLocation().x*Referance.TEXTURE_UNIT, (entity.getLocation().y)*Referance.TEXTURE_UNIT-Referance.TEXTURE_UNIT);
         GL11.glEnd();
     }
 

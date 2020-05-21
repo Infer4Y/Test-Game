@@ -20,7 +20,6 @@ public class Game {
         world.update();
     }
 
-
     public boolean isRunning() {
         return running;
     }

@@ -21,9 +21,9 @@ public class EntityRenderer implements Drawable {
         if (entity != null) {
             texture = ClientGame.textures.getTexture(entity.getName());
             if (entity.getFacing() == Direction.LEFT) {
-                TextureHelper.draw(texture, x-(entity.getBounds().width * Referance.TEXTURE_UNIT), y-(entity.getBounds().height * Referance.TEXTURE_UNIT), entity.getBounds().width * Referance.TEXTURE_UNIT, entity.getBounds().height * Referance.TEXTURE_UNIT);
+                TextureHelper.draw(texture, x-(entity.getBounds().width * Referance.TEXTURE_UNIT)+Referance.TEXTURE_UNIT, y-(entity.getBounds().height * Referance.TEXTURE_UNIT)+Referance.TEXTURE_UNIT, entity.getBounds().width * Referance.TEXTURE_UNIT, entity.getBounds().height * Referance.TEXTURE_UNIT);
             } else {
-                TextureHelper.drawFlippedX(texture, x-(entity.getBounds().width * Referance.TEXTURE_UNIT), y-(entity.getBounds().height * Referance.TEXTURE_UNIT), entity.getBounds().width * Referance.TEXTURE_UNIT, entity.getBounds().height * Referance.TEXTURE_UNIT);
+                TextureHelper.drawFlippedX(texture, x-(entity.getBounds().width * Referance.TEXTURE_UNIT)+Referance.TEXTURE_UNIT, y-(entity.getBounds().height * Referance.TEXTURE_UNIT)+Referance.TEXTURE_UNIT, entity.getBounds().width * Referance.TEXTURE_UNIT, entity.getBounds().height * Referance.TEXTURE_UNIT);
             }
         }
     }

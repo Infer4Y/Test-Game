@@ -15,6 +15,22 @@ public class Chunk {
     }
 
     public Tile getTile(int x, int y){
+        if (x < 0){
+            x = Referance.CHUNKWIDTH + x;
+        }
+
+        if (x > Referance.CHUNKWIDTH-1){
+            x = x - Referance.CHUNKWIDTH+1;
+        }
+
+        if (y < 0){
+            y = Referance.CHUNKHEIGHT + y;
+        }
+
+        if (y > Referance.CHUNKHEIGHT){
+            y = y - Referance.CHUNKHEIGHT+1;
+        }
+
         return tiles[x*Referance.CHUNKWIDTH+y];
     }
 
