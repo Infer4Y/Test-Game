@@ -36,9 +36,9 @@ public class DefaultWorldGenerator extends WorldGenerator {
                 double noise = (SimplexNoise.noise((float) nx * frequency, (float) ny * frequency) + 1)/2;
 
                 Tile tile;
-                if (noise < 0.4F) {
+                if (noise < 0.55F) {
                     tile = Tiles.stone;
-                } else if (noise < 0.580F){
+                } else if (noise < 0.590F){
                     tile = Tiles.dirt;
                 } else if(noise < 0.6F) {
                     tile = Tiles.grass;

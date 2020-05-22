@@ -46,7 +46,7 @@ public class Chunk {
         for (int y = 0; y < Referance.CHUNKHEIGHT; y++) {
             for (int x = 0; x < Referance.CHUNKWIDTH; x++) {
                 if (getTile(x, y).isTickable()) {
-                    getTile(x, y).onTick(world, x, y);
+                    getTile(x, y).onTick(world, this, x, y);
                 }
             }
         }
