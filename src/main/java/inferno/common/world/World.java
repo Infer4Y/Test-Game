@@ -6,6 +6,7 @@ import inferno.common.entities.Player;
 import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
 import inferno.common.world.chunks.Chunk;
+import inferno.common.world.gen.DefaultWorldGenerator;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import static inferno.utils.MathUtils.round;
 
 public class World {
+    private DefaultWorldGenerator generator;
     private ArrayList<Chunk> chunks = new ArrayList<>();
     private ArrayList<Entity> entities = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
@@ -22,6 +24,7 @@ public class World {
 
     public World (String name){
         this.name = name;
+        this.generator = new DefaultWorldGenerator(this);
     }
 
     public String getName() {
@@ -70,19 +73,15 @@ public class World {
 
         requestGeneration(pos);
 
-        for (Chunk chunk : chunks) {
-            if ( chunk.isPosIn(pos)) {
-                return chunk;
-            }
-        }
 
-        return null;
+
+        return getChunkFromPos(pos);
     }
 
 
 
     public void requestGeneration(Vector2f location) {
-        Tile[] tiles = new Tile[]{
+        /*Tile[] tiles = new Tile[]{
                 Tiles.air,    // 0
                 Tiles.air,    // 1
                 Tiles.air,    // 2
@@ -100,16 +99,17 @@ public class World {
                 Tiles.stone,  //14
                 Tiles.stone   //15
         };
+        */
+        Chunk temp = generator.generate(new Float(Math.floor (location.x / Referance.CHUNKWIDTH)), new Float(Math.floor (location.y / Referance.CHUNKHEIGHT)));
 
-        Chunk temp = new Chunk();
-
+        /*
         temp.setOffset(new Vector2f(new Float(Math.floor (location.x / Referance.CHUNKWIDTH)), new Float(Math.floor (location.y / Referance.CHUNKHEIGHT))));
         // ToDo : implement world generation.
         for (int yTile = 0; yTile < Referance.CHUNKHEIGHT; yTile++) {
             for (int xTile = 0; xTile < Referance.CHUNKWIDTH; xTile++) {
                 temp.setTile(tiles[yTile], xTile, yTile);
             }
-        }
+        }*/
 
         chunks.add(temp);
     }

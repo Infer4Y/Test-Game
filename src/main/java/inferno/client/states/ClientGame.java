@@ -33,7 +33,7 @@ public class ClientGame extends Game implements State {
         KeyboardInput keyboardInput = TestGame.getEngine().getKeyboardInput();
 
         if (keyboardInput.isKeyPressed(GLFW_KEY_W)) {
-            GameEngine.userInstance.addForce(new Vector2f(0, -.25f));
+            GameEngine.userInstance.addForce(new Vector2f(0, -.45f));
         }
         if (keyboardInput.isKeyPressed(GLFW_KEY_S)) {
             //GameEngine.userInstance.addForce(new Vector2f(0, .25f));

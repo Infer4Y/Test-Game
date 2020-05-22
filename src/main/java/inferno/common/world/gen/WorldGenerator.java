@@ -1,6 +1,7 @@
 package inferno.common.world.gen;
 
 import inferno.common.world.World;
+import inferno.common.world.chunks.Chunk;
 import inferno.utils.Referance;
 
 public abstract class WorldGenerator {
@@ -12,5 +13,5 @@ public abstract class WorldGenerator {
         seed = Referance.RANDOM.nextLong();
     }
 
-    public abstract void generate();
+    public abstract Chunk generate(float offX, float offY);
 }

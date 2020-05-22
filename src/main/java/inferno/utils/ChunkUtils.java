@@ -16,13 +16,21 @@ public class ChunkUtils {
     {
         Tile t = Tiles.air;
         try {
+            if (tileX < 0){
+                tileX = tileX * -1;
+            }
+            if (tileY < 0){
+                tileY = tileY * -1;
+            }
             t = tempChunk.getTile(tileX, tileY);
         } catch (NullPointerException e) {
             world.requestGeneration(pos);
             t = getTileWithGeneration(world, pos, tempChunk, tileX, tileY);
         }
 
-        ClientGame.manager.drawables.add(new TileOutlineRenderer(pos));
+        if ( TestGame.isDebug() ) {
+            ClientGame.manager.drawables.add(new TileOutlineRenderer(pos));
+        }
 
         return  t;
     }
@@ -32,11 +40,11 @@ public class ChunkUtils {
     }
 
     public static Tile[] returnTileArrayPos(World world, Vector2f pos) {
-        Tile[] tempMesh = new Tile[3];
+        Tile[] tempMesh = new Tile[]{Tiles.air, Tiles.air, Tiles.air};
 
-        tempMesh[0]  = getTileBelowPos(world, new Vector2f(pos.x-1, pos.y+1));
+        //tempMesh[0]  = getTileBelowPos(world, new Vector2f(pos.x-1, pos.y+1));
         tempMesh[1]  = getTileBelowPos(world, new Vector2f(pos.x, pos.y+1));
-        tempMesh[2]  = getTileBelowPos(world, new Vector2f(pos.x+1, pos.y+1));
+        //tempMesh[2]  = getTileBelowPos(world, new Vector2f(pos.x+1, pos.y+1));
 
         return tempMesh;
     }
