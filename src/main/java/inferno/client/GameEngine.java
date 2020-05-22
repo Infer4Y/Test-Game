@@ -54,7 +54,7 @@ public class GameEngine {
 
         userInstance = Entities.cloneEntity(Entities.player);
         userInstance.setDisplayName("Test Player!");
-        userInstance.setLocation(new Vector2f(7,4f));
+        userInstance.setLocation(new Vector2f(54,70));
 
 
         this.keyboardInput = new KeyboardInput(window.getWindowId());
