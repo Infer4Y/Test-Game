@@ -1,14 +1,13 @@
 package inferno.utils;
 
 import inferno.client.TestGame;
-import inferno.client.graphics.renderables.TileOutlineRenderer;
+import inferno.client.graphics.renderables.tiles.TileOutlineRenderer;
 import inferno.client.states.ClientGame;
 import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
 import inferno.common.world.World;
 import inferno.common.world.chunks.Chunk;
 import org.joml.Vector2f;
-import org.lwjgl.opengl.GL11;
 
 public class ChunkUtils {
 

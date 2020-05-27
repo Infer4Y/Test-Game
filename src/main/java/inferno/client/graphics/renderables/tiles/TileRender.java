@@ -1,5 +1,7 @@
-package inferno.client.graphics.renderables;
+package inferno.client.graphics.renderables.tiles;
 
+import inferno.client.graphics.renderables.Drawable;
+import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.states.ClientGame;
 import inferno.client.resources.textures.Texture;
 import inferno.common.tiles.Tile;

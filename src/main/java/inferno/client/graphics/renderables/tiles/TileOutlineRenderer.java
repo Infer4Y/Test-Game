@@ -1,10 +1,11 @@
-package inferno.client.graphics.renderables;
+package inferno.client.graphics.renderables.tiles;
 
+import inferno.client.graphics.renderables.Drawable;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 import org.lwjgl.opengl.GL11;
 
-public class TileOutlineRenderer implements Drawable{
+public class TileOutlineRenderer implements Drawable {
     private Vector2f location = new Vector2f();
 
     public TileOutlineRenderer ( Vector2f location){

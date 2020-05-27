@@ -3,9 +3,9 @@ package inferno.client.graphics;
 import inferno.client.GameEngine;
 import inferno.client.TestGame;
 import inferno.client.graphics.renderables.Drawable;
-import inferno.client.graphics.renderables.EntityRenderer;
+import inferno.client.graphics.renderables.entities.EntityRenderer;
 import inferno.client.graphics.renderables.TextureHelper;
-import inferno.client.graphics.renderables.TileRender;
+import inferno.client.graphics.renderables.tiles.TileRender;
 import inferno.client.states.ClientGame;
 import inferno.common.entities.Entity;
 import inferno.common.world.World;
@@ -16,7 +16,6 @@ import org.joml.Vector2f;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RenderingManager {
     public TileRender tileRender = new TileRender();

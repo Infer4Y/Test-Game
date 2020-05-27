@@ -1,6 +1,7 @@
-package inferno.client.graphics.renderables;
+package inferno.client.graphics.renderables.entities;
 
 import inferno.client.graphics.renderables.Drawable;
+import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.resources.textures.Texture;
 import inferno.client.states.ClientGame;
 import inferno.common.entities.Entity;
