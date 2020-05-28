@@ -5,12 +5,15 @@ import inferno.common.entities.EntityStack;
 import inferno.common.entities.Player;
 import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
+import inferno.common.tiles.TileAir;
 import inferno.common.world.chunks.Chunk;
 import inferno.common.world.gen.DefaultWorldGenerator;
+import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import static inferno.utils.MathUtils.round;
 
@@ -36,11 +39,16 @@ public class World {
     }
 
     public void update() {
-        for (Entity entity: entities) {
-            entity.update(this);
-        }
-        for (Chunk chunk : chunks) {
-            chunk.update(this);
+        try {
+            for (Entity entity: entities) {
+                entity.update(this);
+            }
+            for (Chunk chunk : chunks) {
+                chunk.update(this);
+            }
+        } catch (ConcurrentModificationException e){
+            e.printStackTrace();
+            update();
         }
     }
 
@@ -92,5 +100,9 @@ public class World {
 
     public ArrayList<Entity> getEntities() {
         return entities;
+    }
+
+    public void setTileFromMousePos(Vector2f pos, Tile tile) {
+        ChunkUtils.setTilePos(this, pos, tile);
     }
 }

@@ -84,7 +84,7 @@ public class Entity {
             facing = Direction.LEFT;
         }
 
-        force.mul(.1f);
+        force.mul(.9f);
 
         bounds.x = location.x;
         bounds.y = location.y;
@@ -98,17 +98,9 @@ public class Entity {
     public void onDeath(World world){ }
 
     public boolean isGrounded(World world){
-        System.out.println(location.x + " " + location.y);
+        Tile temp = ChunkUtils.getTileBelowPos(world, location.add(1,1, new Vector2f()));
 
-        Tile[] tilesTemp = ChunkUtils.returnTileArrayPos(world, location);
-
-        Tile temp = tilesTemp[0];
-        Tile temp1 = tilesTemp[1];
-        Tile temp2 = tilesTemp[2];
-
-        System.out.println("Tile 1 : " + temp.getName() +", Tile 2 : "+ temp1.getName() +", Tile 3 : "+ temp2.getName());
-
-        return temp.isSolid() && !temp.isAir() || temp1.isSolid() && !temp1.isAir() || temp2.isSolid() && !temp2.isAir();
+        return temp.isSolid();
     }
 
     public void setSize(float width, float height){
@@ -130,5 +122,9 @@ public class Entity {
 
     public void addForce(Vector2f vector2f) {
         force = force.add(vector2f);
+    }
+
+    public void setXForce(float v) {
+        force.x = v;
     }
 }

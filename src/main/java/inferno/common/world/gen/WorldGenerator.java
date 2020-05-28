@@ -14,4 +14,8 @@ public abstract class WorldGenerator {
     }
 
     public abstract Chunk generate(float offX, float offY);
+
+    public long getSeed() {
+        return seed;
+    }
 }

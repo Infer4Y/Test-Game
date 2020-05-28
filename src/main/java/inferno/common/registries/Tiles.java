@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Tiles {
     public static final HashMap<String, Tile> TILE_MAP = new HashMap<String, Tile>();
     public static TileGrass grass = new TileGrass("grass_sides");
-    public static Tile dirt = new Tile("dirt");
+    public static TileDirt dirt = new TileDirt("dirt");
     public static Tile stone = new Tile("stone");
     public static TileAir air = new TileAir("air");
     public static TileLaunchPad launcher = new TileLaunchPad("launcher");

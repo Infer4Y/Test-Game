@@ -15,11 +15,10 @@ import inferno.utils.Referance;
 import org.joml.Vector2f;
 
 import static inferno.client.states.ClientGame.textures;
+import static org.lwjgl.glfw.GLFW.glfwGetTime;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class GameEngine {
-
-    protected Timer timer;
 
     private GLFWWindow window;
     private ClientGame clientGame;
@@ -31,9 +30,7 @@ public class GameEngine {
     private MenuState menuState;
     private boolean running;
 
-    public GameEngine() {
-        this.timer = new Timer();
-    }
+    public GameEngine() { }
 
     public void begin(){
         window = new GLFWWindow(Referance.WIDTH, Referance.HEIGHT, Referance.NAME+" | "+Referance.VERSION) {
@@ -73,13 +70,24 @@ public class GameEngine {
     }
 
     private void loop(){
+        double lastTime = glfwGetTime();
+
+        int nbFrames = 0;
         while (this.isRunning()) {
-            float delta = timer.getDelta();
 
             window.update();
 
             if (currentState != null) {
                 currentState.update();
+            }
+
+            double currentTime = glfwGetTime();
+
+            nbFrames++;
+            if ( currentTime - lastTime >= 1.0 ){
+                window.setCurrentFPS(nbFrames);
+                nbFrames = 0;
+                lastTime += 1.0;
             }
 
             if (glfwWindowShouldClose(window.getWindowId())) {

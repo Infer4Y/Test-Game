@@ -17,8 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 public abstract class GLFWWindow {
 
     private long window;
+    private String title;
 
     public GLFWWindow(int width, int height, String title) {
+        this.title = title;
         init(width, height, title);
     }
 
@@ -120,5 +122,9 @@ public abstract class GLFWWindow {
         } else {
             dispose();
         }
+    }
+
+    public void setCurrentFPS(int nbFrames) {
+        glfwSetWindowTitle(window, title+ " | FPS : "+ nbFrames);
     }
 }

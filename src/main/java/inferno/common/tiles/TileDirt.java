@@ -7,8 +7,8 @@ import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
-public class TileGrass extends Tile {
-    public TileGrass(String name) {
+public class TileDirt extends Tile {
+    public TileDirt(String name) {
         super(name);
         setTickable(true);
     }
@@ -17,8 +17,10 @@ public class TileGrass extends Tile {
     public void onTick(World world, Chunk chunk, int x, int y) {
         super.onTick(world, chunk, x, y);
         if (ChunkUtils.getTileBelowPos(world, new Vector2f(chunk.getOffset().x*Referance.CHUNKWIDTH + x,  chunk.getOffset().y*Referance.CHUNKHEIGHT + y - 1)).isSolid()) {
-            if (Referance.RANDOM.nextInt(20) == 1) {
-                chunk.setTile(Tiles.dirt, x, y);
+            if (ChunkUtils.getTileBelowPos(world, new Vector2f(chunk.getOffset().x*Referance.CHUNKWIDTH + x-1,  chunk.getOffset().y*Referance.CHUNKHEIGHT + y)) instanceof TileGrass ||ChunkUtils.getTileBelowPos(world, new Vector2f(chunk.getOffset().x*Referance.CHUNKWIDTH + x+1,  chunk.getOffset().y*Referance.CHUNKHEIGHT + y)) instanceof TileGrass) {
+                if (Referance.RANDOM.nextInt(20) == 1) {
+                    chunk.setTile(Tiles.grass, x, y);
+                }
             }
         }
     }

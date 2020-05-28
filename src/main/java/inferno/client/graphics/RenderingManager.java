@@ -33,9 +33,9 @@ public class RenderingManager {
 
         ArrayList<Vector2f> vectors = new ArrayList<>();
 
-        for (int y = 0; y < 5; y++) {
-            for (int x = 0; x < 5; x++) {
-                vectors.add(new Vector2f(playerPos.x, playerPos.y).add(-Referance.CHUNKWIDTH-Referance.CHUNKWIDTH+ (x*Referance.CHUNKWIDTH),-Referance.CHUNKHEIGHT-Referance.CHUNKHEIGHT+ (y*Referance.CHUNKHEIGHT)));
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++) {
+                vectors.add(new Vector2f(playerPos.x, playerPos.y).add(-Referance.CHUNKWIDTH+ (x*Referance.CHUNKWIDTH),-Referance.CHUNKHEIGHT+ (y*Referance.CHUNKHEIGHT)));
             }
         }
 
