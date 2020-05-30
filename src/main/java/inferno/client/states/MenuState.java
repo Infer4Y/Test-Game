@@ -1,18 +1,12 @@
 package inferno.client.states;
 
-import inferno.client.GameEngine;
 import inferno.client.TestGame;
 import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.graphics.user_interface.Button;
 import inferno.client.resources.textures.Textures;
 import inferno.utils.Referance;
 import org.joml.AABBf;
-import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
-
 import static inferno.client.states.ClientGame.textures;
 
 public class MenuState implements State {

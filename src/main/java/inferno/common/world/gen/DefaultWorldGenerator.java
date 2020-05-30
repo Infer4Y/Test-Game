@@ -26,7 +26,7 @@ public class DefaultWorldGenerator extends WorldGenerator {
         double yStart = offY * Referance.CHUNKHEIGHT;
         double yEnd = yStart + Referance.CHUNKHEIGHT;
 
-        float frequency = 1.0f+variation/(float) Referance.CHUNKWIDTH;
+        float frequency = (1.0f+variation)/(float) Referance.CHUNKWIDTH;
 
         for(int i = 0; i < Referance.CHUNKWIDTH; i++){
             for(int j = 0; j < Referance.CHUNKHEIGHT; j++) {

@@ -38,12 +38,13 @@ public class ClientGame extends Game implements State {
 
         KeyboardInput keyboardInput = TestGame.getEngine().getKeyboardInput();
         MouseInput mouseInput = TestGame.getEngine().getMouseInput();
+
         clientMouse = mouseInput.getMousePos().mul(1f/ Referance.TEXTURE_UNIT, new Vector2f()).add(GameEngine.userInstance.getLocation(), new Vector2f()).sub(10,5);
 
         float speedMod = keyboardInput.isKeyPressed(GLFW_KEY_LEFT_CONTROL) ? 2.5f : 1f;
 
         if (keyboardInput.isKeyPressed(GLFW_KEY_W) && GameEngine.userInstance.isGrounded(world)) {
-            GameEngine.userInstance.addForce(new Vector2f(0, -2.45f));
+            GameEngine.userInstance.addForce(new Vector2f(0, -.95f));
         }
         if (keyboardInput.isKeyPressed(GLFW_KEY_S)) {
             //GameEngine.userInstance.addForce(new Vector2f(0, .25f));
