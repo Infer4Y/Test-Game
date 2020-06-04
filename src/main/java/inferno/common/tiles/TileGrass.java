@@ -1,5 +1,7 @@
 package inferno.common.tiles;
 
+import inferno.common.item.Item;
+import inferno.common.registries.Items;
 import inferno.common.registries.Tiles;
 import inferno.common.world.World;
 import inferno.common.world.chunks.Chunk;
@@ -21,5 +23,10 @@ public class TileGrass extends Tile {
                 chunk.setTile(Tiles.dirt, x, y);
             }
         }
+    }
+
+    @Override
+    public Item getBlockDrop() {
+        return Items.getItem("dirt");
     }
 }

@@ -22,6 +22,7 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class GameEngine {
     public static GLFont gameFont;
+    public static GLFont gameFontButton;
     public static GLFont gameFontTitle;
 
     private GLFWWindow window;
@@ -29,6 +30,8 @@ public class GameEngine {
     public static Player userInstance;
     private KeyboardInput keyboardInput;
     private MouseInput mouseInput;
+
+    public static int slotSelected = 0;
 
     private State currentState;
     private MenuState menuState;
@@ -46,6 +49,7 @@ public class GameEngine {
             }
         };
         gameFont = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 11f);
+        gameFontButton = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 11f);
         gameFontTitle = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 42f);
 
 
@@ -98,6 +102,9 @@ public class GameEngine {
 
             if (glfwWindowShouldClose(window.getWindowId())) {
                 setRunning(currentState.requestShutdown());
+                gameFont.dispose();
+                gameFontButton.dispose();
+                gameFontTitle.dispose();
             }
         }
     }

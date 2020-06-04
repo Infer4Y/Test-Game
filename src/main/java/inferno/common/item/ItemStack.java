@@ -32,6 +32,6 @@ public class ItemStack {
     }
 
     public boolean isEmpty(){
-        return item == Items.getItem("air") || this.amount == 0 || this.amount == 1;
+        return item == Items.getItem("air") || this.amount <= 0;
     }
 }

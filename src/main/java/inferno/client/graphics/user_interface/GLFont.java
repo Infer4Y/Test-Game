@@ -150,4 +150,9 @@ public class GLFont {
     public float getCharHeight() {
         return (float) (fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent());
     }
+
+    public void dispose() {
+        glDeleteTextures(this.fontTextureId);
+        fontTextureId = 0;
+    }
 }

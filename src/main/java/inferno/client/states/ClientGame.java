@@ -8,6 +8,8 @@ import inferno.client.resources.textures.Textures;
 import inferno.client.user_interface.KeyboardInput;
 import inferno.client.user_interface.MouseInput;
 import inferno.common.Game;
+import inferno.common.containers.Slot;
+import inferno.common.item.ItemBlock;
 import inferno.common.item.ItemStack;
 import inferno.common.registries.Items;
 import inferno.common.registries.Tiles;
@@ -58,10 +60,39 @@ public class ClientGame extends Game implements State {
             GameEngine.userInstance.setXForce(.25f * speedMod);
         }
 
-        if (mouseInput.isLeftClick()||keyboardInput.isKeyPressed(GLFW_KEY_SPACE)){
+        if (mouseInput.isLeftClick()){
             Tile result = world.breakTileFromMousePos(clientMouse, Tiles.air);
             GameEngine.userInstance.getInventory().addStack(new ItemStack(result.getBlockDrop(), result.getDropAmount()));
         }
+
+        if (mouseInput.isRightClick()){
+            Slot slot = GameEngine.userInstance.getInventory().getSlotFromID(GameEngine.slotSelected);
+            if (!slot.getStack().isEmpty()){
+                if (slot.getStack().getItem() instanceof ItemBlock) {
+                    if(ChunkUtils.getTileBelowPos(world,clientMouse)==Tiles.air) {
+                        world.setTileFromMousePos(clientMouse, ((ItemBlock) slot.getStack().getItem()).getTile());
+                        slot.getStack().setAmount(slot.getStack().getAmount() - 1);
+                    }
+                }
+            }
+        }
+
+        if (mouseInput.isWheelUp()){
+            if ( GameEngine.slotSelected == 0 ){
+                GameEngine.slotSelected = GameEngine.userInstance.getInventory().getSize()-1;
+            } else {
+                GameEngine.slotSelected--;
+            }
+        }
+
+        if (mouseInput.isWheelDown()){
+            if ( GameEngine.slotSelected == GameEngine.userInstance.getInventory().getSize()-1 ){
+                GameEngine.slotSelected = 0;
+            } else {
+                GameEngine.slotSelected++;
+            }
+        }
+
         System.out.println("Player pos : " + GameEngine.userInstance.getLocation().toString() + "\nMouse pos : " + clientMouse.toString());
 
         //ClientGame.manager.drawables.add(new TileOutlineRenderer(clientMouse));
