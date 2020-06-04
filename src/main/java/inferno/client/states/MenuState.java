@@ -1,11 +1,13 @@
 package inferno.client.states;
 
+import inferno.client.GameEngine;
 import inferno.client.TestGame;
 import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.graphics.user_interface.Button;
 import inferno.client.resources.textures.Textures;
 import inferno.utils.Referance;
 import org.joml.AABBf;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 import static inferno.client.states.ClientGame.textures;
 
@@ -15,6 +17,7 @@ public class MenuState implements State {
     @Override
     public void render() {
         TextureHelper.draw(Textures.loading,0,0, Referance.WIDTH-1, Referance.HEIGHT-1);
+        GameEngine.gameFontTitle.drawText(Referance.NAME+ " | " +Referance.VERSION, 20,20);
         startButton.draw();
     }
 

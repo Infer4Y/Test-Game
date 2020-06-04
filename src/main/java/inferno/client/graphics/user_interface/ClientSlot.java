@@ -1,5 +1,6 @@
 package inferno.client.graphics.user_interface;
 
+import inferno.client.GameEngine;
 import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.graphics.renderables.items.ItemStackRender;
 import inferno.client.states.ClientGame;
@@ -18,6 +19,8 @@ public class ClientSlot {
 
         itemstackRender.setItem(slot.getStack().getItem());
         itemstackRender.draw(x+1,y+1);
+
+        GameEngine.gameFont.drawText((slot.getStack().getAmount())+"", x + 1f, y + 1f);
     }
 
     public void setSlot(Slot slot) {

@@ -6,7 +6,7 @@ import org.joml.Vector4f;
 import org.lwjgl.opengl.GL11;
 
 public class Button {
-    private Vector4f color = new Vector4f(1,1,1,1);
+    private Vector4f color = new Vector4f(1,1,1,.5f);
     private AABBf bounds;
 
     public Button(Vector4f color, AABBf bounds) {
@@ -23,6 +23,7 @@ public class Button {
     }
 
     public void draw(){
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glColor4f(color.x, color.y, color.z, color.w);
         GL11.glRectf(bounds.minX, bounds.minY, bounds.maxX, bounds.maxY);
     }

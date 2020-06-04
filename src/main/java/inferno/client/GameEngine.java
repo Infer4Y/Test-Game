@@ -1,5 +1,7 @@
 package inferno.client;
 
+import inferno.client.graphics.user_interface.GLFont;
+import inferno.client.resources.ResourceLocation;
 import inferno.client.states.ClientGame;
 import inferno.client.states.MenuState;
 import inferno.client.states.State;
@@ -19,6 +21,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class GameEngine {
+    public static GLFont gameFont;
+    public static GLFont gameFontTitle;
 
     private GLFWWindow window;
     private ClientGame clientGame;
@@ -41,6 +45,8 @@ public class GameEngine {
                 }
             }
         };
+        gameFont = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 11f);
+        gameFontTitle = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 42f);
 
 
         Tiles.init();
