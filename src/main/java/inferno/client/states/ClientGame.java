@@ -8,8 +8,10 @@ import inferno.client.resources.textures.Textures;
 import inferno.client.user_interface.KeyboardInput;
 import inferno.client.user_interface.MouseInput;
 import inferno.common.Game;
+import inferno.common.item.ItemStack;
 import inferno.common.registries.Items;
 import inferno.common.registries.Tiles;
+import inferno.common.tiles.Tile;
 import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
@@ -57,11 +59,12 @@ public class ClientGame extends Game implements State {
         }
 
         if (mouseInput.isLeftClick()||keyboardInput.isKeyPressed(GLFW_KEY_SPACE)){
-            world.setTileFromMousePos(clientMouse, Tiles.air);
+            Tile result = world.breakTileFromMousePos(clientMouse, Tiles.air);
+            GameEngine.userInstance.getInventory().addStack(new ItemStack(result.getBlockDrop(), result.getDropAmount()));
         }
         System.out.println("Player pos : " + GameEngine.userInstance.getLocation().toString() + "\nMouse pos : " + clientMouse.toString());
 
-        ClientGame.manager.drawables.add(new TileOutlineRenderer(clientMouse));
+        //ClientGame.manager.drawables.add(new TileOutlineRenderer(clientMouse));
     }
 
     public boolean requestShutdown() {

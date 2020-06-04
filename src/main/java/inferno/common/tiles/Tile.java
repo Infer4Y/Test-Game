@@ -71,4 +71,8 @@ public class Tile {
     public void setTickable(boolean tickable) {
         this.tickable = tickable;
     }
+
+    public int getDropAmount() {
+        return 1;
+    }
 }

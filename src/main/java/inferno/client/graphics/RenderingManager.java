@@ -6,6 +6,7 @@ import inferno.client.graphics.renderables.Drawable;
 import inferno.client.graphics.renderables.entities.EntityRenderer;
 import inferno.client.graphics.renderables.TextureHelper;
 import inferno.client.graphics.renderables.tiles.TileRender;
+import inferno.client.graphics.user_interface.HeadsUpDisplay;
 import inferno.client.states.ClientGame;
 import inferno.common.entities.Entity;
 import inferno.common.world.World;
@@ -24,6 +25,8 @@ public class RenderingManager {
     public Camera camera = new Camera(new Vector2f(7,-4), new Bounds(0,0, 20, 10));
 
     public ArrayList<Drawable> drawables = new ArrayList<>();
+
+    private HeadsUpDisplay headsUpDisplay = new HeadsUpDisplay();
 
 
     public void render(World world) {
@@ -77,6 +80,8 @@ public class RenderingManager {
         drawables.clear();
 
         camera.unTranslate();
+
+        headsUpDisplay.draw(0,0);
     }
 
     private void debugEntity(Entity entity){

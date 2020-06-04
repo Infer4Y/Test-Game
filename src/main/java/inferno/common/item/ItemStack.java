@@ -25,7 +25,7 @@ public class ItemStack {
 
     public void setAmount(int amount) {
         this.amount = amount;
-        if (this.amount==0){
+        if (this.amount<=0){
             setItem(Items.getItem("air"));
             this.amount=-1;
         }

@@ -19,13 +19,15 @@ public class Inventory {
 
     public Inventory() {
         for (int i = 0; i < size; i++){
-            slots.add(new Slot(new ItemStack(null, 0)));
+            slots.add(new Slot(new ItemStack(Items.getItem("air"), 0)));
         }
     }
 
     public void addStack(ItemStack stack){
         if (stack.getItem() == Items.getItem("air")) return;
+        if (!hasSpace(stack.getItem()) || !hasSpace(Items.getItem("air"))) return;
         slots.get(getSlotsIDFromItem(Items.getItem("air"))[0]).setStack(stack);
+
         merge(stack.getItem());
     }
 
@@ -38,14 +40,14 @@ public class Inventory {
 
         Integer[] slotsToMerge = getSlotsIDFromItem(itemType);
 
-        if (slotsToMerge.length <= 1) return;
+        if (slotsToMerge.length == 0 || slotsToMerge.length == 1) return;
 
         int target = slotsToMerge[0];
         int amount = 0;
 
         for (int slotid : slotsToMerge){
             amount += slots.get(slotid).getStack().getAmount();
-            slots.get(slotid).getStack().setAmount(0);
+            slots.get(slotid).getStack().setAmount(-1);
         }
 
         slots.get(target).getStack().setAmount(amount);

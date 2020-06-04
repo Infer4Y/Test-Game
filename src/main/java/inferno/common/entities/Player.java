@@ -4,7 +4,7 @@ import inferno.common.containers.Inventory;
 import inferno.common.item.ItemStack;
 
 public class Player extends Entity {
-    private Inventory inventory = new Inventory();
+    private Inventory inventory = new Inventory(9);
     private String displayName = "";
 
     public Player(String name, int health, int maxHealth) {
@@ -24,5 +24,9 @@ public class Player extends Entity {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }

@@ -105,4 +105,10 @@ public class World {
     public void setTileFromMousePos(Vector2f pos, Tile tile) {
         ChunkUtils.setTilePos(this, pos, tile);
     }
+
+    public Tile breakTileFromMousePos(Vector2f pos, Tile tile) {
+        Tile result = ChunkUtils.getTileBelowPos(this, pos);
+        ChunkUtils.setTilePos(this, pos, tile);
+        return result;
+    }
 }

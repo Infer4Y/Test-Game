@@ -1,18 +1,26 @@
 package inferno.client.graphics.user_interface;
 
+import inferno.client.graphics.renderables.TextureHelper;
+import inferno.client.graphics.renderables.items.ItemStackRender;
+import inferno.client.states.ClientGame;
 import inferno.common.containers.Slot;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class ClientSlot {
-    private BufferedImage texture;
     private Slot slot;
-
+    ItemStackRender itemstackRender = new ItemStackRender();
 
     public ClientSlot() {
     }
 
-    public void draw(Graphics g) {
+    public void draw(float x, float y) {
+        TextureHelper.draw(ClientGame.textures.slot, x, y, 32f, 32f, .9f);
+
+        itemstackRender.setItem(slot.getStack().getItem());
+        itemstackRender.draw(x+1,y+1);
+    }
+
+    public void setSlot(Slot slot) {
+        this.slot = slot;
     }
 }
