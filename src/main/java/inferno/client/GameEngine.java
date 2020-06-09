@@ -48,8 +48,8 @@ public class GameEngine {
                 }
             }
         };
-        gameFont = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 11f);
-        gameFontButton = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 11f);
+        gameFont = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 15f);
+        gameFontButton = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 28f);
         gameFontTitle = new GLFont(new ResourceLocation("fonts/OpenSans_Regular.ttf"), 42f);
 
 
@@ -61,7 +61,7 @@ public class GameEngine {
 
         userInstance = Entities.cloneEntity(Entities.player);
         userInstance.setDisplayName("Test Player!");
-        userInstance.setLocation(new Vector2f(54,70));
+        userInstance.setLocation(new Vector2f(27,32));
 
 
         this.keyboardInput = new KeyboardInput(window.getWindowId());

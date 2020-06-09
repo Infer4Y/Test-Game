@@ -14,7 +14,7 @@ public class DefaultWorldGenerator extends WorldGenerator {
     public DefaultWorldGenerator(World world) {
         super(world);
         Referance.RANDOM.setSeed(getSeed());
-        variation = Referance.RANDOM.nextFloat();
+        variation = 0.72178906075789243f;
     }
 
     @Override

@@ -98,7 +98,7 @@ public class Entity {
     public void onDeath(World world){ }
 
     public boolean isGrounded(World world){
-        Tile temp = ChunkUtils.getTileBelowPos(world, location.add(1,1, new Vector2f()));
+        Tile temp = ChunkUtils.getTileBelowPos(world, location.add(0,1, new Vector2f()));
 
         return temp.isSolid();
     }

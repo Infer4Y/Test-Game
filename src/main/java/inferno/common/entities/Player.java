@@ -4,7 +4,7 @@ import inferno.common.containers.Inventory;
 import inferno.common.item.ItemStack;
 
 public class Player extends Entity {
-    private Inventory inventory = new Inventory(9);
+    private Inventory inventory = new Inventory(18);
     private String displayName = "";
 
     public Player(String name, int health, int maxHealth) {
@@ -13,9 +13,7 @@ public class Player extends Entity {
     }
 
     public boolean canPickup(ItemStack stack){
-        inventory.hasSpace(stack.getItem());
-
-        return false;
+        return inventory.hasSpace(stack.getItem());
     }
 
     public void setDisplayName(String displayName) {

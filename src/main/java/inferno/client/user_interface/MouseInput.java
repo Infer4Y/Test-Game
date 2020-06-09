@@ -1,5 +1,6 @@
 package inferno.client.user_interface;
 
+import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWScrollCallback;
@@ -15,13 +16,14 @@ public class MouseInput {
 
     private boolean up, down;
 
+    private double currentMouseWheel;
+
     public MouseInput(long window) {
         this.window = window;
         glfwSetScrollCallback(window, new GLFWScrollCallback() {
             @Override
             public void invoke(long window, double xoffset, double yoffset) {
-                up = 0 < yoffset;
-                down = 0 > yoffset;
+                currentMouseWheel  = yoffset;
             }
         });
     }
@@ -31,11 +33,17 @@ public class MouseInput {
     }
 
     public boolean isWheelDown(){
-        return down;
+        float test = (float) currentMouseWheel;
+        return test < 0;
     }
 
     public boolean isWheelUp(){
-        return up;
+        float test = (float) currentMouseWheel;
+        return test > 0;
+    }
+
+    public void resetWheel(){
+        currentMouseWheel = 0;
     }
 
     public boolean isRightClick(){

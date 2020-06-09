@@ -1,13 +1,12 @@
 package inferno.common.world;
 
 import inferno.common.entities.Entity;
-import inferno.common.entities.EntityStack;
 import inferno.common.entities.Player;
-import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
-import inferno.common.tiles.TileAir;
 import inferno.common.world.chunks.Chunk;
 import inferno.common.world.gen.DefaultWorldGenerator;
+import inferno.common.world.gen.struc.SapplingWorldGenerator;
+import inferno.common.world.gen.struc.TreeWorldGenerator;
 import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
@@ -15,10 +14,10 @@ import org.joml.Vector2f;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-import static inferno.utils.MathUtils.round;
-
 public class World {
-    private DefaultWorldGenerator generator;
+    private DefaultWorldGenerator chunkGenerator;
+    private SapplingWorldGenerator sapplingWorldGenerator;
+    private TreeWorldGenerator treeWorldGenerator;
     private ArrayList<Chunk> chunks = new ArrayList<>();
     private ArrayList<Entity> entities = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
@@ -27,7 +26,9 @@ public class World {
 
     public World (String name){
         this.name = name;
-        this.generator = new DefaultWorldGenerator(this);
+        this.chunkGenerator = new DefaultWorldGenerator(this);
+        this.sapplingWorldGenerator = new SapplingWorldGenerator(this);
+        this.treeWorldGenerator = new TreeWorldGenerator(this);
     }
 
     public String getName() {
@@ -89,7 +90,7 @@ public class World {
 
 
     public void requestGeneration(Vector2f location) {
-        Chunk temp = generator.generate(new Float(Math.floor (location.x / Referance.CHUNKWIDTH)), new Float(Math.floor (location.y / Referance.CHUNKHEIGHT)));
+        Chunk temp = chunkGenerator.generate(new Float(Math.floor (location.x / Referance.CHUNKWIDTH)), new Float(Math.floor (location.y / Referance.CHUNKHEIGHT)));
 
         chunks.add(temp);
     }
@@ -110,5 +111,9 @@ public class World {
         Tile result = ChunkUtils.getTileBelowPos(this, pos);
         ChunkUtils.setTilePos(this, pos, tile);
         return result;
+    }
+
+    public void requestTreeGeneration(float x, float y) {
+        treeWorldGenerator.generate(x,y);
     }
 }

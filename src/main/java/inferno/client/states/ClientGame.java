@@ -28,6 +28,7 @@ public class ClientGame extends Game implements State {
 
     public ClientGame(){
         super();
+        GameEngine.userInstance.getInventory().addStack(new ItemStack(Items.getItem(Tiles.sapling.getName()),5));
     }
 
     public void render(){
@@ -95,6 +96,7 @@ public class ClientGame extends Game implements State {
 
         System.out.println("Player pos : " + GameEngine.userInstance.getLocation().toString() + "\nMouse pos : " + clientMouse.toString());
 
+        mouseInput.resetWheel();
         //ClientGame.manager.drawables.add(new TileOutlineRenderer(clientMouse));
     }
 
