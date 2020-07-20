@@ -61,12 +61,13 @@ public class GLFont {
 
     public void drawText(String text, int x, int y, Vector3f color) {
         glColor3f(color.x, color.y, color.z);
-        drawText(text, x, y);
+        drawText(text, x, y,true);
         glColor3f(1,1,1);
     }
 
-    public void drawText(String text, float x, float y) {
-        glEnable(GL_BLEND);
+    public void drawText(String text, float x, float y, boolean blend) {
+        if (blend)
+            glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, this.fontTextureId);

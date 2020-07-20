@@ -24,7 +24,7 @@ public class ClientSlot {
         itemstackRender.draw(x+offSet,y+offSet);
 
         if (slot.getStack().getItem() != Items.getItem("air")) {
-            GameEngine.gameFont.drawText((slot.getStack().getAmount()) + "", x + offSet, y + offSet);
+            GameEngine.gameFont.drawText((slot.getStack().getAmount()) + "", x + offSet, y + offSet, true);
         }
     }
 
@@ -35,7 +35,7 @@ public class ClientSlot {
         itemstackRender.draw(x+offSet,y+offSet);
 
         if (slot.getStack().getItem() != Items.getItem("air")) {
-            GameEngine.gameFont.drawText((slot.getStack().getAmount()) + "", x + offSet, y + offSet);
+            GameEngine.gameFont.drawText((slot.getStack().getAmount()) + "", x + offSet, y + offSet,true);
         }
     }
 
