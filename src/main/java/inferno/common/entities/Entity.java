@@ -1,22 +1,14 @@
 package inferno.common.entities;
 
-import inferno.client.GameEngine;
-import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
-import inferno.common.world.Direction;
 import inferno.common.world.World;
-import inferno.common.world.chunks.Chunk;
 import inferno.utils.Bounds;
-import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
-
-import java.util.ArrayList;
 
 public class Entity {
     private String name;
     private int health, maxHealth;
-    private Direction facing;
     private Vector2f location = new Vector2f(), force = new Vector2f();
     private Bounds bounds = new Bounds(location, new Vector2f(1,1));
     private boolean isKillable;
@@ -26,7 +18,6 @@ public class Entity {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
-        this.facing = Direction.LEFT;
         this.setSize(1f, 1f);
     }
 
@@ -56,14 +47,6 @@ public class Entity {
 
     public void onCollision(World world, Entity target, Vector2f location) { }
 
-    public Direction getFacing() {
-        return facing;
-    }
-
-    public void setFacing(Direction facing) {
-        this.facing = facing;
-    }
-
     public Vector2f getLocation() {
         return location;
     }
@@ -74,17 +57,6 @@ public class Entity {
 
     public void update(World world) {
         location  = location.add(force);
-        if (!isGrounded(world) && isGravity){
-            location = location.add(Referance.GRAVITY);
-        }
-
-        if ( force.x > 0) {
-            facing = Direction.RIGHT;
-        } else if (force. x < 0) {
-            facing = Direction.LEFT;
-        }
-
-        force.mul(.9f);
 
         bounds.x = location.x;
         bounds.y = location.y;
@@ -98,9 +70,7 @@ public class Entity {
     public void onDeath(World world){ }
 
     public boolean isGrounded(World world){
-        Tile temp = ChunkUtils.getTileBelowPos(world, location.add(0,1, new Vector2f()));
-
-        return temp.isSolid();
+        return false;
     }
 
     public void setSize(float width, float height){

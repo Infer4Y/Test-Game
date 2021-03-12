@@ -4,7 +4,6 @@ import inferno.common.entities.Entity;
 import inferno.common.item.Item;
 import inferno.common.registries.Items;
 import inferno.common.world.World;
-import inferno.common.world.chunks.Chunk;
 
 public class Tile {
     private String name;
@@ -22,7 +21,7 @@ public class Tile {
 
     public void onBlockCollision(World world, Entity entity){ }
 
-    public void onTick(World world, Chunk chunk, int x, int y){ }
+    public void onTick(World world, int x, int y){ }
 
     public String getName() {
         return name;

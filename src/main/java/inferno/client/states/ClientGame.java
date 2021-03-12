@@ -3,7 +3,6 @@ package inferno.client.states;
 import inferno.client.GameEngine;
 import inferno.client.TestGame;
 import inferno.client.graphics.RenderingManager;
-import inferno.client.graphics.renderables.tiles.TileOutlineRenderer;
 import inferno.client.resources.textures.Textures;
 import inferno.client.user_interface.KeyboardInput;
 import inferno.client.user_interface.MouseInput;
@@ -14,7 +13,6 @@ import inferno.common.item.ItemStack;
 import inferno.common.registries.Items;
 import inferno.common.registries.Tiles;
 import inferno.common.tiles.Tile;
-import inferno.utils.ChunkUtils;
 import inferno.utils.Referance;
 import org.joml.Vector2f;
 
@@ -62,18 +60,12 @@ public class ClientGame extends Game implements State {
         }
 
         if (mouseInput.isLeftClick()){
-            Tile result = world.breakTileFromMousePos(clientMouse, Tiles.air);
-            GameEngine.userInstance.getInventory().addStack(new ItemStack(result.getBlockDrop(), result.getDropAmount()));
         }
 
         if (mouseInput.isRightClick()){
             Slot slot = GameEngine.userInstance.getInventory().getSlotFromID(GameEngine.slotSelected);
             if (!slot.getStack().isEmpty()){
                 if (slot.getStack().getItem() instanceof ItemBlock) {
-                    if(ChunkUtils.getTileBelowPos(world,clientMouse)==Tiles.air) {
-                        world.setTileFromMousePos(clientMouse, ((ItemBlock) slot.getStack().getItem()).getTile());
-                        slot.getStack().setAmount(slot.getStack().getAmount() - 1);
-                    }
                 }
             }
         }
